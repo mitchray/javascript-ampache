@@ -54,6 +54,26 @@ export class Users extends Base {
     }
 
     /**
+     * Register as a new user if allowed.
+     * @remarks MINIMUM_API_VERSION=600000
+     * @param params.username Username
+     * @param params.password SHA256 hashed password
+     * @param params.email  Email
+     * @param [params.fullname] Full Name
+     * @see {@link https://ampache.org/api/api-json-methods/#register}
+     */
+    register (params: {
+        username: string,
+        password: string,
+        email: string,
+        fullname?: string
+    }) {
+        let query = 'register';
+        query += qs.stringify(params, '&');
+        return this.request<Success>(query);
+    }
+
+    /**
      * Update an existing user
      * ACCESS REQUIRED: 100 (Admin)
      * @remarks MINIMUM_API_VERSION=400001
