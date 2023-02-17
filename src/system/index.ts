@@ -10,6 +10,7 @@ import { LiveStream } from "../live-streams/types";
 import { Label } from "../labels/types";
 import { Genre } from "../genres/types";
 import { User } from "../users/types";
+import { IndexEntry } from "./types";
 
 export class System extends Base {
     /**
@@ -34,6 +35,7 @@ export class System extends Base {
      * @param [params.offset]
      * @param [params.limit]
      * @see {@link https://ampache.org/api/api-json-methods#get_indexes}
+     * @deprecated Being removed in 7.0.0. Use `list` instead.
      */
     async getIndexes (params: {
         type: 'song' | 'album' | 'artist' | 'album_artist' | 'playlist' | 'podcast' | 'podcast_episode' | 'live_stream',
@@ -73,6 +75,30 @@ export class System extends Base {
             default:
                 return false;
         }
+    }
+
+    /**
+     * This takes a named array of objects and returning `id`, `name`, `prefix` and `basename`
+     * @remarks MINIMUM_API_VERSION=600000
+     * @param params.type type of object to find
+     * @param [params.filter] Value is Alpha Match for returned results, may be more than one letter/number
+     * @param [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
+     * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
+     * @param [params.hide_search] 0, 1 (if true do not include searches/smartlists in the result)
+     * @param [params.offset]
+     * @param [params.limit]
+     * @see {@link https://ampache.org/api/api-json-methods#list}
+     */
+    async list (params: {
+        type: 'song' | 'album' | 'artist' | 'album_artist' | 'playlist' | 'podcast' | 'podcast_episode' | 'live_stream',
+        filter?: string,
+        add?: Date,
+        update?: Date,
+        hide_search?: number
+    } & Pagination) {
+        let query = 'list';
+        query += qs.stringify(params, '&');
+        return this.request<{list: IndexEntry[]}>(query);
     }
 
     /**
