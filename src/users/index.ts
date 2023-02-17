@@ -55,7 +55,7 @@ export class Users extends Base {
 
     /**
      * Register as a new user if allowed.
-     * @remarks MINIMUM_API_VERSION=600000
+     * @remarks MINIMUM_API_VERSION=6.0.0
      * @param params.username Username
      * @param params.password SHA256 hashed password
      * @param params.email  Email

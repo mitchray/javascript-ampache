@@ -79,7 +79,7 @@ export class System extends Base {
 
     /**
      * This takes a named array of objects and returning `id`, `name`, `prefix` and `basename`
-     * @remarks MINIMUM_API_VERSION=600000
+     * @remarks MINIMUM_API_VERSION=6.0.0
      * @param params.type type of object to find
      * @param [params.filter] Value is Alpha Match for returned results, may be more than one letter/number
      * @param [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
