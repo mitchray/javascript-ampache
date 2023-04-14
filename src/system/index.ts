@@ -43,7 +43,7 @@ export class System extends Base {
         add?: Date,
         update?: Date,
         include?: BinaryBoolean,
-        hide_search?: number
+        hide_search?: BinaryBoolean
     } & Pagination) {
         let query = 'get_indexes';
         query += qs.stringify(params, '&');
@@ -94,7 +94,7 @@ export class System extends Base {
         filter?: string,
         add?: Date,
         update?: Date,
-        hide_search?: number
+        hide_search?: BinaryBoolean
     } & Pagination) {
         let query = 'list';
         query += qs.stringify(params, '&');
