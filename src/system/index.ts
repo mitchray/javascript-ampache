@@ -102,6 +102,31 @@ export class System extends Base {
     }
 
     /**
+     * Return children of a parent object in a folder traversal/browse style
+     * If you don't send any parameters you'll get a catalog list (the 'root' path)
+     * @remarks MINIMUM_API_VERSION=6.0.0
+     * @param [params.filter] object_id
+     * @param [params.type] type of object to find
+     * @param [params.catalog] catalog ID you are browsing (required on 'artist', 'album', 'podcast')
+     * @param [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
+     * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
+     * @param [params.offset]
+     * @param [params.limit]
+     * @see {@link https://ampache.org/api/api-json-methods#browse}
+     */
+    async browse (params: {
+        filter?: UID,
+        type?: 'root' | 'catalog' | 'artist' | 'album' | 'podcast',
+        catalog?: number,
+        add?: Date,
+        update?: Date,
+    } & Pagination) {
+        let query = 'browse';
+        query += qs.stringify(params, '&');
+        return this.request<{browse: IndexEntry[]}>(query);
+    }
+
+    /**
      * Return similar artist IDs or similar song IDs compared to the input filter
      * @remarks MINIMUM_API_VERSION=420000
      * @param params.type type of object to check against
