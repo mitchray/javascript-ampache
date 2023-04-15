@@ -97,4 +97,19 @@ export class Catalogs extends Base {
         query += qs.stringify(params, '&');
         return this.request<Catalog>(query);
     }
+
+    /**
+     * Delete an existing catalog. (if it exists)
+     * ACCESS REQUIRED: 75 (Catalog Manager)
+     * @remarks MINIMUM_API_VERSION=6.0.0
+     * @param params.filter ID of the catalog
+     * @see {@link https://ampache.org/api/api-json-methods#catalog_delete}
+     */
+    catalogDelete(params: {
+        filter: UID,
+    }) {
+        let query = 'catalog_delete';
+        query += qs.stringify(params, '&');
+        return this.request<Success>(query);
+    }
 }
