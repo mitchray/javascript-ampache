@@ -86,9 +86,14 @@ export class Users extends Base {
      * @param  [params.city] City
      * @param  [params.disable] 0, 1
      * @param  [params.maxbitrate] Max bitrate for transcoding
-     * @see {@link https://ampache.org/api/api-json-methods#user_update}
+     * @param  [params.group] Catalog filter group, default = 0
+     * @param  [params.fullname_public] show fullname in public display
+     * @param  [params.reset_apikey] reset user Api Key
+     * @param  [params.reset_streamtoken] reset user Stream Token
+     * @param  [params.clear_stats] reset all stats for this user
+     * @see {@link https://ampache.org/api/api-json-methods#user_edit}
      */
-    userUpdate (params: {
+    userEdit (params: {
         username: string,
         password?: string,
         email?: string,
@@ -96,10 +101,15 @@ export class Users extends Base {
         website?: string,
         state?: string,
         city?: string,
+        maxbitrate?: string,
+        group?: number,
         disable?: BinaryBoolean,
-        maxbitrate?: string
+        fullname_public?: BinaryBoolean,
+        reset_apikey?: BinaryBoolean,
+        reset_streamtoken?: BinaryBoolean,
+        clear_stats?: BinaryBoolean,
     }) {
-        let query = 'user_update';
+        let query = 'user_edit';
         query += qs.stringify(params, '&');
         return this.request<Success>(query);
     }
