@@ -470,7 +470,7 @@ export class System extends Base {
      */
     async advancedSearch (params: {
         operator: 'and' | 'or',
-        type: 'song' | 'album' | 'artist' | 'label' | 'playlist' | 'podcast' | 'podcast_episode' | 'genre' | 'user' | 'video',
+        type: 'song' | 'album' | 'album_disk' | 'artist' | 'label' | 'playlist' | 'podcast' | 'podcast_episode' | 'genre' | 'user' | 'video',
         rules: Array<Array<string>>,
         random?: BinaryBoolean,
     } & Pagination) {
