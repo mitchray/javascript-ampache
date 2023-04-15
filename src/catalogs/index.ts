@@ -68,4 +68,33 @@ export class Catalogs extends Base {
         query += qs.stringify(params, '&');
         return this.request<Success>(query);
     }
+
+    /**
+     * Create a new catalog.
+     * ACCESS REQUIRED: 75 (Catalog Manager)
+     * @remarks MINIMUM_API_VERSION=6.0.0
+     * @param params.name Name for the catalog
+     * @param params.path URL or folder path for your catalog
+     * @param [params.type] Default: 'local'
+     * @param [params.media_type] Default: 'music'
+     * @param [params.file_pattern] Pattern used identify tags from the file name. Default: '%T - %t'
+     * @param [params.folder_pattern] Pattern used identify tags from the folder name. Default: '%a/%A'
+     * @param [params.username] login to remote catalog
+     * @param [params.password] password to remote catalog
+     * @see {@link https://ampache.org/api/api-json-methods#catalog_add}
+     */
+    catalogAdd(params: {
+        name: string,
+        path: string,
+        type?: 'local' | 'beets' | 'remote' | 'subsonic' | 'seafile' | 'beetsremote',
+        media_type?: 'music' | 'podcast' | 'clip' | 'tvshow' | 'movie' | 'personal_video',
+        file_pattern?: string,
+        folder_pattern?: string,
+        username?: string,
+        password?: string,
+    }) {
+        let query = 'catalog_add';
+        query += qs.stringify(params, '&');
+        return this.request<Catalog>(query);
+    }
 }
