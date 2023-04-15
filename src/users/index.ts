@@ -86,6 +86,38 @@ export class Users extends Base {
      * @param  [params.city] City
      * @param  [params.disable] 0, 1
      * @param  [params.maxbitrate] Max bitrate for transcoding
+     * @see {@link https://ampache.org/api/api-json-methods#user_update}
+     * @deprecated Being removed in 7.0.0. Use `user_edit` instead.
+     */
+    userUpdate (params: {
+        username: string,
+        password?: string,
+        email?: string,
+        fullname?: string,
+        website?: string,
+        state?: string,
+        city?: string,
+        disable?: BinaryBoolean,
+        maxbitrate?: string
+    }) {
+        let query = 'user_update';
+        query += qs.stringify(params, '&');
+        return this.request<Success>(query);
+    }
+
+    /**
+     * Update an existing user
+     * ACCESS REQUIRED: 100 (Admin)
+     * @remarks MINIMUM_API_VERSION=6.0.0
+     * @param  params.username Username
+     * @param  [params.password] Password
+     * @param  [params.email] Email
+     * @param  [params.fullname] Full Name
+     * @param  [params.website] Website
+     * @param  [params.state] State
+     * @param  [params.city] City
+     * @param  [params.disable] 0, 1
+     * @param  [params.maxbitrate] Max bitrate for transcoding
      * @param  [params.group] Catalog filter group, default = 0
      * @param  [params.fullname_public] show fullname in public display
      * @param  [params.reset_apikey] reset user Api Key
