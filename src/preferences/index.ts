@@ -73,7 +73,7 @@ export class Preferences extends Base {
         filter: string,
         type: 'boolean' | 'integer' | 'string' | 'special',
         default: string | number,
-        category: 'interface' | 'internal' | 'options' | 'playlist' | 'plugins' | 'streaming' | 'system',
+        category: 'interface' | 'internal' | 'options' | 'playlist' | 'plugins' | 'streaming',
         description?: string,
         subcategory?: string,
         level?: number,
