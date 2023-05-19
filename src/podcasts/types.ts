@@ -36,6 +36,11 @@ export type PodcastEpisode = {
     mime: string,
     time: number,
     size: number,
+    bitrate: number,
+    stream_bitrate: number,
+    rate: number,
+    mode: number | null,
+    channels: number | null,
     public_url: string,
     url: string,
     catalog: UID,
@@ -44,7 +49,7 @@ export type PodcastEpisode = {
     rating: number | null,
     averagerating: number | null,
     playcount: number,
-    played: string,
+    played: number,
 }
 
 export type DeletedPodcastEpisode = {
