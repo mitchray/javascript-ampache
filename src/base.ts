@@ -58,6 +58,27 @@ export abstract class Base {
         })
     }
 
+    protected binary<T> (endpoint: string, includeAuth: boolean = true): Promise<Blob> {
+        let url = this.url + "/server/json.server.php?action=" + endpoint;
+
+        if (includeAuth) {
+            url += "&auth=" + this.sessionKey + "&version=" + this.version;
+        }
+
+        if (this.debug) {
+            console.debug(
+                "javascript-ampache query URL %c" + url,
+                "color: black; font-style: italic; background-color: orange;padding: 2px"
+            );
+        }
+
+        return fetch(url)
+            .then(response => response.blob())
+            .then(r => {
+                return r;
+            })
+    }
+
     public setSessionKey(sessionKey: string) {
         this.sessionKey = sessionKey;
     }

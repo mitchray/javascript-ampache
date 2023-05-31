@@ -370,7 +370,7 @@ export class System extends Base {
     }) {
         let query = 'stream';
         query += qs.stringify(params, '&');
-        return this.request(query);
+        return this.binary(query);
     }
 
     /**
@@ -389,7 +389,7 @@ export class System extends Base {
     }) {
         let query = 'download';
         query += qs.stringify(params, '&');
-        return this.request(query);
+        return this.binary(query);
     }
 
     /**
@@ -405,7 +405,7 @@ export class System extends Base {
     }) {
         let query = 'get_art';
         query += qs.stringify(params, '&');
-        return this.request(query);
+        return this.binary(query);
     }
 
     /**
