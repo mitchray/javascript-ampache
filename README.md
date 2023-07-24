@@ -15,7 +15,10 @@ Import `javascript-ampache` module in your project and initialize it with the UR
 ```js
 import AmpacheAPI from 'javascript-ampache';
 
-const API = new AmpacheAPI({ url: 'http://pathToYourAmpacheServer' }); // debug: true - will log the final GET to console
+const API = new AmpacheAPI({ url: 'http://pathToYourAmpacheServer', sessionKey: yourSessionAuthKey }); // debug: true - will log the final GET to console
+
+// either set the session key at time of instantiation or set/update with: 
+API.setSessionKey(yourSessionAuthKey);
 
 let allUsers = API.users();
 
