@@ -97,12 +97,14 @@ export class Songs extends Base {
      * This returns the songs for a playlist
      * @remarks MINIMUM_API_VERSION=380001
      * @param params.filter UID to find
+     * @param [params.random] 0, 1 (if true get random songs using limit)
      * @param [params.offset]
      * @param [params.limit]
      * @see {@link https://ampache.org/api/api-json-methods#playlist_songs}
      */
     async playlistSongs (params: {
         filter: UID,
+        random?: BinaryBoolean,
     } & Pagination) {
         let query = 'playlist_songs';
         query += qs.stringify(params, '&');
