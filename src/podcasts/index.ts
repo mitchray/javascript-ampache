@@ -37,8 +37,7 @@ export class Podcasts extends Base {
     } & Pagination) {
         let query = 'podcast';
         query += qs.stringify(params, '&');
-        let data = await this.request<{podcast: Podcast[]}>(query);
-        return (data.podcast) ? data.podcast : data;
+        return this.request<Podcast>(query);
     }
 
     /**

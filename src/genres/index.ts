@@ -33,7 +33,6 @@ export class Genres extends Base {
     }) {
         let query = 'genre';
         query += qs.stringify(params, '&');
-        let data = await this.request<{genre: Genre[]}>(query);
-        return (data.genre) ? data.genre : data;
+        return this.request<Genre>(query);
     }
 }
