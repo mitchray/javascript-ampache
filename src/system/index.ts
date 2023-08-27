@@ -470,7 +470,7 @@ export class System extends Base {
      */
     async advancedSearch (params: {
         operator: 'and' | 'or',
-        type: 'song' | 'album' | 'album_disk' | 'artist' | 'label' | 'playlist' | 'podcast' | 'podcast_episode' | 'genre' | 'user' | 'video',
+        type: 'song' | 'album' | 'album_disk' | 'artist' | 'album_artist' | 'song_artist' | 'label' | 'playlist' | 'podcast' | 'podcast_episode' | 'genre' | 'user' | 'video',
         rules: Array<Array<string>>,
         random?: BinaryBoolean,
     } & Pagination) {
@@ -504,6 +504,8 @@ export class System extends Base {
                 data = await this.request<{album: Album[]}>(query);
                 return (data.album) ? data.album : data;
             case "artist":
+            case "album_artist":
+            case "song_artist":
                 data = await this.request<{artist: Artist[]}>(query);
                 return (data.artist) ? data.artist : data;
             case "label":
