@@ -27,8 +27,7 @@ export class Preferences extends Base {
     }) {
         let query = 'system_preference';
         query += qs.stringify(params, '&');
-        let data = await this.request<{Preference}>(query);
-        return data[0];
+        return await this.request<{ preference: Preference }>(query);
     }
 
     /**
@@ -53,8 +52,7 @@ export class Preferences extends Base {
     }) {
         let query = 'user_preference';
         query += qs.stringify(params, '&');
-        let data = await this.request<{Preference}>(query);
-        return data[0];
+        return await this.request<{ preference: Preference }>(query);
     }
 
     /**
