@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.4] - 2023-XX-XX
+## [1.0.4] - 2023-09-21
 ## Requires Ampache 6.0.1
 - Preferences are now an object
 
