@@ -1,15 +1,37 @@
 import qs from 'querystringify';
 import { Bookmark } from './types';
-import { Base, Success, UID } from '../base';
+import { Base, BinaryBoolean, Success, UID } from '../base';
 
 export class Bookmarks extends Base {
     /**
+     * Get a single bookmark by bookmark_id
+     * @remarks MINIMUM_API_VERSION=6.1.0
+     * @param params.filter UID to find
+     * @param [params.include] 0,1, if true include the object in the bookmark
+     * @see {@link https://ampache.org/api/api-json-methods#bookmark}
+     */
+    async bookmark (params: {
+        filter: UID,
+        include?: BinaryBoolean,
+    }) {
+        let query = 'bookmark';
+        query += qs.stringify(params, '&');
+        return this.request<Bookmark>(query);
+    }
+
+    /**
      * Get information about bookmarked media this user is allowed to manage
      * @remarks MINIMUM_API_VERSION=5.0.0
+     * @param [params.client] filter by the agent/client name
+     * @param [params.include] 0,1, if true include the object in the bookmark
      * @see {@link https://ampache.org/api/api-json-methods#bookmarks}
      */
-    async bookmarks () {
+    async bookmarks (params: {
+        client?: string,
+        include?: BinaryBoolean,
+    }) {
         let query = 'bookmarks';
+        query += qs.stringify(params, '&');
         let data = await this.request<{bookmark: Bookmark[]}>(query);
         return (data.bookmark) ? data.bookmark : data;
     }
@@ -19,11 +41,13 @@ export class Bookmarks extends Base {
      * @remarks MINIMUM_API_VERSION=5.0.0
      * @param params.filter UID to find
      * @param params.type Object type
+     * @param [params.include] 0,1, if true include the object in the bookmark
      * @see {@link https://ampache.org/api/api-json-methods#get_bookmark}
      */
     getBookmark (params: {
         filter: UID,
         type: 'song' | 'video' | 'podcast_episode',
+        include?: BinaryBoolean,
     }) {
         let query = 'get_bookmark';
         query += qs.stringify(params, '&');
@@ -38,6 +62,7 @@ export class Bookmarks extends Base {
      * @param params.position current track time in seconds
      * @param [params.client] Agent string. (Default: 'AmpacheAPI')
      * @param [params.date] update time (Default: UNIXTIME())
+     * @param [params.include] 0,1, if true include the object in the bookmark
      * @see {@link https://ampache.org/api/api-json-methods#bookmark_create}
      */
     bookmarkCreate (params: {
@@ -46,6 +71,7 @@ export class Bookmarks extends Base {
         position: number,
         client?: string,
         date?: number,
+        include?: BinaryBoolean,
     }) {
         let query = 'bookmark_create';
         query += qs.stringify(params, '&');
@@ -60,6 +86,7 @@ export class Bookmarks extends Base {
      * @param params.position current track time in seconds
      * @param [params.client] Agent string. (Default: 'AmpacheAPI')
      * @param [params.date] update time (Default: UNIXTIME())
+     * @param [params.include] 0,1, if true include the object in the bookmark
      * @see {@link https://ampache.org/api/api-json-methods#bookmark_edit}
      */
     bookmarkEdit (params: {
@@ -68,6 +95,7 @@ export class Bookmarks extends Base {
         position: number,
         client?: string,
         date?: number,
+        include?: BinaryBoolean,
     }) {
         let query = 'bookmark_edit';
         query += qs.stringify(params, '&');
