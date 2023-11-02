@@ -68,8 +68,20 @@ export class Auth extends Base {
      * @param params.auth Session ID to destroy
      * @see {@link https://ampache.org/api/api-json-methods#goodbye}
      */
-    goodbye (params: { auth }) {
+    goodbye (params: { auth: string }) {
         let query = 'goodbye';
+        query += qs.stringify(params, '&');
+        return this.request<Success>(query, false);
+    }
+
+    /**
+     * Email a new password to the user (if allowed) using a reset token.
+     * @remarks MINIMUM_API_VERSION=6.1.0
+     * @param params.auth Password reset token
+     * @see {@link https://ampache.org/api/api-json-methods#lost_password}
+     */
+    lostPassword (params: { auth: string }) {
+        let query = 'lost_password';
         query += qs.stringify(params, '&');
         return this.request<Success>(query, false);
     }
