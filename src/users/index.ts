@@ -15,13 +15,13 @@ export class Users extends Base {
     }
 
     /**
-     * This get a user's public information
+     * This get a user's public information (or current user if username is omitted)
      * @remarks MINIMUM_API_VERSION=380001
-     * @param params.username UID to find
+     * @param [params.username] UID to find
      * @see {@link https://ampache.org/api/api-json-methods#user}
      */
     async user (params: {
-        username: string
+        username?: string
     }) {
         let query = 'user';
         query += qs.stringify(params, '&');
