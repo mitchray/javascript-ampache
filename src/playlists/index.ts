@@ -141,6 +141,24 @@ export class Playlists extends Base {
     }
 
     /**
+     * This adds an item to a playlist
+     * @remarks MINIMUM_API_VERSION=6.3.0
+     * @param params.filter UID of Playlist
+     * @param params.id UID of the object to add to playlist
+     * @param params.type 'song', 'album', 'artist', 'playlist'
+     * @see {@link https://ampache.org/api/api-json-methods#playlist_add}
+     */
+    playlistAdd (params: {
+        filter: UID,
+        id: UID,
+        type: 'song' | 'album' | 'artist' | 'playlist',
+    }) {
+        let query = 'playlist_add';
+        query += qs.stringify(params, '&');
+        return this.request<Success>(query);
+    }
+
+    /**
      * This modifies name and type of a playlist.
      * NOTE items and tracks must be sent together and be of equal length.
      * @remarks MINIMUM_API_VERSION=400001
