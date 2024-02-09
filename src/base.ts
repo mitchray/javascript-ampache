@@ -26,7 +26,7 @@ export type UID = string | number;
 export abstract class Base {
     sessionKey: string;
     url: string;
-    version: string = '6.0.0';// default to latest version
+    version: string = '6.3.0';// default to latest version
     debug: boolean;
 
     constructor(config: Config) {
@@ -35,13 +35,8 @@ export abstract class Base {
         this.debug = config.debug || false;
     }
 
-    protected request<T> (endpoint: string, includeAuth: boolean = true): Promise<T> {
-        let url = this.url + "/server/json.server.php?action=" + endpoint;
-
-        // some endpoints like ping() or goodbye() can pass their own auth
-        if (includeAuth) {
-            url += "&auth=" + this.sessionKey + "&version=" + this.version;
-        }
+    protected request<T> (endpoint: string): Promise<T> {
+        let url = this.url + "/server/json.server.php?action=" + endpoint + "&version=" + this.version;
 
         if (this.debug) {
             console.debug(
@@ -50,7 +45,12 @@ export abstract class Base {
             );
         }
 
-        return fetch(url).then(r => {
+        return fetch(url, {
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + this.sessionKey
+            }
+        }).then(r => {
             if (r.ok) {
                 return r.json();
             }
@@ -58,12 +58,8 @@ export abstract class Base {
         })
     }
 
-    protected binary<T> (endpoint: string, includeAuth: boolean = true): Promise<Blob> {
-        let url = this.url + "/server/json.server.php?action=" + endpoint;
-
-        if (includeAuth) {
-            url += "&auth=" + this.sessionKey + "&version=" + this.version;
-        }
+    protected binary<T> (endpoint: string): Promise<Blob> {
+        let url = this.url + "/server/json.server.php?action=" + endpoint + "&version=" + this.version;
 
         if (this.debug) {
             console.debug(
@@ -72,7 +68,12 @@ export abstract class Base {
             );
         }
 
-        return fetch(url)
+        return fetch(url,{
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + this.sessionKey
+            }
+        })
             .then(response => response.blob())
             .then(r => {
                 return r;

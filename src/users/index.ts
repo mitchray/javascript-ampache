@@ -20,7 +20,7 @@ export class Users extends Base {
      * @param [params.username] UID to find
      * @see {@link https://ampache.org/api/api-json-methods#user}
      */
-    async user (params: {
+    async user (params?: {
         username?: string
     }) {
         let query = 'user';

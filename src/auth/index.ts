@@ -59,7 +59,7 @@ export class Auth extends Base {
     ping (params?: { auth?: string, version?: string }) {
         let query = 'ping';
         query += qs.stringify(params, '&');
-        return this.request<AuthResponse>(query, false);
+        return this.request<AuthResponse>(query);
     }
 
     /**
@@ -71,7 +71,7 @@ export class Auth extends Base {
     goodbye (params: { auth: string }) {
         let query = 'goodbye';
         query += qs.stringify(params, '&');
-        return this.request<Success>(query, false);
+        return this.request<Success>(query);
     }
 
     /**
@@ -83,7 +83,7 @@ export class Auth extends Base {
     lostPassword (params: { auth: string }) {
         let query = 'lost_password';
         query += qs.stringify(params, '&');
-        return this.request<Success>(query, false);
+        return this.request<Success>(query);
     }
 
     /**
