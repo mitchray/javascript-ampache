@@ -11,6 +11,7 @@ export type Video = {
     time: number,
     url: string,
     art: string,
+    has_art: boolean,
     flag: boolean,
     rating: number | null,
     averagerating: number | null,

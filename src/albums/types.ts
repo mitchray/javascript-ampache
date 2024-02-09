@@ -24,6 +24,7 @@ export type Album = {
     type: string | null,
     genre: GenreSummary[],
     art: string,
+    has_art: boolean,
     flag: boolean,
     rating: number | null,
     averagerating: number | null,

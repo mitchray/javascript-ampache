@@ -7,6 +7,7 @@ export type Playlist = {
     items: number,
     type: 'public' | 'private',
     art: string,
+    has_art: boolean,
     flag: boolean,
     rating: number | null,
     averagerating: number | null,

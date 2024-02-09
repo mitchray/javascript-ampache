@@ -29,6 +29,7 @@ export type Song = {
     album_mbid: string | null,
     artist_mbid: string | null,
     art: string,
+    has_art: boolean,
     flag: boolean,
     rating: number | null,
     averagerating: number | null,
