@@ -140,6 +140,7 @@ export class Playlists extends Base {
      * @param params.song UID of song to add to playlist
      * @param [params.check] 0, 1 Whether to check and ignore duplicates (default = 0)
      * @see {@link https://ampache.org/api/api-json-methods#playlist_add_song}
+     * @deprecated Being removed in 7.0.0. Use `playlist_add` instead.
      */
     playlistAddSong (params: {
         filter: UID,
