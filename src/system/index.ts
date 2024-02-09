@@ -102,6 +102,34 @@ export class System extends Base {
     }
 
     /**
+     * This takes a collection of inputs and return ID's for the object type.
+     * @remarks MINIMUM_API_VERSION=6.3.0
+     * @param params.type type of object to find
+     * @param [params.filter] Value is Alpha Match for returned results, may be more than one letter/number
+     * @param [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
+     * @param [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
+     * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
+     * @param [params.include] 0, 1, (include child objects)
+     * @param [params.hide_search] 0, 1 (if true do not include searches/smartlists in the result)
+     * @param [params.offset]
+     * @param [params.limit]
+     * @see {@link https://ampache.org/api/api-json-methods#index}
+     */
+    async index (params: {
+        type: 'catalog' | 'song' | 'album' | 'artist' | 'album_artist' | 'song_artist' | 'playlist' | 'podcast' | 'podcast_episode' | 'share' | 'video' | 'live_stream'
+        filter?: string,
+        exact?: BinaryBoolean,
+        add?: Date,
+        update?: Date,
+        include?: BinaryBoolean,
+        hide_search?: BinaryBoolean
+    } & Pagination) {
+        let query = 'index';
+        query += qs.stringify(params, '&');
+        return this.request<{index: []}>(query);
+    }
+
+    /**
      * Return children of a parent object in a folder traversal/browse style
      * If you don't send any parameters you'll get a catalog list (the 'root' path)
      * @remarks MINIMUM_API_VERSION=6.0.0
