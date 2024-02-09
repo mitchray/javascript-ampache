@@ -47,7 +47,7 @@ export class Shares extends Base {
      */
     shareCreate (params: {
         filter: UID,
-        type: 'song' | 'album' | 'artist',
+        type: 'song' | 'album' | 'artist' | 'playlist' | 'podcast' | 'podcast_episode' | 'video',
         description?: string,
         expires?: number,
     }) {
