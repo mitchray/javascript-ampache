@@ -79,6 +79,52 @@ export class Playlists extends Base {
     }
 
     /**
+     * This returns a user's playlists based on the specified filter
+     * @remarks MINIMUM_API_VERSION=6.3.0
+     * @param [params.filter] Filter results to match this string
+     * @param [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
+     * @param [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
+     * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
+     * @param [params.offset]
+     * @param [params.limit]
+     * @see {@link https://ampache.org/api/api-json-methods#user_playlists}
+     */
+    async userPlaylists (params?: {
+        filter?: string,
+        exact?: BinaryBoolean,
+        add?: Date,
+        update?: Date,
+    } & Pagination) {
+        let query = 'user_playlists';
+        query += qs.stringify(params, '&');
+        let data = await this.request<{playlist: Playlist[]}>(query);
+        return (data.playlist) ? data.playlist : data;
+    }
+
+    /**
+     * This returns a user's smartlists based on the specified filter
+     * @remarks MINIMUM_API_VERSION=6.3.0
+     * @param [params.filter] Filter results to match this string
+     * @param [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
+     * @param [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
+     * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
+     * @param [params.offset]
+     * @param [params.limit]
+     * @see {@link https://ampache.org/api/api-json-methods#user_smartlists}
+     */
+    async userSmartlists (params?: {
+        filter?: string,
+        exact?: BinaryBoolean,
+        add?: Date,
+        update?: Date,
+    } & Pagination) {
+        let query = 'user_smartlists';
+        query += qs.stringify(params, '&');
+        let data = await this.request<{playlist: Playlist[]}>(query);
+        return (data.playlist) ? data.playlist : data;
+    }
+
+    /**
      * This creates a new playlist and returns it
      * @remarks MINIMUM_API_VERSION=380001
      * @param params.name Playlist name
