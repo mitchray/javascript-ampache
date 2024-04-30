@@ -40,7 +40,7 @@ export abstract class Base {
 
         if (this.debug) {
             console.debug(
-                "javascript-ampache query URL %c" + url,
+                "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
                 "color: black; font-style: italic; background-color: orange;padding: 2px"
             );
         }
@@ -63,7 +63,7 @@ export abstract class Base {
 
         if (this.debug) {
             console.debug(
-                "javascript-ampache query URL %c" + url,
+                "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
                 "color: black; font-style: italic; background-color: orange;padding: 2px"
             );
         }
