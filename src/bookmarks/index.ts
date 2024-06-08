@@ -37,7 +37,7 @@ export class Bookmarks extends Base {
     }
 
     /**
-     * Get the bookmark from it's object_id and object_type.
+     * Get the bookmark from its object_id and object_type.
      * @remarks MINIMUM_API_VERSION=5.0.0
      * @param params.filter UID to find
      * @param params.type Object type

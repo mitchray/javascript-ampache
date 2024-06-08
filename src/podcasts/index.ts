@@ -1,6 +1,6 @@
 import qs from 'querystringify';
 import { Podcast, PodcastEpisode, DeletedPodcastEpisode } from './types';
-import { Base, Pagination, Success, UID } from '../base';
+import {Base, ExtendedPagination, Pagination, Success, UID} from '../base';
 
 export class Podcasts extends Base {
     /**
@@ -10,12 +10,14 @@ export class Podcasts extends Base {
      * @param [params.include] episodes (include podcast_episodes in the response)
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#podcasts}
      */
     async podcasts (params?: {
         filter?: string,
         include?: 'episodes',
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'podcasts';
         query += qs.stringify(params, '&');
         let data = await this.request<{podcast: Podcast[]}>(query);
@@ -102,11 +104,13 @@ export class Podcasts extends Base {
      * @param params.filter UID of podcast
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#podcast_episodes}
      */
     async podcastEpisodes (params: {
         filter: UID,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'podcast_episodes';
         query += qs.stringify(params, '&');
         let data = await this.request<{podcast_episode: PodcastEpisode[]}>(query);

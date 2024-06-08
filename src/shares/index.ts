@@ -1,6 +1,6 @@
 import qs from 'querystringify';
 import { Share } from './types';
-import { Base, BinaryBoolean, Pagination, Success, UID } from '../base';
+import { Base, BinaryBoolean, ExtendedPagination, Success, UID } from '../base';
 
 export class Shares extends Base {
     /**
@@ -10,12 +10,14 @@ export class Shares extends Base {
      * @param [params.exact] 0, 1 boolean to match the exact filter string
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#shares}
      */
     async shares (params?: {
         filter?: string,
         exact?: BinaryBoolean,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'shares';
         query += qs.stringify(params, '&');
         let data = await this.request<{share: Share[]}>(query);

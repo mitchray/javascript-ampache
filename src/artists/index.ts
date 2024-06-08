@@ -1,6 +1,6 @@
 import qs from 'querystringify';
 import { Artist } from './types';
-import { Base, BinaryBoolean, Pagination, UID } from '../base';
+import { Base, BinaryBoolean, ExtendedPagination, UID } from '../base';
 
 export class Artists extends Base {
     /**
@@ -14,6 +14,8 @@ export class Artists extends Base {
      * @param [params.album_artist] 0, 1 (if true filter for album artists only)
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#artists}
      */
     async artists (params?: {
@@ -23,7 +25,7 @@ export class Artists extends Base {
         update?: Date,
         include?: 'albums' | 'songs',
         album_artist?: BinaryBoolean,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'artists';
         query += qs.stringify(params, '&');
         let data = await this.request<{artist: Artist[]}>(query);
@@ -52,11 +54,13 @@ export class Artists extends Base {
      * @param params.filter UID to find
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#genre_artists}
      */
     async genreArtists (params: {
         filter: UID
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'genre_artists';
         query += qs.stringify(params, '&');
         let data = await this.request<{artist: Artist[]}>(query);
@@ -69,11 +73,13 @@ export class Artists extends Base {
      * @param params.filter UID of find
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#label_artists}
      */
     async labelArtists (params: {
         filter: UID
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'label_artists';
         query += qs.stringify(params, '&');
         let data = await this.request<{artist: Artist[]}>(query);

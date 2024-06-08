@@ -19,6 +19,17 @@ export type Pagination = {
     limit?: number,
 }
 
+/**
+ * @param [offset] Return results starting from this index position
+ * @param [limit] Maximum number of results to return
+ * @param [cond] Apply additional filters to the browse using ; separated comma string pairs (e.g. 'filter1,value1;filter2,value2')
+ * @param [sort] Sort name or comma-separated key pair. (e.g. 'name,order') Default order 'ASC' (e.g. 'name,ASC' == 'name')
+ */
+export type ExtendedPagination = Pagination & {
+    cond?: string,
+    sort?: string,
+}
+
 export type BinaryBoolean = 0 | 1;
 
 export type UID = string | number;

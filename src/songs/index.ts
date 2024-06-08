@@ -1,6 +1,6 @@
 import qs from 'querystringify';
 import { Song, DeletedSong } from './types';
-import { Base, BinaryBoolean, Pagination, Success, UID } from '../base';
+import {Base, BinaryBoolean, ExtendedPagination, Pagination, Success, UID} from '../base';
 
 export class Songs extends Base {
     /**
@@ -12,6 +12,8 @@ export class Songs extends Base {
      * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#songs}
      */
     async songs (params?: {
@@ -19,7 +21,7 @@ export class Songs extends Base {
         exact?: BinaryBoolean,
         add?: Date,
         update?: Date,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'songs';
         query += qs.stringify(params, '&');
         let data = await this.request<{song: Song[]}>(query);
@@ -47,12 +49,14 @@ export class Songs extends Base {
      * @param [params.top50] 0, 1 (if true filter to the artist top 50)
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#artist_songs}
      */
     async artistSongs (params: {
         filter: UID,
         top50?: BinaryBoolean,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'artist_songs';
         query += qs.stringify(params, '&');
         let data = await this.request<{song: Song[]}>(query);
@@ -65,11 +69,13 @@ export class Songs extends Base {
      * @param params.filter UID to find
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#album_songs}
      */
     async albumSongs (params: {
         filter: UID,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'album_songs';
         query += qs.stringify(params, '&');
         let data = await this.request<{song: Song[]}>(query);
@@ -82,11 +88,13 @@ export class Songs extends Base {
      * @param params.filter UID to find
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#genre_songs}
      */
     async genreSongs (params: {
         filter: UID,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'genre_songs';
         query += qs.stringify(params, '&');
         let data = await this.request<{song: Song[]}>(query);
@@ -118,11 +126,13 @@ export class Songs extends Base {
      * @param params.filter UID to find
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#license_songs}
      */
     async licenseSongs (params: {
         filter: UID,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'license_songs';
         query += qs.stringify(params, '&');
         let data = await this.request<{song: Song[]}>(query);

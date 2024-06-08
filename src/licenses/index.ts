@@ -1,6 +1,6 @@
 import qs from 'querystringify';
 import { License } from './types';
-import { Base, BinaryBoolean, Pagination, UID } from '../base';
+import { Base, BinaryBoolean, ExtendedPagination, UID } from '../base';
 
 export class Licenses extends Base {
     /**
@@ -12,6 +12,8 @@ export class Licenses extends Base {
      * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#licenses}
      */
     async licenses (params?: {
@@ -19,7 +21,7 @@ export class Licenses extends Base {
         exact?: BinaryBoolean,
         add?: Date,
         update?: Date,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'licenses';
         query += qs.stringify(params, '&');
         let data = await this.request<{license: License[]}>(query);

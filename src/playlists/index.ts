@@ -1,7 +1,7 @@
 import qs from 'querystringify';
 import { Playlist } from './types';
 import { Song } from "../songs/types";
-import { Base, BinaryBoolean, Pagination, Success, UID } from '../base';
+import {Base, BinaryBoolean, ExtendedPagination, Pagination, Success, UID} from '../base';
 
 export class Playlists extends Base {
     /**
@@ -15,6 +15,8 @@ export class Playlists extends Base {
      * @param [params.show_dupes] 0, 1 (if true ignore 'api_hide_dupe_searches' setting)
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#playlists}
      */
     async playlists (params?: {
@@ -24,7 +26,7 @@ export class Playlists extends Base {
         update?: Date,
         hide_search?: BinaryBoolean,
         show_dupes?: BinaryBoolean,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'playlists';
         query += qs.stringify(params, '&');
         let data = await this.request<{playlist: Playlist[]}>(query);
@@ -87,6 +89,8 @@ export class Playlists extends Base {
      * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#user_playlists}
      */
     async userPlaylists (params?: {
@@ -94,7 +98,7 @@ export class Playlists extends Base {
         exact?: BinaryBoolean,
         add?: Date,
         update?: Date,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'user_playlists';
         query += qs.stringify(params, '&');
         let data = await this.request<{playlist: Playlist[]}>(query);
@@ -110,6 +114,8 @@ export class Playlists extends Base {
      * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#user_smartlists}
      */
     async userSmartlists (params?: {
@@ -117,7 +123,7 @@ export class Playlists extends Base {
         exact?: BinaryBoolean,
         add?: Date,
         update?: Date,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'user_smartlists';
         query += qs.stringify(params, '&');
         let data = await this.request<{playlist: Playlist[]}>(query);
@@ -159,7 +165,7 @@ export class Playlists extends Base {
     }
 
     /**
-     * This modifies name and type of a playlist.
+     * This modifies name and type of the playlist.
      * NOTE items and tracks must be sent together and be of equal length.
      * @remarks MINIMUM_API_VERSION=400001
      * @param params.filter UID to find

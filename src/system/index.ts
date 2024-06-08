@@ -1,7 +1,7 @@
 import qs from 'querystringify';
 import { Song } from "../songs/types";
 import { Artist } from "../artists/types";
-import { Base, BinaryBoolean, Pagination, Success, UID } from '../base';
+import {Base, BinaryBoolean, ExtendedPagination, Pagination, Success, UID} from '../base';
 import { Album } from '../albums/types';
 import { Video } from '../videos/types';
 import { Playlist } from '../playlists/types';
@@ -34,6 +34,8 @@ export class System extends Base {
      * @param [params.hide_search] 0, 1 (if true do not include searches/smartlists in the result)
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#get_indexes}
      * @deprecated Being removed in 7.0.0. Use `list` instead.
      */
@@ -44,7 +46,7 @@ export class System extends Base {
         update?: Date,
         include?: BinaryBoolean,
         hide_search?: BinaryBoolean
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'get_indexes';
         query += qs.stringify(params, '&');
         let data;
@@ -87,6 +89,8 @@ export class System extends Base {
      * @param [params.hide_search] 0, 1 (if true do not include searches/smartlists in the result)
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#list}
      */
     async list (params: {
@@ -95,7 +99,7 @@ export class System extends Base {
         add?: Date,
         update?: Date,
         hide_search?: BinaryBoolean
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'list';
         query += qs.stringify(params, '&');
         return this.request<{list: IndexEntry[]}>(query);
@@ -113,6 +117,8 @@ export class System extends Base {
      * @param [params.hide_search] 0, 1 (if true do not include searches/smartlists in the result)
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#index}
      */
     async index (params: {
@@ -123,7 +129,7 @@ export class System extends Base {
         update?: Date,
         include?: BinaryBoolean,
         hide_search?: BinaryBoolean
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'index';
         query += qs.stringify(params, '&');
         return this.request<{index: []}>(query);
@@ -140,6 +146,8 @@ export class System extends Base {
      * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#browse}
      */
     async browse (params: {
@@ -148,7 +156,7 @@ export class System extends Base {
         catalog?: number,
         add?: Date,
         update?: Date,
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'browse';
         query += qs.stringify(params, '&');
         return this.request<{browse: IndexEntry[]}>(query);
@@ -383,7 +391,7 @@ export class System extends Base {
      * @param params.id UID to find
      * @param params.type Object type
      * @param [params.bitrate] Max bitrate for transcoding
-     * @param [params.format] mp3, ogg, raw, etc (raw returns the original format)
+     * @param [params.format] mp3, ogg, raw, etc. (raw returns the original format)
      * @param [params.offset] Time offset
      * @param [params.length] 0, 1 (estimate content length)
      * @see {@link https://ampache.org/api/api-json-methods#stream}
@@ -407,7 +415,7 @@ export class System extends Base {
      * @remarks MINIMUM_API_VERSION=400001
      * @param params.id UID to find
      * @param params.type Object type
-     * @param [params.format] mp3, ogg, raw, etc (raw returns the original format)
+     * @param [params.format] mp3, ogg, raw, etc. (raw returns the original format)
      * @see {@link https://ampache.org/api/api-json-methods#download}
      */
     download (params: {

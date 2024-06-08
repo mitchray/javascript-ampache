@@ -1,17 +1,21 @@
 import qs from 'querystringify';
 import { Catalog } from './types';
-import { Base, Success, UID } from '../base';
+import {Base, ExtendedPagination, Success, UID} from '../base';
 
 export class Catalogs extends Base {
     /**
      * This searches the catalogs and returns... catalogs
      * @remarks MINIMUM_API_VERSION=420000
      * @param [params.filter] Catalog type
+     * @param [params.offset]
+     * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#catalogs}
      */
     async catalogs (params?: {
         filter?: 'music' | 'clip' | 'tvshow' | 'movie' | 'personal_video' | 'podcast',
-    }) {
+    } & ExtendedPagination) {
         let query = 'catalogs';
         query += qs.stringify(params, '&');
         let data = await this.request<{catalog: Catalog[]}>(query);

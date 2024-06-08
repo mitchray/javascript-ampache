@@ -1,6 +1,6 @@
 import qs from 'querystringify';
 import { Album } from './types';
-import { Base, BinaryBoolean, Pagination, UID } from '../base';
+import { Base, BinaryBoolean, ExtendedPagination, UID } from '../base';
 
 export class Albums extends Base {
     /**
@@ -13,6 +13,8 @@ export class Albums extends Base {
      * @param [params.include] albums, songs (include child objects in the response)
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#albums}
      */
     async albums (params?: {
@@ -21,7 +23,7 @@ export class Albums extends Base {
         add?: Date,
         update?: Date,
         include?: "albums" | "songs",
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'albums';
         query += qs.stringify(params, '&');
         let data = await this.request<{album: Album[]}>(query);
@@ -50,11 +52,13 @@ export class Albums extends Base {
      * @param params.filter UID to find
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#artist_albums}
      */
     async artistAlbums (params: {
         filter: UID
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'artist_albums';
         query += qs.stringify(params, '&');
         let data = await this.request<{album: Album[]}>(query);
@@ -67,11 +71,13 @@ export class Albums extends Base {
      * @param params.filter UID to find
      * @param [params.offset]
      * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#genre_albums}
      */
     async genreAlbums (params?: {
         filter: UID
-    } & Pagination) {
+    } & ExtendedPagination) {
         let query = 'genre_albums';
         query += qs.stringify(params, '&');
         let data = await this.request<{album: Album[]}>(query);

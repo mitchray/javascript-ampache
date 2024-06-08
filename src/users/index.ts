@@ -1,6 +1,6 @@
 import qs from 'querystringify';
 import { User, UserSummary, Activity } from './types';
-import { Base, BinaryBoolean, Success } from '../base';
+import {Base, BinaryBoolean, ExtendedPagination, Success} from '../base';
 
 export class Users extends Base {
     /**
@@ -165,11 +165,15 @@ export class Users extends Base {
      * This gets the followers for the requested username
      * @remarks MINIMUM_API_VERSION=380001
      * @param params.username UID to find
+     * @param [params.offset]
+     * @param [params.limit]
+     * @param [params.cond]
+     * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#followers}
      */
     async followers (params: {
         username: string,
-    }) {
+    } & ExtendedPagination ) {
         let query = 'followers';
         query += qs.stringify(params, '&');
         let data = await this.request<{user: UserSummary[]}>(query);
