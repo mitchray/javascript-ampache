@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.0.9] - 2024-06-28
+- Added `rawURL` method for generating URLs based on an endpoint + params
+
 ## [1.0.8] - 2024-06-08
 - New `cond` and `sort` params for paginated collections
 

@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-unfetch';
+import qs from 'querystringify';
 
 type Config = {
     url: string,
@@ -93,5 +94,26 @@ export abstract class Base {
 
     public setSessionKey(sessionKey: string) {
         this.sessionKey = sessionKey;
+    }
+
+    /**
+     * Construct and return a URL
+     * @param endpoint
+     * @param [params]
+     */
+    public rawURL(endpoint: string, params?: {}) {
+        let query = endpoint;
+        query += qs.stringify(params, '&');
+
+        let url = this.url + "/server/json.server.php?action=" + query + "&version=" + this.version;
+
+        if (this.debug) {
+            console.debug(
+                "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
+                "color: black; font-style: italic; background-color: orange;padding: 2px"
+            );
+        }
+
+        return url;
     }
 }
