@@ -42,7 +42,7 @@ export class Shares extends Base {
      * Create a public url that can be used by anyone to stream media.
      * @remarks MINIMUM_API_VERSION=420000
      * @param params.filter UID of object you are sharing
-     * @param params.type ('song', 'album', 'artist')
+     * @param params.type ('song', 'album', 'artist', 'playlist', 'podcast', 'podcast_episode', 'video')
      * @param [params.description] description (will be filled for you if empty)
      * @param [params.expires] days to keep active
      * @see {@link https://ampache.org/api/api-json-methods#share_create}
