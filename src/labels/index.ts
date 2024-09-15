@@ -24,8 +24,7 @@ export class Labels extends Base {
     } & ExtendedPagination) {
         let query = 'labels';
         query += qs.stringify(params, '&');
-        let data = await this.request<{label: Label[]}>(query);
-        return (data.label) ? data.label : data;
+        return await this.request<{label: Label[]}>(query);
     }
 
     /**

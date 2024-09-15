@@ -54,29 +54,31 @@ export class System extends Base {
         switch (params.type) {
             case "song":
                 data = await this.request<{song: Song[]}>(query);
-                return (data.song) ? data.song : data;
+                break;
             case "album":
                 data = await this.request<{album: Album[]}>(query);
-                return (data.album) ? data.album : data;
+                break;
             case "artist":
             case "album_artist":
                 data = await this.request<{artist: Artist[]}>(query);
-                return (data.artist) ? data.artist : data;
+                break;
             case "playlist":
                 data = await this.request<{playlist: Playlist[]}>(query);
-                return (data.playlist) ? data.playlist : data;
+                break;
             case "podcast":
                 data = await this.request<{podcast: Podcast[]}>(query);
-                return (data.podcast) ? data.podcast : data;
+                break;
             case "podcast_episode":
                 data = await this.request<{podcast_episode: PodcastEpisode[]}>(query);
-                return (data.podcast_episode) ? data.podcast_episode : data;
+                break;
             case "live_stream":
                 data = await this.request<{live_stream: LiveStream[]}>(query);
-                return (data.live_stream) ? data.live_stream : data;
+                break;
             default:
                 return false;
         }
+
+        return data;
     }
 
     /**
@@ -182,13 +184,15 @@ export class System extends Base {
         switch (params.type) {
             case "song":
                 data = await this.request<{song: Song[]}>(query);
-                return (data.song) ? data.song : data;
+                break;
             case "artist":
                 data = await this.request<{artist: Artist[]}>(query);
-                return (data.artist) ? data.artist : data;
+                break;
             default:
                 return false;
         }
+
+        return data;
     }
 
     /**
@@ -215,28 +219,30 @@ export class System extends Base {
         switch (params.type) {
             case "song":
                 data = await this.request<{song: Song[]}>(query);
-                return (data.song) ? data.song : data;
+                break;
             case "album":
                 data = await this.request<{album: Album[]}>(query);
-                return (data.album) ? data.album : data;
+                break;
             case "artist":
                 data = await this.request<{artist: Artist[]}>(query);
-                return (data.artist) ? data.artist : data;
+                break;
             case "video":
                 data = await this.request<{video: Video[]}>(query);
-                return (data.video) ? data.video : data;
+                break;
             case "playlist":
                 data = await this.request<{playlist: Playlist[]}>(query);
-                return (data.playlist) ? data.playlist : data;
+                break;
             case "podcast":
                 data = await this.request<{podcast: Podcast[]}>(query);
-                return (data.podcast) ? data.podcast : data;
+                break;
             case "podcast_episode":
                 data = await this.request<{podcast_episode: PodcastEpisode[]}>(query);
-                return (data.podcast_episode) ? data.podcast_episode : data;
+                break;
             default:
                 return false;
         }
+
+        return data;
     }
 
     /**
@@ -535,38 +541,40 @@ export class System extends Base {
         switch (params.type) {
             case "song":
                 data = await this.request<{song: Song[]}>(query);
-                return (data.song) ? data.song : data;
+                break;
             case "album":
                 data = await this.request<{album: Album[]}>(query);
-                return (data.album) ? data.album : data;
+                break;
             case "artist":
             case "album_artist":
             case "song_artist":
                 data = await this.request<{artist: Artist[]}>(query);
-                return (data.artist) ? data.artist : data;
+                break;
             case "label":
                 data = await this.request<{label: Label[]}>(query);
-                return (data.label) ? data.label : data;
+                break;
             case "playlist":
                 data = await this.request<{playlist: Playlist[]}>(query);
-                return (data.playlist) ? data.playlist : data;
+                break;
             case "podcast":
                 data = await this.request<{podcast: Podcast[]}>(query);
-                return (data.podcast) ? data.podcast : data;
+                break;
             case "podcast_episode":
                 data = await this.request<{podcast_episode: PodcastEpisode[]}>(query);
-                return (data.podcast_episode) ? data.podcast_episode : data;
+                break;
             case "genre":
                 data = await this.request<{genre: Genre[]}>(query);
-                return (data.genre) ? data.genre : data;
+                break;
             case "user":
                 data = await this.request<{user: User[]}>(query);
-                return (data.user) ? data.user : data;
+                break;
             case "video":
                 data = await this.request<{video: Video[]}>(query);
-                return (data.video) ? data.video : data;
+                break;
             default:
                 return false;
         }
+
+        return data;
     }
 }

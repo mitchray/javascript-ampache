@@ -28,8 +28,7 @@ export class Artists extends Base {
     } & ExtendedPagination) {
         let query = 'artists';
         query += qs.stringify(params, '&');
-        let data = await this.request<{artist: Artist[]}>(query);
-        return (data.artist) ? data.artist : data;
+        return await this.request<{artist: Artist[]}>(query);
     }
 
     /**
@@ -63,8 +62,7 @@ export class Artists extends Base {
     } & ExtendedPagination) {
         let query = 'genre_artists';
         query += qs.stringify(params, '&');
-        let data = await this.request<{artist: Artist[]}>(query);
-        return (data.artist) ? data.artist : data;
+        return await this.request<{artist: Artist[]}>(query);
     }
 
     /**
@@ -82,7 +80,6 @@ export class Artists extends Base {
     } & ExtendedPagination) {
         let query = 'label_artists';
         query += qs.stringify(params, '&');
-        let data = await this.request<{artist: Artist[]}>(query);
-        return (data.artist) ? data.artist : data;
+        return await this.request<{artist: Artist[]}>(query);
     }
 }

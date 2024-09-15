@@ -20,8 +20,7 @@ export class Podcasts extends Base {
     } & ExtendedPagination) {
         let query = 'podcasts';
         query += qs.stringify(params, '&');
-        let data = await this.request<{podcast: Podcast[]}>(query);
-        return (data.podcast) ? data.podcast : data;
+        return await this.request<{podcast: Podcast[]}>(query);
     }
 
     /**
@@ -113,8 +112,7 @@ export class Podcasts extends Base {
     } & ExtendedPagination) {
         let query = 'podcast_episodes';
         query += qs.stringify(params, '&');
-        let data = await this.request<{podcast_episode: PodcastEpisode[]}>(query);
-        return (data.podcast_episode) ? data.podcast_episode : data;
+        return await this.request<{podcast_episode: PodcastEpisode[]}>(query);
     }
 
     /**
@@ -171,7 +169,6 @@ export class Podcasts extends Base {
     } & Pagination) {
         let query = 'deleted_podcast_episodes';
         query += qs.stringify(params, '&');
-        let data = await this.request<{deleted_podcast_episode: DeletedPodcastEpisode[]}>(query);
-        return (data.deleted_podcast_episode) ? data.deleted_podcast_episode : data;
+        return await this.request<{deleted_podcast_episode: DeletedPodcastEpisode[]}>(query);
     }
 }

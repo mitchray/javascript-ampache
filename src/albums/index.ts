@@ -26,8 +26,7 @@ export class Albums extends Base {
     } & ExtendedPagination) {
         let query = 'albums';
         query += qs.stringify(params, '&');
-        let data = await this.request<{album: Album[]}>(query);
-        return (data.album) ? data.album : data;
+        return await this.request<{album: Album[]}>(query);
     }
 
     /**
@@ -61,8 +60,7 @@ export class Albums extends Base {
     } & ExtendedPagination) {
         let query = 'artist_albums';
         query += qs.stringify(params, '&');
-        let data = await this.request<{album: Album[]}>(query);
-        return (data.album) ? data.album : data;
+        return await this.request<{album: Album[]}>(query);
     }
 
     /**
@@ -80,7 +78,6 @@ export class Albums extends Base {
     } & ExtendedPagination) {
         let query = 'genre_albums';
         query += qs.stringify(params, '&');
-        let data = await this.request<{album: Album[]}>(query);
-        return (data.album) ? data.album : data;
+        return await this.request<{album: Album[]}>(query);
     }
 }

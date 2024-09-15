@@ -10,8 +10,7 @@ export class Users extends Base {
      */
     async users() {
         let query = 'users';
-        let data = await this.request<{user: UserSummary[]}>(query);
-        return (data.user) ? data.user : data;
+        return await this.request<{user: UserSummary[]}>(query);
     }
 
     /**
@@ -176,8 +175,7 @@ export class Users extends Base {
     } & ExtendedPagination ) {
         let query = 'followers';
         query += qs.stringify(params, '&');
-        let data = await this.request<{user: UserSummary[]}>(query);
-        return (data.user) ? data.user : data;
+        return await this.request<{user: UserSummary[]}>(query);
     }
 
     /**
@@ -190,8 +188,7 @@ export class Users extends Base {
     }) {
         let query = 'following';
         query += qs.stringify(params, '&');
-        let data = await this.request<{user: UserSummary[]}>(query);
-        return (data.user) ? data.user : data;
+        return await this.request<{user: UserSummary[]}>(query);
     }
 
     /**
@@ -222,8 +219,7 @@ export class Users extends Base {
     }) {
         let query = 'timeline';
         query += qs.stringify(params, '&');
-        let data = await this.request<{activity: Activity[]}>(query);
-        return (data.activity) ? data.activity : data;
+        return await this.request<{activity: Activity[]}>(query);
     }
 
     /**
@@ -239,7 +235,6 @@ export class Users extends Base {
     }) {
         let query = 'friends_timeline';
         query += qs.stringify(params, '&');
-        let data = await this.request<{activity: Activity[]}>(query);
-        return (data.activity) ? data.activity : data;
+        return await this.request<{activity: Activity[]}>(query);
     }
 }

@@ -24,8 +24,7 @@ export class LiveStreams extends Base {
     } & ExtendedPagination) {
         let query = 'live_streams';
         query += qs.stringify(params, '&');
-        let data = await this.request<{live_stream: LiveStream[]}>(query);
-        return (data.live_stream) ? data.live_stream : data;
+        return await this.request<{live_stream: LiveStream[]}>(query);
     }
 
     /**

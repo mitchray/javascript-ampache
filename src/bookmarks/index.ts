@@ -32,8 +32,7 @@ export class Bookmarks extends Base {
     }) {
         let query = 'bookmarks';
         query += qs.stringify(params, '&');
-        let data = await this.request<{bookmark: Bookmark[]}>(query);
-        return (data.bookmark) ? data.bookmark : data;
+        return await this.request<{bookmark: Bookmark[]}>(query);
     }
 
     /**

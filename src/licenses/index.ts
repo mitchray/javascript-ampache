@@ -24,8 +24,7 @@ export class Licenses extends Base {
     } & ExtendedPagination) {
         let query = 'licenses';
         query += qs.stringify(params, '&');
-        let data = await this.request<{license: License[]}>(query);
-        return (data.license) ? data.license : data;
+        return await this.request<{license: License[]}>(query);
     }
 
     /**

@@ -11,8 +11,7 @@ export class Preferences extends Base {
      */
     async systemPreferences () {
         let query = 'system_preferences';
-        let data = await this.request<{preference: Preference[]}>(query);
-        return (data.preference) ? data.preference : data;
+        return await this.request<{preference: Preference[]}>(query);
     }
 
     /**
@@ -37,8 +36,7 @@ export class Preferences extends Base {
      */
     async userPreferences () {
         let query = 'user_preferences';
-        let data = await this.request<{preference: Preference[]}>(query);
-        return (data.preference) ? data.preference : data;
+        return await this.request<{preference: Preference[]}>(query);
     }
 
     /**

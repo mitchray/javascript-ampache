@@ -16,7 +16,6 @@ export class Shouts extends Base {
     }) {
         let query = 'last_shouts';
         query += qs.stringify(params, '&');
-        let data = await this.request<{shout: Shout[]}>(query);
-        return (data.shout) ? data.shout : data;
+        return await this.request<{shout: Shout[]}>(query);
     }
 }

@@ -20,8 +20,7 @@ export class Shares extends Base {
     } & ExtendedPagination) {
         let query = 'shares';
         query += qs.stringify(params, '&');
-        let data = await this.request<{share: Share[]}>(query);
-        return (data.share) ? data.share : data;
+        return await this.request<{share: Share[]}>(query);
     }
 
     /**

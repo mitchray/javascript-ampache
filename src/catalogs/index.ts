@@ -18,8 +18,7 @@ export class Catalogs extends Base {
     } & ExtendedPagination) {
         let query = 'catalogs';
         query += qs.stringify(params, '&');
-        let data = await this.request<{catalog: Catalog[]}>(query);
-        return (data.catalog) ? data.catalog : data;
+        return await this.request<{catalog: Catalog[]}>(query);
     }
 
     /**

@@ -1,7 +1,7 @@
 import qs from 'querystringify';
 import { Playlist } from './types';
 import { Song } from "../songs/types";
-import {Base, BinaryBoolean, ExtendedPagination, Pagination, Success, UID} from '../base';
+import { Base, BinaryBoolean, ExtendedPagination, Pagination, Success, UID } from '../base';
 
 export class Playlists extends Base {
     /**
@@ -19,7 +19,7 @@ export class Playlists extends Base {
      * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#playlists}
      */
-    async playlists (params?: {
+    async playlists(params?: {
         filter?: string,
         exact?: BinaryBoolean,
         add?: Date,
@@ -29,8 +29,7 @@ export class Playlists extends Base {
     } & ExtendedPagination) {
         let query = 'playlists';
         query += qs.stringify(params, '&');
-        let data = await this.request<{playlist: Playlist[]}>(query);
-        return (data.playlist) ? data.playlist : data;
+        return await this.request<{ playlist: Playlist[] }>(query);
     }
 
     /**
@@ -43,7 +42,7 @@ export class Playlists extends Base {
      * @param [params.show_dupes] 0, 1 (if true ignore 'api_hide_dupe_searches' setting)
      * @see {@link https://ampache.org/api/api-json-methods#playlists}
      */
-    async smartlists (params?: {
+    async smartlists(params?: {
         filter?: string,
         exact?: BinaryBoolean,
         add?: Date,
@@ -52,18 +51,14 @@ export class Playlists extends Base {
     }) {
         let query = 'playlists';
         query += qs.stringify(params, '&');
-        let data = await this.request<{playlist: Playlist[]}>(query);
-
-        let results = (data.playlist) ? data.playlist : data;
+        let data = await this.request<{ playlist: Playlist[] }>(query);
 
         // filter out regular playlists
-        if (Array.isArray(results)) {
-            results = results.filter(function(item) {
-                return item.id.toString().match(/^smart_/);
-            })
+        if (Array.isArray(data.playlist)) {
+            data.playlist = data.playlist.filter(item => item.id.toString().startsWith('smart_'));
         }
 
-        return results;
+        return data;
     }
 
     /**
@@ -72,7 +67,7 @@ export class Playlists extends Base {
      * @param params.filter UID to find
      * @see {@link https://ampache.org/api/api-json-methods#playlist}
      */
-    playlist (params: {
+    playlist(params: {
         filter: UID
     }) {
         let query = 'playlist';
@@ -93,7 +88,7 @@ export class Playlists extends Base {
      * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#user_playlists}
      */
-    async userPlaylists (params?: {
+    async userPlaylists(params?: {
         filter?: string,
         exact?: BinaryBoolean,
         add?: Date,
@@ -101,8 +96,7 @@ export class Playlists extends Base {
     } & ExtendedPagination) {
         let query = 'user_playlists';
         query += qs.stringify(params, '&');
-        let data = await this.request<{playlist: Playlist[]}>(query);
-        return (data.playlist) ? data.playlist : data;
+        return await this.request<{ playlist: Playlist[] }>(query);
     }
 
     /**
@@ -118,7 +112,7 @@ export class Playlists extends Base {
      * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#user_smartlists}
      */
-    async userSmartlists (params?: {
+    async userSmartlists(params?: {
         filter?: string,
         exact?: BinaryBoolean,
         add?: Date,
@@ -126,8 +120,7 @@ export class Playlists extends Base {
     } & ExtendedPagination) {
         let query = 'user_smartlists';
         query += qs.stringify(params, '&');
-        let data = await this.request<{playlist: Playlist[]}>(query);
-        return (data.playlist) ? data.playlist : data;
+        return await this.request<{ playlist: Playlist[] }>(query);
     }
 
     /**
@@ -137,7 +130,7 @@ export class Playlists extends Base {
      * @param [params.type] public, private (Playlist type)
      * @see {@link https://ampache.org/api/api-json-methods#playlist_create}
      */
-    playlistCreate (params: {
+    playlistCreate(params: {
         name: string,
         type?: 'public' | 'private',
     }) {
@@ -154,7 +147,7 @@ export class Playlists extends Base {
      * @param params.type 'song', 'album', 'artist', 'playlist'
      * @see {@link https://ampache.org/api/api-json-methods#playlist_add}
      */
-    playlistAdd (params: {
+    playlistAdd(params: {
         filter: UID,
         id: UID,
         type: 'song' | 'album' | 'artist' | 'playlist',
@@ -176,7 +169,7 @@ export class Playlists extends Base {
      * @param [params.tracks] comma-separated playlisttrack numbers matched to 'items' in order
      * @see {@link https://ampache.org/api/api-json-methods#playlist_edit}
      */
-    playlistEdit (params: {
+    playlistEdit(params: {
         filter: UID,
         name?: string,
         type?: 'public' | 'private',
@@ -195,7 +188,7 @@ export class Playlists extends Base {
      * @param params.filter UID of playlist to delete
      * @see {@link https://ampache.org/api/api-json-methods#playlist_delete}
      */
-    playlistDelete (params: {
+    playlistDelete(params: {
         filter: UID,
     }) {
         let query = 'playlist_delete';
@@ -212,7 +205,7 @@ export class Playlists extends Base {
      * @see {@link https://ampache.org/api/api-json-methods#playlist_add_song}
      * @deprecated Being removed in 7.0.0. Use `playlist_add` instead.
      */
-    playlistAddSong (params: {
+    playlistAddSong(params: {
         filter: UID,
         song: UID,
         check?: BinaryBoolean,
@@ -230,7 +223,7 @@ export class Playlists extends Base {
      * @param [params.track] Track number to remove from playlist
      * @see {@link https://ampache.org/api/api-json-methods#playlist_remove_song}
      */
-    playlistRemoveSong (params: {
+    playlistRemoveSong(params: {
         filter: UID,
         song?: UID,
         track?: number,
@@ -253,7 +246,7 @@ export class Playlists extends Base {
      * @param [params.limit]
      * @see {@link https://ampache.org/api/api-json-methods#playlist_generate}
      */
-    async playlistGenerate (params?: {
+    async playlistGenerate(params?: {
         mode?: 'recent' | 'forgotten' | 'unplayed' | 'random',
         filter?: string,
         album?: number,
@@ -263,7 +256,6 @@ export class Playlists extends Base {
     } & Pagination) {
         let query = 'playlist_generate';
         query += qs.stringify(params, '&');
-        let data = await this.request<{song: Song[]}>(query);
-        return (data.song) ? data.song : data;
+        return await this.request<{ song: Song[] }>(query);
     }
 }

@@ -20,8 +20,7 @@ export class Genres extends Base {
     } & ExtendedPagination) {
         let query = 'genres';
         query += qs.stringify(params, '&');
-        let data = await this.request<{genre: Genre[]}>(query);
-        return (data.genre) ? data.genre : data;
+        return await this.request<{genre: Genre[]}>(query);
     }
 
     /**

@@ -24,8 +24,7 @@ export class Songs extends Base {
     } & ExtendedPagination) {
         let query = 'songs';
         query += qs.stringify(params, '&');
-        let data = await this.request<{song: Song[]}>(query);
-        return (data.song) ? data.song : data;
+        return await this.request<{song: Song[]}>(query);
     }
 
     /**
@@ -59,8 +58,7 @@ export class Songs extends Base {
     } & ExtendedPagination) {
         let query = 'artist_songs';
         query += qs.stringify(params, '&');
-        let data = await this.request<{song: Song[]}>(query);
-        return (data.song) ? data.song : data;
+        return await this.request<{song: Song[]}>(query);
     }
 
     /**
@@ -78,8 +76,7 @@ export class Songs extends Base {
     } & ExtendedPagination) {
         let query = 'album_songs';
         query += qs.stringify(params, '&');
-        let data = await this.request<{song: Song[]}>(query);
-        return (data.song) ? data.song : data;
+        return await this.request<{song: Song[]}>(query);
     }
 
     /**
@@ -97,8 +94,7 @@ export class Songs extends Base {
     } & ExtendedPagination) {
         let query = 'genre_songs';
         query += qs.stringify(params, '&');
-        let data = await this.request<{song: Song[]}>(query);
-        return (data.song) ? data.song : data;
+        return await this.request<{song: Song[]}>(query);
     }
 
     /**
@@ -116,8 +112,7 @@ export class Songs extends Base {
     } & Pagination) {
         let query = 'playlist_songs';
         query += qs.stringify(params, '&');
-        let data = await this.request<{song: Song[]}>(query);
-        return (data.song) ? data.song : data;
+        return await this.request<{song: Song[]}>(query);
     }
 
     /**
@@ -135,8 +130,7 @@ export class Songs extends Base {
     } & ExtendedPagination) {
         let query = 'license_songs';
         query += qs.stringify(params, '&');
-        let data = await this.request<{song: Song[]}>(query);
-        return (data.song) ? data.song : data;
+        return await this.request<{song: Song[]}>(query);
     }
 
     /**
@@ -181,8 +175,7 @@ export class Songs extends Base {
     } & Pagination) {
         let query = 'search_songs';
         query += qs.stringify(params, '&');
-        let data = await this.request<{song: Song[]}>(query);
-        return (data.song) ? data.song : data;
+        return await this.request<{song: Song[]}>(query);
     }
 
     /**
@@ -197,7 +190,6 @@ export class Songs extends Base {
     } & Pagination) {
         let query = 'deleted_songs';
         query += qs.stringify(params, '&');
-        let data = await this.request<{deleted_song: DeletedSong[]}>(query);
-        return (data.deleted_song) ? data.deleted_song : data;
+        return await this.request<{deleted_song: DeletedSong[]}>(query);
     }
 }

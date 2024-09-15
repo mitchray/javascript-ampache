@@ -18,8 +18,7 @@ export class Videos extends Base {
     } & Pagination) {
         let query = 'videos';
         query += qs.stringify(params, '&');
-        let data = await this.request<{video: Video[]}>(query);
-        return (data.video) ? data.video : data;
+        return await this.request<{video: Video[]}>(query);
     }
 
     /**
@@ -47,7 +46,6 @@ export class Videos extends Base {
     } & Pagination) {
         let query = 'deleted_videos';
         query += qs.stringify(params, '&');
-        let data = await this.request<{deleted_video: DeletedVideo[]}>(query);
-        return (data.deleted_video) ? data.deleted_video : data;
+        return await this.request<{deleted_video: DeletedVideo[]}>(query);
     }
 }
