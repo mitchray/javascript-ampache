@@ -1,38 +1,38 @@
 import { AlbumResponse } from "../albums/types";
 import { Song } from "../songs/types";
-import {GenreResponse} from "../genres/types";
+import { GenreResponse } from "../genres/types";
 
 export type ArtistSummary = {
-    id: string,
-    name: string,
-    prefix: string | null,
-    basename: string
-}
+  id: string;
+  name: string;
+  prefix: string | null;
+  basename: string;
+};
 
 export type ArtistResponse = {
-    id: string,
-    name: string,
-    prefix: string | null,
-    basename: string,
-    albums: AlbumResponse[],
-    albumcount: number,
-    songs: Song[],
-    songcount: number,
-    genre: GenreResponse[],
-    art: string,
-    has_art: boolean,
-    flag: boolean,
-    rating: number | null,
-    averagerating: number | null,
-    mbid: string | null,
-    summary: string,
-    time: number,
-    yearformed: number,
-    placeformed: string,
-}
+  id: string;
+  name: string;
+  prefix: string | null;
+  basename: string;
+  albums: AlbumResponse[];
+  albumcount: number;
+  songs: Song[];
+  songcount: number;
+  genre: GenreResponse[];
+  art: string;
+  has_art: boolean;
+  flag: boolean;
+  rating: number | null;
+  averagerating: number | null;
+  mbid: string | null;
+  summary: string;
+  time: number;
+  yearformed: number;
+  placeformed: string;
+};
 
 export type ArtistsResponse = {
-    total_count: number;
-    md5: string;
-    artist: ArtistResponse[];
-}
+  total_count: number;
+  md5: string;
+  artist: ArtistResponse[];
+};

@@ -1,24 +1,24 @@
-import fetch from 'isomorphic-unfetch';
-import qs from 'querystringify';
+import fetch from "isomorphic-unfetch";
+import qs from "querystringify";
 
 type Config = {
-    url: string,
-    sessionKey?: string,
-    debug?: boolean,
-}
+  url: string;
+  sessionKey?: string;
+  debug?: boolean;
+};
 
 export type Success = {
-    success: string,
-}
+  success: string;
+};
 
 /**
  * @param [offset] Return results starting from this index position
  * @param [limit] Maximum number of results to return
  */
 export type Pagination = {
-    offset?: number,
-    limit?: number,
-}
+  offset?: number;
+  limit?: number;
+};
 
 /**
  * @param [offset] Return results starting from this index position
@@ -27,93 +27,108 @@ export type Pagination = {
  * @param [sort] Sort name or comma-separated key pair. (e.g. 'name,order') Default order 'ASC' (e.g. 'name,ASC' == 'name')
  */
 export type ExtendedPagination = Pagination & {
-    cond?: string,
-    sort?: string,
-}
+  cond?: string;
+  sort?: string;
+};
 
 export type BinaryBoolean = 0 | 1;
 
 export type UID = string | number;
 
 export abstract class Base {
-    sessionKey: string;
-    url: string;
-    version: string = '6.3.0';// default to latest version
-    debug: boolean;
+  sessionKey: string;
+  url: string;
+  version: string = "6.3.0"; // default to latest version
+  debug: boolean;
 
-    constructor(config: Config) {
-        this.sessionKey = config.sessionKey || null;
-        this.url = config.url;
-        this.debug = config.debug || false;
+  constructor(config: Config) {
+    this.sessionKey = config.sessionKey || null;
+    this.url = config.url;
+    this.debug = config.debug || false;
+  }
+
+  protected request<T>(endpoint: string): Promise<T> {
+    let url =
+      this.url +
+      "/server/json.server.php?action=" +
+      endpoint +
+      "&version=" +
+      this.version;
+
+    if (this.debug) {
+      console.debug(
+        "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
+        "color: black; font-style: italic; background-color: orange;padding: 2px",
+      );
     }
 
-    protected request<T> (endpoint: string): Promise<T> {
-        let url = this.url + "/server/json.server.php?action=" + endpoint + "&version=" + this.version;
+    return fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + this.sessionKey,
+      },
+    }).then((r) => {
+      if (r.ok) {
+        return r.json();
+      }
+      throw new Error(r.statusText);
+    });
+  }
 
-        if (this.debug) {
-            console.debug(
-                "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
-                "color: black; font-style: italic; background-color: orange;padding: 2px"
-            );
-        }
+  protected binary<T>(endpoint: string): Promise<Blob> {
+    let url =
+      this.url +
+      "/server/json.server.php?action=" +
+      endpoint +
+      "&version=" +
+      this.version;
 
-        return fetch(url, {
-            method: "GET",
-            headers: {
-                'Authorization': 'Bearer ' + this.sessionKey
-            }
-        }).then(r => {
-            if (r.ok) {
-                return r.json();
-            }
-            throw new Error(r.statusText);
-        })
+    if (this.debug) {
+      console.debug(
+        "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
+        "color: black; font-style: italic; background-color: orange;padding: 2px",
+      );
     }
 
-    protected binary<T> (endpoint: string): Promise<Blob> {
-        let url = this.url + "/server/json.server.php?action=" + endpoint + "&version=" + this.version;
+    return fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + this.sessionKey,
+      },
+    })
+      .then((response) => response.blob())
+      .then((r) => {
+        return r;
+      });
+  }
 
-        if (this.debug) {
-            console.debug(
-                "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
-                "color: black; font-style: italic; background-color: orange;padding: 2px"
-            );
-        }
+  public setSessionKey(sessionKey: string) {
+    this.sessionKey = sessionKey;
+  }
 
-        return fetch(url,{
-            method: "GET",
-            headers: {
-                'Authorization': 'Bearer ' + this.sessionKey
-            }
-        })
-            .then(response => response.blob())
-            .then(r => {
-                return r;
-            })
+  /**
+   * Construct and return a URL
+   * @param endpoint
+   * @param [params]
+   */
+  public rawURL(endpoint: string, params?: {}) {
+    let query = endpoint;
+    query += qs.stringify(params, "&");
+
+    let url =
+      this.url +
+      "/server/json.server.php?action=" +
+      query +
+      "&version=" +
+      this.version;
+
+    if (this.debug) {
+      console.debug(
+        "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
+        "color: black; font-style: italic; background-color: orange;padding: 2px",
+      );
     }
 
-    public setSessionKey(sessionKey: string) {
-        this.sessionKey = sessionKey;
-    }
-
-    /**
-     * Construct and return a URL
-     * @param endpoint
-     * @param [params]
-     */
-    public rawURL(endpoint: string, params?: {}) {
-        let query = endpoint;
-        query += qs.stringify(params, '&');
-
-        let url = this.url + "/server/json.server.php?action=" + query + "&version=" + this.version;
-
-        if (this.debug) {
-            console.debug(
-                "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
-                "color: black; font-style: italic; background-color: orange;padding: 2px"
-            );
-        }
-
-        return url;
-    }
+    return url;
+  }
 }
