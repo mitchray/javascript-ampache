@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Video, DeletedVideo } from './types';
+import { VideoResponse, VideosResponse, DeletedVideosResponse } from './types';
 import { Base, BinaryBoolean, Pagination, UID } from '../base';
 
 export class Videos extends Base {
@@ -18,7 +18,7 @@ export class Videos extends Base {
     } & Pagination) {
         let query = 'videos';
         query += qs.stringify(params, '&');
-        return await this.request<{video: Video[]}>(query);
+        return await this.request<VideosResponse>(query);
     }
 
     /**
@@ -32,7 +32,7 @@ export class Videos extends Base {
     }) {
         let query = 'video';
         query += qs.stringify(params, '&');
-        return this.request<Video>(query);
+        return this.request<VideoResponse>(query);
     }
 
     /**
@@ -46,6 +46,6 @@ export class Videos extends Base {
     } & Pagination) {
         let query = 'deleted_videos';
         query += qs.stringify(params, '&');
-        return await this.request<{deleted_video: DeletedVideo[]}>(query);
+        return await this.request<DeletedVideosResponse>(query);
     }
 }

@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Song, DeletedSong } from './types';
+import { SongResponse, SongsResponse, DeletedSongsResponse } from './types';
 import {Base, BinaryBoolean, ExtendedPagination, Pagination, Success, UID} from '../base';
 
 export class Songs extends Base {
@@ -24,7 +24,7 @@ export class Songs extends Base {
     } & ExtendedPagination) {
         let query = 'songs';
         query += qs.stringify(params, '&');
-        return await this.request<{song: Song[]}>(query);
+        return await this.request<SongsResponse>(query);
     }
 
     /**
@@ -38,7 +38,7 @@ export class Songs extends Base {
     }) {
         let query = 'song';
         query += qs.stringify(params, '&');
-        return this.request<Song>(query);
+        return this.request<SongResponse>(query);
     }
 
     /**
@@ -58,7 +58,7 @@ export class Songs extends Base {
     } & ExtendedPagination) {
         let query = 'artist_songs';
         query += qs.stringify(params, '&');
-        return await this.request<{song: Song[]}>(query);
+        return await this.request<SongsResponse>(query);
     }
 
     /**
@@ -76,7 +76,7 @@ export class Songs extends Base {
     } & ExtendedPagination) {
         let query = 'album_songs';
         query += qs.stringify(params, '&');
-        return await this.request<{song: Song[]}>(query);
+        return await this.request<SongsResponse>(query);
     }
 
     /**
@@ -94,7 +94,7 @@ export class Songs extends Base {
     } & ExtendedPagination) {
         let query = 'genre_songs';
         query += qs.stringify(params, '&');
-        return await this.request<{song: Song[]}>(query);
+        return await this.request<SongsResponse>(query);
     }
 
     /**
@@ -112,7 +112,7 @@ export class Songs extends Base {
     } & Pagination) {
         let query = 'playlist_songs';
         query += qs.stringify(params, '&');
-        return await this.request<{song: Song[]}>(query);
+        return await this.request<SongsResponse>(query);
     }
 
     /**
@@ -130,7 +130,7 @@ export class Songs extends Base {
     } & ExtendedPagination) {
         let query = 'license_songs';
         query += qs.stringify(params, '&');
-        return await this.request<{song: Song[]}>(query);
+        return await this.request<SongsResponse>(query);
     }
 
     /**
@@ -159,7 +159,7 @@ export class Songs extends Base {
         let query = 'url_to_song';
         params.url = encodeURIComponent(params.url);
         query += qs.stringify(params, '&');
-        return this.request<Song>(query);
+        return this.request<SongResponse>(query);
     }
 
     /**
@@ -175,7 +175,7 @@ export class Songs extends Base {
     } & Pagination) {
         let query = 'search_songs';
         query += qs.stringify(params, '&');
-        return await this.request<{song: Song[]}>(query);
+        return await this.request<SongsResponse>(query);
     }
 
     /**
@@ -190,6 +190,6 @@ export class Songs extends Base {
     } & Pagination) {
         let query = 'deleted_songs';
         query += qs.stringify(params, '&');
-        return await this.request<{deleted_song: DeletedSong[]}>(query);
+        return await this.request<DeletedSongsResponse>(query);
     }
 }

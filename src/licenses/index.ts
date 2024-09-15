@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { License } from './types';
+import { LicenseResponse, LicensesResponse } from './types';
 import { Base, BinaryBoolean, ExtendedPagination, UID } from '../base';
 
 export class Licenses extends Base {
@@ -24,7 +24,7 @@ export class Licenses extends Base {
     } & ExtendedPagination) {
         let query = 'licenses';
         query += qs.stringify(params, '&');
-        return await this.request<{license: License[]}>(query);
+        return await this.request<LicensesResponse>(query);
     }
 
     /**
@@ -38,6 +38,6 @@ export class Licenses extends Base {
     }) {
         let query = 'license';
         query += qs.stringify(params, '&');
-        return this.request<License>(query);
+        return this.request<LicenseResponse>(query);
     }
 }

@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Artist } from './types';
+import { ArtistResponse, ArtistsResponse } from './types';
 import { Base, BinaryBoolean, ExtendedPagination, UID } from '../base';
 
 export class Artists extends Base {
@@ -28,7 +28,7 @@ export class Artists extends Base {
     } & ExtendedPagination) {
         let query = 'artists';
         query += qs.stringify(params, '&');
-        return await this.request<{artist: Artist[]}>(query);
+        return await this.request<ArtistsResponse>(query);
     }
 
     /**
@@ -44,7 +44,7 @@ export class Artists extends Base {
     }) {
         let query = 'artist';
         query += qs.stringify(params, '&');
-        return this.request<Artist>(query);
+        return this.request<ArtistResponse>(query);
     }
 
     /**
@@ -62,7 +62,7 @@ export class Artists extends Base {
     } & ExtendedPagination) {
         let query = 'genre_artists';
         query += qs.stringify(params, '&');
-        return await this.request<{artist: Artist[]}>(query);
+        return await this.request<ArtistsResponse>(query);
     }
 
     /**
@@ -80,6 +80,6 @@ export class Artists extends Base {
     } & ExtendedPagination) {
         let query = 'label_artists';
         query += qs.stringify(params, '&');
-        return await this.request<{artist: Artist[]}>(query);
+        return await this.request<ArtistsResponse>(query);
     }
 }

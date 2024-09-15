@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Playlist } from './types';
+import { PlaylistResponse, PlaylistsResponse } from './types';
 import { Song } from "../songs/types";
 import { Base, BinaryBoolean, ExtendedPagination, Pagination, Success, UID } from '../base';
 
@@ -29,7 +29,7 @@ export class Playlists extends Base {
     } & ExtendedPagination) {
         let query = 'playlists';
         query += qs.stringify(params, '&');
-        return await this.request<{ playlist: Playlist[] }>(query);
+        return await this.request<PlaylistsResponse>(query);
     }
 
     /**
@@ -51,7 +51,7 @@ export class Playlists extends Base {
     }) {
         let query = 'playlists';
         query += qs.stringify(params, '&');
-        let data = await this.request<{ playlist: Playlist[] }>(query);
+        let data = await this.request<PlaylistsResponse>(query);
 
         // filter out regular playlists
         if (Array.isArray(data.playlist)) {
@@ -72,7 +72,7 @@ export class Playlists extends Base {
     }) {
         let query = 'playlist';
         query += qs.stringify(params, '&');
-        return this.request<Playlist>(query);
+        return this.request<PlaylistResponse>(query);
     }
 
     /**
@@ -96,7 +96,7 @@ export class Playlists extends Base {
     } & ExtendedPagination) {
         let query = 'user_playlists';
         query += qs.stringify(params, '&');
-        return await this.request<{ playlist: Playlist[] }>(query);
+        return await this.request<PlaylistsResponse>(query);
     }
 
     /**
@@ -120,7 +120,7 @@ export class Playlists extends Base {
     } & ExtendedPagination) {
         let query = 'user_smartlists';
         query += qs.stringify(params, '&');
-        return await this.request<{ playlist: Playlist[] }>(query);
+        return await this.request<PlaylistsResponse>(query);
     }
 
     /**
@@ -136,7 +136,7 @@ export class Playlists extends Base {
     }) {
         let query = 'playlist_create';
         query += qs.stringify(params, '&');
-        return this.request<Playlist>(query);
+        return this.request<PlaylistResponse>(query);
     }
 
     /**

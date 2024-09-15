@@ -1,15 +1,15 @@
-import { Song } from "../songs/types";
-import { Album } from "../albums/types";
-import { Artist } from "../artists/types";
-import { Playlist } from "../playlists/types";
-import { Podcast, PodcastEpisode } from "../podcasts/types";
-import { LiveStream } from "../live-streams/types";
-import { Video } from "../videos/types";
+import { SongResponse } from "../songs/types";
+import { AlbumResponse } from "../albums/types";
+import { ArtistResponse } from "../artists/types";
+import { PlaylistResponse } from "../playlists/types";
+import { PodcastResponse, PodcastEpisodeResponse } from "../podcasts/types";
+import { LiveStreamResponse } from "../live-streams/types";
+import { VideoResponse } from "../videos/types";
 import { UID } from "../base";
 
-export type IndexType = Song | Album | Artist | Playlist | Podcast | PodcastEpisode | LiveStream;
+export type IndexType = SongResponse | AlbumResponse | ArtistResponse | PlaylistResponse | PodcastResponse | PodcastEpisodeResponse | LiveStreamResponse;
 
-export type StatsType = Song | Album | Artist | Video | Playlist | Podcast | PodcastEpisode;
+export type StatsType = SongResponse | AlbumResponse | ArtistResponse | VideoResponse | PlaylistResponse | PodcastResponse | PodcastEpisodeResponse;
 
 export type IndexEntry = {
     id: UID,

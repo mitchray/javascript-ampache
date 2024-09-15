@@ -1,6 +1,6 @@
 import { UID } from "../base";
 
-export type Share = {
+export type ShareResponse = {
     id: UID,
     name: string,
     owner: string,
@@ -16,4 +16,10 @@ export type Share = {
     secret: string,
     public_url: string,
     description: string,
+}
+
+export type SharesResponse = {
+    total_count: number;
+    md5: string;
+    share: ShareResponse[];
 }

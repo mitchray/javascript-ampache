@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Genre } from './types';
+import { GenreResponse, GenresResponse } from './types';
 import { Base, BinaryBoolean, ExtendedPagination, UID } from '../base';
 
 export class Genres extends Base {
@@ -20,7 +20,7 @@ export class Genres extends Base {
     } & ExtendedPagination) {
         let query = 'genres';
         query += qs.stringify(params, '&');
-        return await this.request<{genre: Genre[]}>(query);
+        return await this.request<GenresResponse>(query);
     }
 
     /**
@@ -34,6 +34,6 @@ export class Genres extends Base {
     }) {
         let query = 'genre';
         query += qs.stringify(params, '&');
-        return this.request<Genre>(query);
+        return this.request<GenreResponse>(query);
     }
 }

@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Bookmark } from './types';
+import { BookmarkResponse, BookmarksResponse } from './types';
 import { Base, BinaryBoolean, Success, UID } from '../base';
 
 export class Bookmarks extends Base {
@@ -16,7 +16,7 @@ export class Bookmarks extends Base {
     }) {
         let query = 'bookmark';
         query += qs.stringify(params, '&');
-        return this.request<Bookmark>(query);
+        return this.request<BookmarkResponse>(query);
     }
 
     /**
@@ -32,7 +32,7 @@ export class Bookmarks extends Base {
     }) {
         let query = 'bookmarks';
         query += qs.stringify(params, '&');
-        return await this.request<{bookmark: Bookmark[]}>(query);
+        return await this.request<BookmarksResponse>(query);
     }
 
     /**
@@ -50,7 +50,7 @@ export class Bookmarks extends Base {
     }) {
         let query = 'get_bookmark';
         query += qs.stringify(params, '&');
-        return this.request<Bookmark>(query);
+        return this.request<BookmarkResponse>(query);
     }
 
     /**
@@ -74,7 +74,7 @@ export class Bookmarks extends Base {
     }) {
         let query = 'bookmark_create';
         query += qs.stringify(params, '&');
-        return this.request<Bookmark>(query);
+        return this.request<BookmarkResponse>(query);
     }
 
     /**
@@ -98,7 +98,7 @@ export class Bookmarks extends Base {
     }) {
         let query = 'bookmark_edit';
         query += qs.stringify(params, '&');
-        return this.request<Bookmark>(query);
+        return this.request<BookmarkResponse>(query);
     }
 
     /**

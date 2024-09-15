@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { LiveStream } from './types';
+import { LiveStreamResponse, LiveStreamsResponse } from './types';
 import { Base, BinaryBoolean, ExtendedPagination, Success, UID } from '../base';
 
 export class LiveStreams extends Base {
@@ -24,7 +24,7 @@ export class LiveStreams extends Base {
     } & ExtendedPagination) {
         let query = 'live_streams';
         query += qs.stringify(params, '&');
-        return await this.request<{live_stream: LiveStream[]}>(query);
+        return await this.request<LiveStreamsResponse>(query);
     }
 
     /**
@@ -38,7 +38,7 @@ export class LiveStreams extends Base {
     }) {
         let query = 'live_stream';
         query += qs.stringify(params, '&');
-        return this.request<LiveStream>(query);
+        return this.request<LiveStreamResponse>(query);
     }
 
     /**
@@ -61,7 +61,7 @@ export class LiveStreams extends Base {
     }) {
         let query = 'live_stream_create';
         query += qs.stringify(params, '&');
-        return this.request<LiveStream>(query);
+        return this.request<LiveStreamResponse>(query);
     }
 
     /**
@@ -86,7 +86,7 @@ export class LiveStreams extends Base {
     }) {
         let query = 'live_stream_edit';
         query += qs.stringify(params, '&');
-        return this.request<LiveStream>(query);
+        return this.request<LiveStreamResponse>(query);
     }
 
     /**

@@ -1,6 +1,6 @@
 import { UID } from "../base";
 
-export type Catalog = {
+export type CatalogResponse = {
     id: UID,
     name: string,
     type: 'local' | 'remote',
@@ -12,4 +12,10 @@ export type Catalog = {
     path: string,
     rename_pattern: string,
     sort_pattern: string,
+}
+
+export type CatalogsResponse = {
+    total_count: number;
+    md5: string;
+    catalog: CatalogResponse[];
 }

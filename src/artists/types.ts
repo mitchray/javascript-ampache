@@ -1,6 +1,6 @@
-import { Album } from "../albums/types";
+import { AlbumResponse } from "../albums/types";
 import { Song } from "../songs/types";
-import { Genre } from "../genres/types";
+import {GenreResponse} from "../genres/types";
 
 export type ArtistSummary = {
     id: string,
@@ -9,16 +9,16 @@ export type ArtistSummary = {
     basename: string
 }
 
-export type Artist = {
+export type ArtistResponse = {
     id: string,
     name: string,
     prefix: string | null,
     basename: string,
-    albums: Album[],
+    albums: AlbumResponse[],
     albumcount: number,
     songs: Song[],
     songcount: number,
-    genre: Genre[],
+    genre: GenreResponse[],
     art: string,
     has_art: boolean,
     flag: boolean,
@@ -29,4 +29,10 @@ export type Artist = {
     time: number,
     yearformed: number,
     placeformed: string,
+}
+
+export type ArtistsResponse = {
+    total_count: number;
+    md5: string;
+    artist: ArtistResponse[];
 }

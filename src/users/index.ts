@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { User, UserSummary, Activity } from './types';
+import {UserResponse, UserSummary, ActivityResponse} from './types';
 import {Base, BinaryBoolean, ExtendedPagination, Success} from '../base';
 
 export class Users extends Base {
@@ -24,7 +24,7 @@ export class Users extends Base {
     }) {
         let query = 'user';
         query += qs.stringify(params, '&');
-        return await this.request<User>(query);
+        return await this.request<UserResponse>(query);
     }
 
     /**
@@ -219,7 +219,7 @@ export class Users extends Base {
     }) {
         let query = 'timeline';
         query += qs.stringify(params, '&');
-        return await this.request<{activity: Activity[]}>(query);
+        return await this.request<{activity: ActivityResponse[]}>(query);
     }
 
     /**
@@ -235,6 +235,6 @@ export class Users extends Base {
     }) {
         let query = 'friends_timeline';
         query += qs.stringify(params, '&');
-        return await this.request<{activity: Activity[]}>(query);
+        return await this.request<{activity: ActivityResponse[]}>(query);
     }
 }

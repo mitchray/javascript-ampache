@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Album } from './types';
+import { AlbumResponse, AlbumsResponse } from './types';
 import { Base, BinaryBoolean, ExtendedPagination, UID } from '../base';
 
 export class Albums extends Base {
@@ -17,7 +17,7 @@ export class Albums extends Base {
      * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#albums}
      */
-    async albums (params?: {
+    async albums(params?: {
         filter?: number,
         exact?: BinaryBoolean,
         add?: Date,
@@ -26,7 +26,7 @@ export class Albums extends Base {
     } & ExtendedPagination) {
         let query = 'albums';
         query += qs.stringify(params, '&');
-        return await this.request<{album: Album[]}>(query);
+        return await this.request<AlbumsResponse>(query);
     }
 
     /**
@@ -36,13 +36,13 @@ export class Albums extends Base {
      * @param [params.include] songs (include child objects in the response)
      * @see {@link https://ampache.org/api/api-json-methods#album}
      */
-    album (params: {
+    album(params: {
         filter: UID,
         include?: 'songs'
     }) {
         let query = 'album';
         query += qs.stringify(params, '&');
-        return this.request<Album>(query);
+        return this.request<AlbumResponse>(query);
     }
 
     /**
@@ -55,12 +55,12 @@ export class Albums extends Base {
      * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#artist_albums}
      */
-    async artistAlbums (params: {
+    async artistAlbums(params: {
         filter: UID
     } & ExtendedPagination) {
         let query = 'artist_albums';
         query += qs.stringify(params, '&');
-        return await this.request<{album: Album[]}>(query);
+        return await this.request<AlbumsResponse>(query);
     }
 
     /**
@@ -73,11 +73,11 @@ export class Albums extends Base {
      * @param [params.sort]
      * @see {@link https://ampache.org/api/api-json-methods#genre_albums}
      */
-    async genreAlbums (params?: {
+    async genreAlbums(params?: {
         filter: UID
     } & ExtendedPagination) {
         let query = 'genre_albums';
         query += qs.stringify(params, '&');
-        return await this.request<{album: Album[]}>(query);
+        return await this.request<AlbumsResponse>(query);
     }
 }

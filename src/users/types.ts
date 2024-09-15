@@ -5,7 +5,7 @@ export type UserSummary = {
     username: string,
 }
 
-export type User = {
+export type UserResponse = {
     id: UID,
     username: string,
     auth: string,
@@ -22,7 +22,13 @@ export type User = {
     city: string | null,
 }
 
-export type Activity = {
+export type UsersResponse = {
+    total_count: number;
+    md5: string;
+    user: UserResponse[];
+}
+
+export type ActivityResponse = {
     id: UID,
     date: number,
     object_type: string,

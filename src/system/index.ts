@@ -1,16 +1,17 @@
 import qs from 'querystringify';
-import { Song } from "../songs/types";
-import { Artist } from "../artists/types";
+import {SongResponse, SongsResponse} from "../songs/types";
+import {ArtistResponse, ArtistsResponse} from "../artists/types";
 import {Base, BinaryBoolean, ExtendedPagination, Pagination, Success, UID} from '../base';
-import { Album } from '../albums/types';
-import { Video } from '../videos/types';
-import { Playlist } from '../playlists/types';
-import { Podcast, PodcastEpisode } from '../podcasts/types';
-import { LiveStream } from "../live-streams/types";
-import { Label } from "../labels/types";
-import { Genre } from "../genres/types";
-import { User } from "../users/types";
+import {AlbumResponse, AlbumsResponse} from '../albums/types';
+import {VideoResponse, VideosResponse} from '../videos/types';
+import {PlaylistResponse, PlaylistsResponse} from '../playlists/types';
+import {PodcastResponse, PodcastEpisodeResponse, PodcastsResponse, PodcastEpisodesResponse} from '../podcasts/types';
+import {LiveStreamResponse, LiveStreamsResponse} from "../live-streams/types";
+import {LabelResponse, LabelsResponse} from "../labels/types";
+import {GenreResponse, GenresResponse} from "../genres/types";
+import {UserResponse, UsersResponse} from "../users/types";
 import { IndexEntry } from "./types";
+import {Albums} from "../albums";
 
 export class System extends Base {
     /**
@@ -53,26 +54,26 @@ export class System extends Base {
 
         switch (params.type) {
             case "song":
-                data = await this.request<{song: Song[]}>(query);
+                data = await this.request<SongsResponse>(query);
                 break;
             case "album":
-                data = await this.request<{album: Album[]}>(query);
+                data = await this.request<AlbumsResponse>(query);
                 break;
             case "artist":
             case "album_artist":
-                data = await this.request<{artist: Artist[]}>(query);
+                data = await this.request<ArtistsResponse>(query);
                 break;
             case "playlist":
-                data = await this.request<{playlist: Playlist[]}>(query);
+                data = await this.request<PlaylistsResponse>(query);
                 break;
             case "podcast":
-                data = await this.request<{podcast: Podcast[]}>(query);
+                data = await this.request<PodcastsResponse>(query);
                 break;
             case "podcast_episode":
-                data = await this.request<{podcast_episode: PodcastEpisode[]}>(query);
+                data = await this.request<PodcastEpisodesResponse>(query);
                 break;
             case "live_stream":
-                data = await this.request<{live_stream: LiveStream[]}>(query);
+                data = await this.request<LiveStreamsResponse>(query);
                 break;
             default:
                 return false;
@@ -183,10 +184,10 @@ export class System extends Base {
 
         switch (params.type) {
             case "song":
-                data = await this.request<{song: Song[]}>(query);
+                data = await this.request<SongsResponse>(query);
                 break;
             case "artist":
-                data = await this.request<{artist: Artist[]}>(query);
+                data = await this.request<ArtistsResponse>(query);
                 break;
             default:
                 return false;
@@ -218,25 +219,25 @@ export class System extends Base {
 
         switch (params.type) {
             case "song":
-                data = await this.request<{song: Song[]}>(query);
+                data = await this.request<SongsResponse>(query);
                 break;
             case "album":
-                data = await this.request<{album: Album[]}>(query);
+                data = await this.request<AlbumsResponse>(query);
                 break;
             case "artist":
-                data = await this.request<{artist: Artist[]}>(query);
+                data = await this.request<ArtistsResponse>(query);
                 break;
             case "video":
-                data = await this.request<{video: Video[]}>(query);
+                data = await this.request<VideosResponse>(query);
                 break;
             case "playlist":
-                data = await this.request<{playlist: Playlist[]}>(query);
+                data = await this.request<PlaylistsResponse>(query);
                 break;
             case "podcast":
-                data = await this.request<{podcast: Podcast[]}>(query);
+                data = await this.request<PodcastsResponse>(query);
                 break;
             case "podcast_episode":
-                data = await this.request<{podcast_episode: PodcastEpisode[]}>(query);
+                data = await this.request<PodcastEpisodesResponse>(query);
                 break;
             default:
                 return false;
@@ -540,36 +541,36 @@ export class System extends Base {
 
         switch (params.type) {
             case "song":
-                data = await this.request<{song: Song[]}>(query);
+                data = await this.request<SongsResponse>(query);
                 break;
             case "album":
-                data = await this.request<{album: Album[]}>(query);
+                data = await this.request<AlbumsResponse>(query);
                 break;
             case "artist":
             case "album_artist":
             case "song_artist":
-                data = await this.request<{artist: Artist[]}>(query);
+                data = await this.request<ArtistsResponse>(query);
                 break;
             case "label":
-                data = await this.request<{label: Label[]}>(query);
+                data = await this.request<LabelsResponse>(query);
                 break;
             case "playlist":
-                data = await this.request<{playlist: Playlist[]}>(query);
+                data = await this.request<PlaylistsResponse>(query);
                 break;
             case "podcast":
-                data = await this.request<{podcast: Podcast[]}>(query);
+                data = await this.request<PodcastsResponse>(query);
                 break;
             case "podcast_episode":
-                data = await this.request<{podcast_episode: PodcastEpisode[]}>(query);
+                data = await this.request<PodcastEpisodesResponse>(query);
                 break;
             case "genre":
-                data = await this.request<{genre: Genre[]}>(query);
+                data = await this.request<GenresResponse>(query);
                 break;
             case "user":
-                data = await this.request<{user: User[]}>(query);
+                data = await this.request<UsersResponse>(query);
                 break;
             case "video":
-                data = await this.request<{video: Video[]}>(query);
+                data = await this.request<VideosResponse>(query);
                 break;
             default:
                 return false;

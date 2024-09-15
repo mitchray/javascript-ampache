@@ -1,9 +1,9 @@
 import { ArtistSummary } from "../artists/types";
 import { GenreSummary } from "../genres/types";
 import { UID } from "../base";
-import { AlbumSummary } from "../albums/types";
+import { AlbumSummary} from "../albums/types";
 
-export type Song = {
+export type SongResponse = {
     id: UID,
     title: string,
     name: string,
@@ -50,7 +50,13 @@ export type Song = {
     r128_track_gain: number | null,
 }
 
-export type DeletedSong = {
+export type SongsResponse = {
+    total_count: number;
+    md5: string;
+    song: SongResponse[];
+}
+
+export type DeletedSongResponse = {
     id: UID,
     addition_time: number,
     delete_time: number,
@@ -62,4 +68,10 @@ export type DeletedSong = {
     total_skip: number,
     album: UID,
     artist: UID,
+}
+
+export type DeletedSongsResponse = {
+    total_count: number;
+    md5: string;
+    deleted_song: DeletedSongResponse[];
 }

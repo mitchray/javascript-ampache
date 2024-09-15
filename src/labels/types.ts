@@ -1,6 +1,6 @@
 import { UID } from "../base";
 
-export type Label = {
+export type LabelResponse = {
     id: UID,
     name: string,
     artists: number,
@@ -11,4 +11,10 @@ export type Label = {
     email: string | null,
     website: string | null,
     user: UID,
+}
+
+export type LabelsResponse = {
+    total_count: number;
+    md5: string;
+    label: LabelResponse[];
 }

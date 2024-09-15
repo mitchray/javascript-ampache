@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Shout } from './types';
+import { ShoutResponse } from './types';
 import { Base } from '../base';
 
 export class Shouts extends Base {
@@ -16,6 +16,6 @@ export class Shouts extends Base {
     }) {
         let query = 'last_shouts';
         query += qs.stringify(params, '&');
-        return await this.request<{shout: Shout[]}>(query);
+        return await this.request<{shout: ShoutResponse[]}>(query);
     }
 }

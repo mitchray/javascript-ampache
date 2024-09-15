@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Label } from './types';
+import { LabelResponse, LabelsResponse } from './types';
 import { Base, BinaryBoolean, ExtendedPagination, UID } from '../base';
 
 export class Labels extends Base {
@@ -24,7 +24,7 @@ export class Labels extends Base {
     } & ExtendedPagination) {
         let query = 'labels';
         query += qs.stringify(params, '&');
-        return await this.request<{label: Label[]}>(query);
+        return await this.request<LabelsResponse>(query);
     }
 
     /**
@@ -38,6 +38,6 @@ export class Labels extends Base {
     }) {
         let query = 'label';
         query += qs.stringify(params, '&');
-        return this.request<Label>(query);
+        return this.request<LabelResponse>(query);
     }
 }

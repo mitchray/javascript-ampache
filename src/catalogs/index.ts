@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Catalog } from './types';
+import { CatalogResponse, CatalogsResponse } from './types';
 import {Base, ExtendedPagination, Success, UID} from '../base';
 
 export class Catalogs extends Base {
@@ -18,7 +18,7 @@ export class Catalogs extends Base {
     } & ExtendedPagination) {
         let query = 'catalogs';
         query += qs.stringify(params, '&');
-        return await this.request<{catalog: Catalog[]}>(query);
+        return await this.request<CatalogsResponse>(query);
     }
 
     /**
@@ -32,7 +32,7 @@ export class Catalogs extends Base {
     }) {
         let query = 'catalog';
         query += qs.stringify(params, '&');
-        return this.request<Catalog>(query);
+        return this.request<CatalogResponse>(query);
     }
 
     /**
@@ -98,7 +98,7 @@ export class Catalogs extends Base {
     }) {
         let query = 'catalog_add';
         query += qs.stringify(params, '&');
-        return this.request<Catalog>(query);
+        return this.request<CatalogResponse>(query);
     }
 
     /**

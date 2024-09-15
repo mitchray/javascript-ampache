@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Share } from './types';
+import { ShareResponse, SharesResponse } from './types';
 import { Base, BinaryBoolean, ExtendedPagination, Success, UID } from '../base';
 
 export class Shares extends Base {
@@ -20,7 +20,7 @@ export class Shares extends Base {
     } & ExtendedPagination) {
         let query = 'shares';
         query += qs.stringify(params, '&');
-        return await this.request<{share: Share[]}>(query);
+        return await this.request<SharesResponse>(query);
     }
 
     /**
@@ -34,7 +34,7 @@ export class Shares extends Base {
     }) {
         let query = 'share';
         query += qs.stringify(params, '&');
-        return this.request<Share>(query);
+        return this.request<ShareResponse>(query);
     }
 
     /**
@@ -54,7 +54,7 @@ export class Shares extends Base {
     }) {
         let query = 'share_create';
         query += qs.stringify(params, '&');
-        return this.request<Share>(query);
+        return this.request<ShareResponse>(query);
     }
 
     /**

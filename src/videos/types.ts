@@ -1,7 +1,7 @@
 import { UID } from "../base";
 import { GenreSummary } from "../genres/types";
 
-export type Video = {
+export type VideoResponse = {
     id: UID,
     title: string,
     mime: string,
@@ -18,7 +18,13 @@ export type Video = {
     playcount: number,
 }
 
-export type DeletedVideo = {
+export type VideosResponse = {
+    total_count: number;
+    md5: string;
+    video: VideoResponse[];
+}
+
+export type DeletedVideoResponse = {
     id: UID,
     addition_time: number,
     delete_time: number,
@@ -27,4 +33,10 @@ export type DeletedVideo = {
     catalog: UID,
     total_count: number,
     total_skip: number,
+}
+
+export type DeletedVideosResponse = {
+    total_count: number;
+    md5: string;
+    deleted_video: DeletedVideoResponse[];
 }

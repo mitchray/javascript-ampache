@@ -1,6 +1,6 @@
 import qs from 'querystringify';
 import { Base, BinaryBoolean, Success } from '../base';
-import { Preference } from "./types";
+import { PreferenceResponse, PreferencesResponse } from "./types";
 
 export class Preferences extends Base {
     /**
@@ -11,7 +11,7 @@ export class Preferences extends Base {
      */
     async systemPreferences () {
         let query = 'system_preferences';
-        return await this.request<{preference: Preference[]}>(query);
+        return await this.request<PreferencesResponse>(query);
     }
 
     /**
@@ -26,7 +26,7 @@ export class Preferences extends Base {
     }) {
         let query = 'system_preference';
         query += qs.stringify(params, '&');
-        return await this.request<{ preference: Preference }>(query);
+        return await this.request<PreferenceResponse>(query);
     }
 
     /**
@@ -36,7 +36,7 @@ export class Preferences extends Base {
      */
     async userPreferences () {
         let query = 'user_preferences';
-        return await this.request<{preference: Preference[]}>(query);
+        return await this.request<PreferencesResponse>(query);
     }
 
     /**
@@ -50,7 +50,7 @@ export class Preferences extends Base {
     }) {
         let query = 'user_preference';
         query += qs.stringify(params, '&');
-        return await this.request<{ preference: Preference }>(query);
+        return await this.request<PreferenceResponse>(query);
     }
 
     /**

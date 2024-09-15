@@ -1,5 +1,5 @@
 import qs from 'querystringify';
-import { Podcast, PodcastEpisode, DeletedPodcastEpisode } from './types';
+import { PodcastResponse, PodcastsResponse, PodcastEpisodeResponse, PodcastEpisodesResponse, DeletedPodcastEpisodeResponse, DeletedPodcastEpisodesResponse } from './types';
 import {Base, ExtendedPagination, Pagination, Success, UID} from '../base';
 
 export class Podcasts extends Base {
@@ -20,7 +20,7 @@ export class Podcasts extends Base {
     } & ExtendedPagination) {
         let query = 'podcasts';
         query += qs.stringify(params, '&');
-        return await this.request<{podcast: Podcast[]}>(query);
+        return await this.request<PodcastsResponse>(query);
     }
 
     /**
@@ -38,7 +38,7 @@ export class Podcasts extends Base {
     } & Pagination) {
         let query = 'podcast';
         query += qs.stringify(params, '&');
-        return this.request<Podcast>(query);
+        return this.request<PodcastResponse>(query);
     }
 
     /**
@@ -54,7 +54,7 @@ export class Podcasts extends Base {
     }) {
         let query = 'podcast_create';
         query += qs.stringify(params, '&');
-        return this.request<Podcast>(query);
+        return this.request<PodcastResponse>(query);
     }
 
     /**
@@ -112,7 +112,7 @@ export class Podcasts extends Base {
     } & ExtendedPagination) {
         let query = 'podcast_episodes';
         query += qs.stringify(params, '&');
-        return await this.request<{podcast_episode: PodcastEpisode[]}>(query);
+        return await this.request<PodcastEpisodesResponse>(query);
     }
 
     /**
@@ -126,7 +126,7 @@ export class Podcasts extends Base {
     }) {
         let query = 'podcast_episode';
         query += qs.stringify(params, '&');
-        return this.request<PodcastEpisode>(query);
+        return this.request<PodcastEpisodeResponse>(query);
     }
 
     /**
@@ -169,6 +169,6 @@ export class Podcasts extends Base {
     } & Pagination) {
         let query = 'deleted_podcast_episodes';
         query += qs.stringify(params, '&');
-        return await this.request<{deleted_podcast_episode: DeletedPodcastEpisode[]}>(query);
+        return await this.request<DeletedPodcastEpisodesResponse>(query);
     }
 }

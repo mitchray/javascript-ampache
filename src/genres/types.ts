@@ -5,7 +5,7 @@ export type GenreSummary = {
     name: string,
 }
 
-export type Genre = {
+export type GenreResponse = {
     id: UID,
     name: string,
     albums: number,
@@ -14,4 +14,10 @@ export type Genre = {
     videos: number,
     playlists: number,
     live_streams: number,
+}
+
+export type GenresResponse = {
+    total_count: number;
+    md5: string;
+    genre: GenreResponse[];
 }
