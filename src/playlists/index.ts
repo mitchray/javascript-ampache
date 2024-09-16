@@ -1,6 +1,6 @@
 import qs from "querystringify";
 import { PlaylistResponse, PlaylistsResponse } from "./types";
-import { Song } from "../songs/types";
+import { SongsResponse } from "../songs/types";
 import {
   Base,
   BinaryBoolean,
@@ -259,6 +259,6 @@ export class Playlists extends Base {
   ) {
     let query = "playlist_generate";
     query += qs.stringify(params, "&");
-    return this.request<{ song: Song[] }>(query);
+    return this.request<SongsResponse>(query);
   }
 }
