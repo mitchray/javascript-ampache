@@ -21,7 +21,7 @@ export class Podcasts extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#podcasts}
    */
-  async podcasts(
+  podcasts(
     params?: {
       filter?: string;
       include?: "episodes";
@@ -29,7 +29,7 @@ export class Podcasts extends Base {
   ) {
     let query = "podcasts";
     query += qs.stringify(params, "&");
-    return await this.request<PodcastsResponse>(query);
+    return this.request<PodcastsResponse>(query);
   }
 
   /**
@@ -41,7 +41,7 @@ export class Podcasts extends Base {
    * @param [params.limit]
    * @see {@link https://ampache.org/api/api-json-methods#podcast}
    */
-  async podcast(
+  podcast(
     params?: {
       filter: UID;
       include?: "episodes";
@@ -113,14 +113,14 @@ export class Podcasts extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#podcast_episodes}
    */
-  async podcastEpisodes(
+  podcastEpisodes(
     params: {
       filter: UID;
     } & ExtendedPagination,
   ) {
     let query = "podcast_episodes";
     query += qs.stringify(params, "&");
-    return await this.request<PodcastEpisodesResponse>(query);
+    return this.request<PodcastEpisodesResponse>(query);
   }
 
   /**
@@ -166,9 +166,9 @@ export class Podcasts extends Base {
    * @param [params.limit]
    * @see {@link https://ampache.org/api/api-json-methods#deleted_podcast_episodes}
    */
-  async deletedPodcastEpisodes(params?: {} & Pagination) {
+  deletedPodcastEpisodes(params?: {} & Pagination) {
     let query = "deleted_podcast_episodes";
     query += qs.stringify(params, "&");
-    return await this.request<DeletedPodcastEpisodesResponse>(query);
+    return this.request<DeletedPodcastEpisodesResponse>(query);
   }
 }

@@ -8,9 +8,9 @@ export class Users extends Base {
    * @remarks MINIMUM_API_VERSION=5.0.0
    * @see {@link https://ampache.org/api/api-json-methods#users}
    */
-  async users() {
+  users() {
     let query = "users";
-    return await this.request<{ user: UserSummary[] }>(query);
+    return this.request<{ user: UserSummary[] }>(query);
   }
 
   /**
@@ -19,10 +19,10 @@ export class Users extends Base {
    * @param [params.username] UID to find
    * @see {@link https://ampache.org/api/api-json-methods#user}
    */
-  async user(params?: { username?: string }) {
+  user(params?: { username?: string }) {
     let query = "user";
     query += qs.stringify(params, "&");
-    return await this.request<UserResponse>(query);
+    return this.request<UserResponse>(query);
   }
 
   /**
@@ -166,14 +166,14 @@ export class Users extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#followers}
    */
-  async followers(
+  followers(
     params: {
       username: string;
     } & ExtendedPagination,
   ) {
     let query = "followers";
     query += qs.stringify(params, "&");
-    return await this.request<{ user: UserSummary[] }>(query);
+    return this.request<{ user: UserSummary[] }>(query);
   }
 
   /**
@@ -181,10 +181,10 @@ export class Users extends Base {
    * @remarks MINIMUM_API_VERSION=380001
    * @see {@link https://ampache.org/api/api-json-methods#following}
    */
-  async following(params: { username: string }) {
+  following(params: { username: string }) {
     let query = "following";
     query += qs.stringify(params, "&");
-    return await this.request<{ user: UserSummary[] }>(query);
+    return this.request<{ user: UserSummary[] }>(query);
   }
 
   /**
@@ -206,10 +206,10 @@ export class Users extends Base {
    * @param [params.since] UNIXTIME
    * @see {@link https://ampache.org/api/api-json-methods#timeline}
    */
-  async timeline(params: { username: string; limit?: number; since?: number }) {
+  timeline(params: { username: string; limit?: number; since?: number }) {
     let query = "timeline";
     query += qs.stringify(params, "&");
-    return await this.request<{ activity: ActivityResponse[] }>(query);
+    return this.request<{ activity: ActivityResponse[] }>(query);
   }
 
   /**
@@ -219,9 +219,9 @@ export class Users extends Base {
    * @param [params.since] UNIXTIME
    * @see {@link https://ampache.org/api/api-json-methods#friends_timeline}
    */
-  async friendsTimeline(params?: { limit?: number; since?: number }) {
+  friendsTimeline(params?: { limit?: number; since?: number }) {
     let query = "friends_timeline";
     query += qs.stringify(params, "&");
-    return await this.request<{ activity: ActivityResponse[] }>(query);
+    return this.request<{ activity: ActivityResponse[] }>(query);
   }
 }

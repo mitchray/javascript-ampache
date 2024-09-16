@@ -16,7 +16,7 @@ export class LiveStreams extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#live_streams}
    */
-  async liveStreams(
+  liveStreams(
     params?: {
       filter?: string;
       exact?: BinaryBoolean;
@@ -26,7 +26,7 @@ export class LiveStreams extends Base {
   ) {
     let query = "live_streams";
     query += qs.stringify(params, "&");
-    return await this.request<LiveStreamsResponse>(query);
+    return this.request<LiveStreamsResponse>(query);
   }
 
   /**

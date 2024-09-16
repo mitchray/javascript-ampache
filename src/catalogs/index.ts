@@ -13,7 +13,7 @@ export class Catalogs extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#catalogs}
    */
-  async catalogs(
+  catalogs(
     params?: {
       filter?:
         | "music"
@@ -26,7 +26,7 @@ export class Catalogs extends Base {
   ) {
     let query = "catalogs";
     query += qs.stringify(params, "&");
-    return await this.request<CatalogsResponse>(query);
+    return this.request<CatalogsResponse>(query);
   }
 
   /**

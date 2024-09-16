@@ -17,7 +17,7 @@ export class Albums extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#albums}
    */
-  async albums(
+  albums(
     params?: {
       filter?: number;
       exact?: BinaryBoolean;
@@ -28,7 +28,7 @@ export class Albums extends Base {
   ) {
     let query = "albums";
     query += qs.stringify(params, "&");
-    return await this.request<AlbumsResponse>(query);
+    return this.request<AlbumsResponse>(query);
   }
 
   /**
@@ -54,14 +54,14 @@ export class Albums extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#artist_albums}
    */
-  async artistAlbums(
+  artistAlbums(
     params: {
       filter: UID;
     } & ExtendedPagination,
   ) {
     let query = "artist_albums";
     query += qs.stringify(params, "&");
-    return await this.request<AlbumsResponse>(query);
+    return this.request<AlbumsResponse>(query);
   }
 
   /**
@@ -74,13 +74,13 @@ export class Albums extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#genre_albums}
    */
-  async genreAlbums(
+  genreAlbums(
     params?: {
       filter: UID;
     } & ExtendedPagination,
   ) {
     let query = "genre_albums";
     query += qs.stringify(params, "&");
-    return await this.request<AlbumsResponse>(query);
+    return this.request<AlbumsResponse>(query);
   }
 }

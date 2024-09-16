@@ -10,9 +10,9 @@ export class Shouts extends Base {
    * @param [params.limit] Maximum number of results to return
    * @see {@link https://ampache.org/api/api-json-methods#last_shouts}
    */
-  async last_shouts(params?: { username?: string; limit?: number }) {
+  last_shouts(params?: { username?: string; limit?: number }) {
     let query = "last_shouts";
     query += qs.stringify(params, "&");
-    return await this.request<{ shout: ShoutResponse[] }>(query);
+    return this.request<{ shout: ShoutResponse[] }>(query);
   }
 }

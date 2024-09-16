@@ -52,7 +52,7 @@ export class System extends Base {
    * @see {@link https://ampache.org/api/api-json-methods#get_indexes}
    * @deprecated Being removed in 7.0.0. Use `list` instead.
    */
-  async getIndexes(
+  getIndexes(
     params: {
       type:
         | "song"
@@ -76,26 +76,26 @@ export class System extends Base {
 
     switch (params.type) {
       case "song":
-        data = await this.request<SongsResponse>(query);
+        data = this.request<SongsResponse>(query);
         break;
       case "album":
-        data = await this.request<AlbumsResponse>(query);
+        data = this.request<AlbumsResponse>(query);
         break;
       case "artist":
       case "album_artist":
-        data = await this.request<ArtistsResponse>(query);
+        data = this.request<ArtistsResponse>(query);
         break;
       case "playlist":
-        data = await this.request<PlaylistsResponse>(query);
+        data = this.request<PlaylistsResponse>(query);
         break;
       case "podcast":
-        data = await this.request<PodcastsResponse>(query);
+        data = this.request<PodcastsResponse>(query);
         break;
       case "podcast_episode":
-        data = await this.request<PodcastEpisodesResponse>(query);
+        data = this.request<PodcastEpisodesResponse>(query);
         break;
       case "live_stream":
-        data = await this.request<LiveStreamsResponse>(query);
+        data = this.request<LiveStreamsResponse>(query);
         break;
       default:
         return false;
@@ -118,7 +118,7 @@ export class System extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#list}
    */
-  async list(
+  list(
     params: {
       type:
         | "song"
@@ -156,7 +156,7 @@ export class System extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#index}
    */
-  async index(
+  index(
     params: {
       type:
         | "catalog"
@@ -199,7 +199,7 @@ export class System extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#browse}
    */
-  async browse(
+  browse(
     params: {
       filter?: UID;
       type?: "root" | "catalog" | "artist" | "album" | "podcast";
@@ -222,7 +222,7 @@ export class System extends Base {
    * @param [params.limit]
    * @see {@link https://ampache.org/api/api-json-methods#get_similar}
    */
-  async getSimilar(
+  getSimilar(
     params: {
       type: "song" | "artist";
       filter: UID;
@@ -234,10 +234,10 @@ export class System extends Base {
 
     switch (params.type) {
       case "song":
-        data = await this.request<SongsResponse>(query);
+        data = this.request<SongsResponse>(query);
         break;
       case "artist":
-        data = await this.request<ArtistsResponse>(query);
+        data = this.request<ArtistsResponse>(query);
         break;
       default:
         return false;
@@ -257,7 +257,7 @@ export class System extends Base {
    * @param [params.limit]
    * @see {@link https://ampache.org/api/api-json-methods#stats}
    */
-  async stats(
+  stats(
     params: {
       type:
         | "song"
@@ -285,25 +285,25 @@ export class System extends Base {
 
     switch (params.type) {
       case "song":
-        data = await this.request<SongsResponse>(query);
+        data = this.request<SongsResponse>(query);
         break;
       case "album":
-        data = await this.request<AlbumsResponse>(query);
+        data = this.request<AlbumsResponse>(query);
         break;
       case "artist":
-        data = await this.request<ArtistsResponse>(query);
+        data = this.request<ArtistsResponse>(query);
         break;
       case "video":
-        data = await this.request<VideosResponse>(query);
+        data = this.request<VideosResponse>(query);
         break;
       case "playlist":
-        data = await this.request<PlaylistsResponse>(query);
+        data = this.request<PlaylistsResponse>(query);
         break;
       case "podcast":
-        data = await this.request<PodcastsResponse>(query);
+        data = this.request<PodcastsResponse>(query);
         break;
       case "podcast_episode":
-        data = await this.request<PodcastEpisodesResponse>(query);
+        data = this.request<PodcastEpisodesResponse>(query);
         break;
       default:
         return false;
@@ -604,7 +604,7 @@ export class System extends Base {
    * @param [params.limit]
    * @see {@link https://ampache.org/api/api-json-methods#advanced_search}
    */
-  async advancedSearch(
+  advancedSearch(
     params: {
       operator: "and" | "or";
       type:
@@ -649,36 +649,36 @@ export class System extends Base {
 
     switch (params.type) {
       case "song":
-        data = await this.request<SongsResponse>(query);
+        data = this.request<SongsResponse>(query);
         break;
       case "album":
-        data = await this.request<AlbumsResponse>(query);
+        data = this.request<AlbumsResponse>(query);
         break;
       case "artist":
       case "album_artist":
       case "song_artist":
-        data = await this.request<ArtistsResponse>(query);
+        data = this.request<ArtistsResponse>(query);
         break;
       case "label":
-        data = await this.request<LabelsResponse>(query);
+        data = this.request<LabelsResponse>(query);
         break;
       case "playlist":
-        data = await this.request<PlaylistsResponse>(query);
+        data = this.request<PlaylistsResponse>(query);
         break;
       case "podcast":
-        data = await this.request<PodcastsResponse>(query);
+        data = this.request<PodcastsResponse>(query);
         break;
       case "podcast_episode":
-        data = await this.request<PodcastEpisodesResponse>(query);
+        data = this.request<PodcastEpisodesResponse>(query);
         break;
       case "genre":
-        data = await this.request<GenresResponse>(query);
+        data = this.request<GenresResponse>(query);
         break;
       case "user":
-        data = await this.request<UsersResponse>(query);
+        data = this.request<UsersResponse>(query);
         break;
       case "video":
-        data = await this.request<VideosResponse>(query);
+        data = this.request<VideosResponse>(query);
         break;
       default:
         return false;

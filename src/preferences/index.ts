@@ -9,9 +9,9 @@ export class Preferences extends Base {
    * @remarks MINIMUM_API_VERSION=5.0.0
    * @see {@link https://ampache.org/api/api-json-methods#system_preferences}
    */
-  async systemPreferences() {
+  systemPreferences() {
     let query = "system_preferences";
-    return await this.request<PreferencesResponse>(query);
+    return this.request<PreferencesResponse>(query);
   }
 
   /**
@@ -21,10 +21,10 @@ export class Preferences extends Base {
    * @param params.systemPreference Preference name e.g ('notify_email', 'ajax_load')
    * @see {@link https://ampache.org/api/api-json-methods#system_preference}
    */
-  async systemPreference(params: { filter: string }) {
+  systemPreference(params: { filter: string }) {
     let query = "system_preference";
     query += qs.stringify(params, "&");
-    return await this.request<PreferenceResponse>(query);
+    return this.request<PreferenceResponse>(query);
   }
 
   /**
@@ -32,9 +32,9 @@ export class Preferences extends Base {
    * @remarks MINIMUM_API_VERSION=5.0.0
    * @see {@link https://ampache.org/api/api-json-methods#user_preferences}
    */
-  async userPreferences() {
+  userPreferences() {
     let query = "user_preferences";
-    return await this.request<PreferencesResponse>(query);
+    return this.request<PreferencesResponse>(query);
   }
 
   /**
@@ -43,10 +43,10 @@ export class Preferences extends Base {
    * @param params.filter Preference name e.g ('notify_email', 'ajax_load')
    * @see {@link https://ampache.org/api/api-json-methods#user_preference}
    */
-  async userPreference(params: { filter: string }) {
+  userPreference(params: { filter: string }) {
     let query = "user_preference";
     query += qs.stringify(params, "&");
-    return await this.request<PreferenceResponse>(query);
+    return this.request<PreferenceResponse>(query);
   }
 
   /**

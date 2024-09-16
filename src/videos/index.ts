@@ -12,7 +12,7 @@ export class Videos extends Base {
    * @param [params.limit]
    * @see {@link https://ampache.org/api/api-json-methods#videos}
    */
-  async videos(
+  videos(
     params?: {
       filter?: string;
       exact?: BinaryBoolean;
@@ -20,7 +20,7 @@ export class Videos extends Base {
   ) {
     let query = "videos";
     query += qs.stringify(params, "&");
-    return await this.request<VideosResponse>(query);
+    return this.request<VideosResponse>(query);
   }
 
   /**
@@ -41,9 +41,9 @@ export class Videos extends Base {
    * @param [params.limit]
    * @see {@link https://ampache.org/api/api-json-methods#deleted_videos}
    */
-  async deletedVideos(params?: {} & Pagination) {
+  deletedVideos(params?: {} & Pagination) {
     let query = "deleted_videos";
     query += qs.stringify(params, "&");
-    return await this.request<DeletedVideosResponse>(query);
+    return this.request<DeletedVideosResponse>(query);
   }
 }

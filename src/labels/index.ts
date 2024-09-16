@@ -16,7 +16,7 @@ export class Labels extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#labels}
    */
-  async labels(
+  labels(
     params?: {
       filter?: string;
       exact?: BinaryBoolean;
@@ -26,7 +26,7 @@ export class Labels extends Base {
   ) {
     let query = "labels";
     query += qs.stringify(params, "&");
-    return await this.request<LabelsResponse>(query);
+    return this.request<LabelsResponse>(query);
   }
 
   /**

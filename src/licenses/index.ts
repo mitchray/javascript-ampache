@@ -16,7 +16,7 @@ export class Licenses extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#licenses}
    */
-  async licenses(
+  licenses(
     params?: {
       filter?: string;
       exact?: BinaryBoolean;
@@ -26,7 +26,7 @@ export class Licenses extends Base {
   ) {
     let query = "licenses";
     query += qs.stringify(params, "&");
-    return await this.request<LicensesResponse>(query);
+    return this.request<LicensesResponse>(query);
   }
 
   /**

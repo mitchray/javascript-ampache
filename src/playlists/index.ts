@@ -26,7 +26,7 @@ export class Playlists extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#playlists}
    */
-  async playlists(
+  playlists(
     params?: {
       filter?: string;
       exact?: BinaryBoolean;
@@ -38,7 +38,7 @@ export class Playlists extends Base {
   ) {
     let query = "playlists";
     query += qs.stringify(params, "&");
-    return await this.request<PlaylistsResponse>(query);
+    return this.request<PlaylistsResponse>(query);
   }
 
   /**
@@ -51,7 +51,7 @@ export class Playlists extends Base {
    * @param [params.show_dupes] 0, 1 (if true ignore 'api_hide_dupe_searches' setting)
    * @see {@link https://ampache.org/api/api-json-methods#playlists}
    */
-  async smartlists(params?: {
+  smartlists(params?: {
     filter?: string;
     exact?: BinaryBoolean;
     add?: Date;
@@ -60,15 +60,16 @@ export class Playlists extends Base {
   }) {
     let query = "playlists";
     query += qs.stringify(params, "&");
-    let data = await this.request<PlaylistsResponse>(query);
+    let data = this.request<PlaylistsResponse>(query).then((response) => {
+      // filter out regular playlists
+      if (Array.isArray(response.playlist)) {
+        response.playlist = response.playlist.filter((item) =>
+          item.id.toString().startsWith("smart_"),
+        );
+      }
 
-    // filter out regular playlists
-    if (Array.isArray(data.playlist)) {
-      data.playlist = data.playlist.filter((item) =>
-        item.id.toString().startsWith("smart_"),
-      );
-    }
-
+      return response;
+    });
     return data;
   }
 
@@ -97,7 +98,7 @@ export class Playlists extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#user_playlists}
    */
-  async userPlaylists(
+  userPlaylists(
     params?: {
       filter?: string;
       exact?: BinaryBoolean;
@@ -107,7 +108,7 @@ export class Playlists extends Base {
   ) {
     let query = "user_playlists";
     query += qs.stringify(params, "&");
-    return await this.request<PlaylistsResponse>(query);
+    return this.request<PlaylistsResponse>(query);
   }
 
   /**
@@ -123,7 +124,7 @@ export class Playlists extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#user_smartlists}
    */
-  async userSmartlists(
+  userSmartlists(
     params?: {
       filter?: string;
       exact?: BinaryBoolean;
@@ -133,7 +134,7 @@ export class Playlists extends Base {
   ) {
     let query = "user_smartlists";
     query += qs.stringify(params, "&");
-    return await this.request<PlaylistsResponse>(query);
+    return this.request<PlaylistsResponse>(query);
   }
 
   /**
@@ -246,7 +247,7 @@ export class Playlists extends Base {
    * @param [params.limit]
    * @see {@link https://ampache.org/api/api-json-methods#playlist_generate}
    */
-  async playlistGenerate(
+  playlistGenerate(
     params?: {
       mode?: "recent" | "forgotten" | "unplayed" | "random";
       filter?: string;
@@ -258,6 +259,6 @@ export class Playlists extends Base {
   ) {
     let query = "playlist_generate";
     query += qs.stringify(params, "&");
-    return await this.request<{ song: Song[] }>(query);
+    return this.request<{ song: Song[] }>(query);
   }
 }

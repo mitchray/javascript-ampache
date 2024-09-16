@@ -10,7 +10,7 @@ export class Bookmarks extends Base {
    * @param [params.include] 0,1, if true include the object in the bookmark
    * @see {@link https://ampache.org/api/api-json-methods#bookmark}
    */
-  async bookmark(params: { filter: UID; include?: BinaryBoolean }) {
+  bookmark(params: { filter: UID; include?: BinaryBoolean }) {
     let query = "bookmark";
     query += qs.stringify(params, "&");
     return this.request<BookmarkResponse>(query);
@@ -23,10 +23,10 @@ export class Bookmarks extends Base {
    * @param [params.include] 0,1, if true include the object in the bookmark
    * @see {@link https://ampache.org/api/api-json-methods#bookmarks}
    */
-  async bookmarks(params: { client?: string; include?: BinaryBoolean }) {
+  bookmarks(params: { client?: string; include?: BinaryBoolean }) {
     let query = "bookmarks";
     query += qs.stringify(params, "&");
-    return await this.request<BookmarksResponse>(query);
+    return this.request<BookmarksResponse>(query);
   }
 
   /**

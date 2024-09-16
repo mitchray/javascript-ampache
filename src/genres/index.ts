@@ -14,7 +14,7 @@ export class Genres extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#genres}
    */
-  async genres(
+  genres(
     params?: {
       filter?: string;
       exact?: BinaryBoolean;
@@ -22,7 +22,7 @@ export class Genres extends Base {
   ) {
     let query = "genres";
     query += qs.stringify(params, "&");
-    return await this.request<GenresResponse>(query);
+    return this.request<GenresResponse>(query);
   }
 
   /**
@@ -31,7 +31,7 @@ export class Genres extends Base {
    * @param params.filter UID to find
    * @see {@link https://ampache.org/api/api-json-methods#genre}
    */
-  async genre(params: { filter: UID }) {
+  genre(params: { filter: UID }) {
     let query = "genre";
     query += qs.stringify(params, "&");
     return this.request<GenreResponse>(query);

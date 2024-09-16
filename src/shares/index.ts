@@ -14,7 +14,7 @@ export class Shares extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#shares}
    */
-  async shares(
+  shares(
     params?: {
       filter?: string;
       exact?: BinaryBoolean;
@@ -22,7 +22,7 @@ export class Shares extends Base {
   ) {
     let query = "shares";
     query += qs.stringify(params, "&");
-    return await this.request<SharesResponse>(query);
+    return this.request<SharesResponse>(query);
   }
 
   /**

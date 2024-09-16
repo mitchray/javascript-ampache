@@ -18,7 +18,7 @@ export class Artists extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#artists}
    */
-  async artists(
+  artists(
     params?: {
       filter?: string;
       exact?: BinaryBoolean;
@@ -30,7 +30,7 @@ export class Artists extends Base {
   ) {
     let query = "artists";
     query += qs.stringify(params, "&");
-    return await this.request<ArtistsResponse>(query);
+    return this.request<ArtistsResponse>(query);
   }
 
   /**
@@ -56,14 +56,14 @@ export class Artists extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#genre_artists}
    */
-  async genreArtists(
+  genreArtists(
     params: {
       filter: UID;
     } & ExtendedPagination,
   ) {
     let query = "genre_artists";
     query += qs.stringify(params, "&");
-    return await this.request<ArtistsResponse>(query);
+    return this.request<ArtistsResponse>(query);
   }
 
   /**
@@ -76,13 +76,13 @@ export class Artists extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#label_artists}
    */
-  async labelArtists(
+  labelArtists(
     params: {
       filter: UID;
     } & ExtendedPagination,
   ) {
     let query = "label_artists";
     query += qs.stringify(params, "&");
-    return await this.request<ArtistsResponse>(query);
+    return this.request<ArtistsResponse>(query);
   }
 }

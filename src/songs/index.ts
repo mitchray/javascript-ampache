@@ -23,7 +23,7 @@ export class Songs extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#songs}
    */
-  async songs(
+  songs(
     params?: {
       filter?: string;
       exact?: BinaryBoolean;
@@ -33,7 +33,7 @@ export class Songs extends Base {
   ) {
     let query = "songs";
     query += qs.stringify(params, "&");
-    return await this.request<SongsResponse>(query);
+    return this.request<SongsResponse>(query);
   }
 
   /**
@@ -59,7 +59,7 @@ export class Songs extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#artist_songs}
    */
-  async artistSongs(
+  artistSongs(
     params: {
       filter: UID;
       top50?: BinaryBoolean;
@@ -67,7 +67,7 @@ export class Songs extends Base {
   ) {
     let query = "artist_songs";
     query += qs.stringify(params, "&");
-    return await this.request<SongsResponse>(query);
+    return this.request<SongsResponse>(query);
   }
 
   /**
@@ -80,14 +80,14 @@ export class Songs extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#album_songs}
    */
-  async albumSongs(
+  albumSongs(
     params: {
       filter: UID;
     } & ExtendedPagination,
   ) {
     let query = "album_songs";
     query += qs.stringify(params, "&");
-    return await this.request<SongsResponse>(query);
+    return this.request<SongsResponse>(query);
   }
 
   /**
@@ -100,14 +100,14 @@ export class Songs extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#genre_songs}
    */
-  async genreSongs(
+  genreSongs(
     params: {
       filter: UID;
     } & ExtendedPagination,
   ) {
     let query = "genre_songs";
     query += qs.stringify(params, "&");
-    return await this.request<SongsResponse>(query);
+    return this.request<SongsResponse>(query);
   }
 
   /**
@@ -119,7 +119,7 @@ export class Songs extends Base {
    * @param [params.limit]
    * @see {@link https://ampache.org/api/api-json-methods#playlist_songs}
    */
-  async playlistSongs(
+  playlistSongs(
     params: {
       filter: UID;
       random?: BinaryBoolean;
@@ -127,7 +127,7 @@ export class Songs extends Base {
   ) {
     let query = "playlist_songs";
     query += qs.stringify(params, "&");
-    return await this.request<SongsResponse>(query);
+    return this.request<SongsResponse>(query);
   }
 
   /**
@@ -140,14 +140,14 @@ export class Songs extends Base {
    * @param [params.sort]
    * @see {@link https://ampache.org/api/api-json-methods#license_songs}
    */
-  async licenseSongs(
+  licenseSongs(
     params: {
       filter: UID;
     } & ExtendedPagination,
   ) {
     let query = "license_songs";
     query += qs.stringify(params, "&");
-    return await this.request<SongsResponse>(query);
+    return this.request<SongsResponse>(query);
   }
 
   /**
@@ -183,14 +183,14 @@ export class Songs extends Base {
    * @param [params.limit]
    * @see {@link https://ampache.org/api/api-json-methods#search_songs}
    */
-  async searchSongs(
+  searchSongs(
     params: {
       filter: string;
     } & Pagination,
   ) {
     let query = "search_songs";
     query += qs.stringify(params, "&");
-    return await this.request<SongsResponse>(query);
+    return this.request<SongsResponse>(query);
   }
 
   /**
@@ -200,9 +200,9 @@ export class Songs extends Base {
    * @param [params.limit]
    * @see {@link https://ampache.org/api/api-json-methods#deleted_songs}
    */
-  async deletedSongs(params?: {} & Pagination) {
+  deletedSongs(params?: {} & Pagination) {
     let query = "deleted_songs";
     query += qs.stringify(params, "&");
-    return await this.request<DeletedSongsResponse>(query);
+    return this.request<DeletedSongsResponse>(query);
   }
 }
