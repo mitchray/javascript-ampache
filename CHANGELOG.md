@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0] - 2024-09-16
+
+- Return the full response instead of just the array of items 
+  - Breaks backwards compatibility with earlier versions of the API which sent only the array of items
+  - e.g. `md5` hash and `total_count` will now be included where applicable, with an additional property containing the array of items named after the requested object type
+
 ## [1.0.9] - 2024-06-28
 
 - Added `rawURL` method for generating URLs based on an endpoint + params
