@@ -30,7 +30,7 @@ export class Bookmarks extends Base {
   }
 
   /**
-   * Get the bookmark from its object_id and object_type.
+   * Get the bookmark/s from its object_id and object_type.
    * @remarks MINIMUM_API_VERSION=5.0.0
    * @param params.filter UID to find
    * @param params.type Object type
@@ -41,6 +41,7 @@ export class Bookmarks extends Base {
     filter: UID;
     type: "song" | "video" | "podcast_episode";
     include?: BinaryBoolean;
+    all?: BinaryBoolean;
   }) {
     let query = "get_bookmark";
     query += qs.stringify(params, "&");
