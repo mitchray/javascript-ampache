@@ -60,17 +60,15 @@ export class Playlists extends Base {
   }) {
     let query = "playlists";
     query += qs.stringify(params, "&");
-    let data = this.request<PlaylistsResponse>(query).then((response) => {
+    return this.request<PlaylistsResponse>(query).then((response) => {
       // filter out regular playlists
       if (Array.isArray(response.playlist)) {
         response.playlist = response.playlist.filter((item) =>
           item.id.toString().startsWith("smart_"),
         );
       }
-
       return response;
     });
-    return data;
   }
 
   /**
