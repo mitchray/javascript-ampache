@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.1] - 2024-09-23
+
+- getBookmark 'all' param
+- Return promise from playlists method
+
 ## [1.1.0] - 2024-09-16
 
 - Return the full response instead of just the array of items 
