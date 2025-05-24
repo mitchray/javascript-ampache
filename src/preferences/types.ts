@@ -9,6 +9,8 @@ export type PreferenceResponse = {
   type: string;
   category: string;
   subcategory: string | null;
+  has_access: boolean;
+  values?: string; // TODO verify type
 };
 
 export type PreferencesResponse = {
