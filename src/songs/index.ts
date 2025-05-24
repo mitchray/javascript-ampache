@@ -169,11 +169,11 @@ export class Songs extends Base {
    * @param params.filter UID of song to fetch
    * @see {@link https://ampache.org/api/api-json-methods#song_tags}
    */
-  songTags(params: { filter: UID }) {
-    let query = "song_tags";
-    query += qs.stringify(params, "&");
-    return this.request<SongResponse>(query); // TODO update reponse
-  }
+  // songTags(params: { filter: UID }) {
+  //   let query = "song_tags";
+  //   query += qs.stringify(params, "&");
+  //   return this.request<SongResponse>(query); // TODO update reponse
+  // }
 
   /**
    * This takes a URL and returns the song object in question

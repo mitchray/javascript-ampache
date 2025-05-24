@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2] - 2025-05-24
+
+## Requires Ampache 7.4.0
+
+- Add `is_hidden` & `merge` to genre object
+- Add `user` to playlist object
+- Add `has_access` to preference objects
+
 ## [1.1.1] - 2024-09-23
 
 - getBookmark 'all' param
