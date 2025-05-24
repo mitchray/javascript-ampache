@@ -1,4 +1,5 @@
 import { UID } from "../base";
+import { UserSummary } from "../users/types"
 
 export type PlaylistResponse = {
   id: UID;
@@ -11,6 +12,7 @@ export type PlaylistResponse = {
   flag: boolean;
   rating: number | null;
   averagerating: number | null;
+  user: UserSummary;
 };
 
 export type PlaylistsResponse = {
