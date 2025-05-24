@@ -14,6 +14,8 @@ export type GenreResponse = {
   videos: number;
   playlists: number;
   live_streams: number;
+  is_hidden: boolean;
+  merge: GenreSummary[];
 };
 
 export type GenresResponse = {
