@@ -20,6 +20,13 @@ export type AuthResponse = {
   songs: number;
   update: string;
   user: number;
+  username: string;
   version: string;
   videos: number;
+  max_song: number;
+  max_album: number;
+  max_artist: number;
+  max_video: number;
+  max_podcast: number;
+  max_podcast_episode: number;
 };

@@ -346,6 +346,7 @@ export class System extends Base {
    * @param params.type Object type
    * @param params.id UID to find
    * @param params.flag 0, 1
+   * @param [params.date] UNIXTIME
    * @see {@link https://ampache.org/api/api-json-methods#flag}
    */
   flag(params: {
@@ -361,6 +362,7 @@ export class System extends Base {
       | "tvshow_season";
     id: UID;
     flag: BinaryBoolean;
+    date?: number;
   }) {
     let query = "flag";
     query += qs.stringify(params, "&");
