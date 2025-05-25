@@ -1,5 +1,5 @@
 import { AlbumResponse } from "../albums/types";
-import { Song } from "../songs/types";
+import { SongsResponse } from "../songs/types";
 import { GenreResponse } from "../genres/types";
 
 export type ArtistSummary = {
@@ -16,7 +16,7 @@ export type ArtistResponse = {
   basename: string;
   albums: AlbumResponse[];
   albumcount: number;
-  songs: Song[];
+  songs: SongsResponse[];
   songcount: number;
   genre: GenreResponse[];
   art: string;
