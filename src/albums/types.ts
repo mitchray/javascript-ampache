@@ -16,6 +16,8 @@ export type AlbumResponse = {
   prefix: string | null;
   basename: string;
   artist: ArtistSummary;
+  artists: ArtistSummary[];
+  songartists: ArtistSummary[];
   time: number;
   year: number | string;
   tracks?: SongResponse[];

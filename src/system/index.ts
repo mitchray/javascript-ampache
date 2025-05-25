@@ -59,7 +59,9 @@ export class System extends Base {
         | "playlist"
         | "podcast"
         | "podcast_episode"
-        | "live_stream";
+        | "live_stream"
+        | "catalog"
+        | "song_artist";
       filter?: string;
       add?: Date;
       update?: Date;
@@ -125,7 +127,9 @@ export class System extends Base {
         | "playlist"
         | "podcast"
         | "podcast_episode"
-        | "live_stream";
+        | "live_stream"
+        | "catalog"
+        | "song_artist";
       filter?: string;
       add?: Date;
       update?: Date;

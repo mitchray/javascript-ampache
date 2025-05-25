@@ -48,6 +48,7 @@ export class Albums extends Base {
    * This returns the albums of an artist
    * @remarks MINIMUM_API_VERSION=380001
    * @param params.filter UID to find
+   * @param [params.album_artist] 0, 1 (if true filter for album artists only)
    * @param [params.offset]
    * @param [params.limit]
    * @param [params.cond]
@@ -57,6 +58,7 @@ export class Albums extends Base {
   artistAlbums(
     params: {
       filter: UID;
+      album_artist?: BinaryBoolean;
     } & ExtendedPagination,
   ) {
     let query = "artist_albums";
