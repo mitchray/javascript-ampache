@@ -686,4 +686,7 @@ export class System extends Base {
 
     return data;
   }
+
+  // alias of advanced_search
+  search = this.advancedSearch;
 }
