@@ -478,6 +478,7 @@ export class System extends Base {
    * @param [params.format] mp3, ogg, raw, etc. (raw returns the original format)
    * @param [params.offset] Time offset
    * @param [params.length] 0, 1 (estimate content length)
+   * @param [params.stats] 0, 1 (if false disable stat recording when playing the object; default: 1)
    * @see {@link https://ampache.org/api/api-json-methods#stream}
    */
   stream(params: {
@@ -487,6 +488,7 @@ export class System extends Base {
     format?: string;
     offset?: number;
     length?: BinaryBoolean;
+    stats?: BinaryBoolean;
   }) {
     let query = "stream";
     query += qs.stringify(params, "&");
@@ -501,6 +503,7 @@ export class System extends Base {
    * @param params.type Object type
    * @param [params.format] mp3, ogg, raw, etc. (raw returns the original format)
    * @param [params.bitrate] max bitrate for transcoding in bytes (e.g 192000=192Kb)
+   * @param [params.stats] 0, 1 (if false disable stat recording when playing the object; default: 1)
    * @see {@link https://ampache.org/api/api-json-methods#download}
    */
   download(params: {
@@ -508,6 +511,7 @@ export class System extends Base {
     type: "song" | "podcast_episode" | "search" | "playlist";
     format?: string;
     bitrate?: number;
+    stats?: BinaryBoolean;
   }) {
     let query = "download";
     query += qs.stringify(params, "&");
