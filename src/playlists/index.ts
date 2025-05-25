@@ -20,6 +20,7 @@ export class Playlists extends Base {
    * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
    * @param [params.hide_search] 0, 1 (if true do not include searches/smartlists in the result)
    * @param [params.show_dupes] 0, 1 (if true ignore 'api_hide_dupe_searches' setting)
+   * @param [params.include] 0, 1 (if true include the objects in the playlist)
    * @param [params.offset]
    * @param [params.limit]
    * @param [params.cond]
@@ -34,6 +35,7 @@ export class Playlists extends Base {
       update?: Date;
       hide_search?: BinaryBoolean;
       show_dupes?: BinaryBoolean;
+      include?: BinaryBoolean;
     } & ExtendedPagination,
   ) {
     let query = "playlists";

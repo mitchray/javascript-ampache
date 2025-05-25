@@ -494,12 +494,14 @@ export class System extends Base {
    * @param params.id UID to find
    * @param params.type Object type
    * @param [params.format] mp3, ogg, raw, etc. (raw returns the original format)
+   * @param [params.bitrate] max bitrate for transcoding in bytes (e.g 192000=192Kb)
    * @see {@link https://ampache.org/api/api-json-methods#download}
    */
   download(params: {
     id: UID;
     type: "song" | "podcast_episode" | "search" | "playlist";
     format?: string;
+    bitrate?: number;
   }) {
     let query = "download";
     query += qs.stringify(params, "&");
@@ -596,6 +598,28 @@ export class System extends Base {
    */
   nowPlaying() {
     let query = "now_playing";
+    return this.request<{ now_playing: NowPlayingResponse[] }>(query);
+  }
+
+  /**
+   * Inform the server about the state of your client. (Song you are playing, Play/Pause state, etc.)
+   * @remarks MINIMUM_API_VERSION=6.4.0
+   * @param params.filter $object_id currently playing/stopping
+   * @param [params.type] song, video, podcast_episode (Default: song)
+   * @param [params.state] play, stop (Default: play)
+   * @param [params.time] current play time in whole seconds (Default: 0)
+   * @param [params.client] agent/client name
+   * @see {@link https://ampache.org/api/api-json-methods#player}
+   */
+  player(params: {
+    filter: UID;
+    type?: "song" | "video" | "podcast_episode";
+    state?: "play" | "stop";
+    time?: number;
+    client?: string;
+  }) {
+    let query = "player";
+    query += qs.stringify(params, "&");
     return this.request<{ now_playing: NowPlayingResponse[] }>(query);
   }
 
