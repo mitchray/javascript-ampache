@@ -35,7 +35,7 @@ export type IndexEntry = {
 
 export type NowPlayingResponse = {
   id: UID;
-  type: "song" | "podcast_episode" | "live_stream" | "video";
+  type: "song" | "podcast_episode" | "video";
   client: string;
   expire: number;
   user: UserSummary;
