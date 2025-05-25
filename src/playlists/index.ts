@@ -1,5 +1,5 @@
 import qs from "querystringify";
-import { PlaylistResponse, PlaylistsResponse } from "./types";
+import { HashResponse, PlaylistResponse, PlaylistsResponse } from "./types";
 import { SongsResponse } from "../songs/types";
 import {
   Base,
@@ -260,5 +260,21 @@ export class Playlists extends Base {
     let query = "playlist_generate";
     query += qs.stringify(params, "&");
     return this.request<SongsResponse>(query);
+  }
+
+  /**
+   * This returns the md5 hash for the songs in a playlist
+   * @remarks MINIMUM_API_VERSION=6.6.0
+   * @param params.filter string UID of Playlist
+   * @see {@link https://ampache.org/api/api-json-methods#playlist_hash}
+   */
+  playlistHash(
+      params: {
+        filter: UID;
+      },
+  ) {
+    let query = "playlist_hash";
+    query += qs.stringify(params, "&");
+    return this.request<HashResponse>(query);
   }
 }

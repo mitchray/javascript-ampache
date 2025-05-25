@@ -13,10 +13,17 @@ export type PlaylistResponse = {
   rating: number | null;
   averagerating: number | null;
   user: UserSummary;
+  has_access: boolean;
+  has_collaborate: boolean;
+  last_update: number;
 };
 
 export type PlaylistsResponse = {
   total_count: number;
   md5: string;
   playlist: PlaylistResponse[];
+};
+
+export type HashResponse = {
+  md5: string;
 };

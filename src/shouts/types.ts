@@ -6,4 +6,6 @@ export type ShoutResponse = {
   date: number;
   text: string;
   user: UserSummary;
+  object_type: "song" | "album" | "artist" | "playlist";
+  object_id: UID;
 };
