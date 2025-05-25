@@ -38,7 +38,7 @@ export type UID = string | number;
 export abstract class Base {
   sessionKey: string;
   url: string;
-  version: string = "6.3.0"; // default to latest version
+  version: string = "6.6.8"; // default to latest version
   debug: boolean;
 
   constructor(config: Config) {

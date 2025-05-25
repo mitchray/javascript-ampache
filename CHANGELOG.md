@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.3] - 2025-05-25
+
+- Update Ampache API version
+
+## Requires Ampache 7.4.0
+
 ## [1.1.2] - 2025-05-24
 
 ## Requires Ampache 7.4.0
