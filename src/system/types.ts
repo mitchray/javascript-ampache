@@ -6,6 +6,7 @@ import { PodcastResponse, PodcastEpisodeResponse } from "../podcasts/types";
 import { LiveStreamResponse } from "../live-streams/types";
 import { VideoResponse } from "../videos/types";
 import { UID } from "../base";
+import { UserSummary } from "../users/types";
 
 export type IndexType =
   | SongResponse
@@ -31,3 +32,11 @@ export type IndexEntry = {
   prefix: string;
   basename: string;
 };
+
+export type NowPlayingResponse = {
+  id: UID;
+  type: "song" | "podcast_episode" | "live_stream" | "video";
+  client: string;
+  expire: number;
+  user: UserSummary;
+}

@@ -1,6 +1,6 @@
 import qs from "querystringify";
-import { SongResponse, SongsResponse } from "../songs/types";
-import { ArtistResponse, ArtistsResponse } from "../artists/types";
+import { SongsResponse } from "../songs/types";
+import { ArtistsResponse } from "../artists/types";
 import {
   Base,
   BinaryBoolean,
@@ -9,21 +9,18 @@ import {
   Success,
   UID,
 } from "../base";
-import { AlbumResponse, AlbumsResponse } from "../albums/types";
-import { VideoResponse, VideosResponse } from "../videos/types";
-import { PlaylistResponse, PlaylistsResponse } from "../playlists/types";
+import { AlbumsResponse } from "../albums/types";
+import { VideosResponse } from "../videos/types";
+import { PlaylistsResponse } from "../playlists/types";
 import {
-  PodcastResponse,
-  PodcastEpisodeResponse,
   PodcastsResponse,
   PodcastEpisodesResponse,
 } from "../podcasts/types";
-import { LiveStreamResponse, LiveStreamsResponse } from "../live-streams/types";
-import { LabelResponse, LabelsResponse } from "../labels/types";
-import { GenreResponse, GenresResponse } from "../genres/types";
-import { UserResponse, UsersResponse } from "../users/types";
-import { IndexEntry } from "./types";
-import { Albums } from "../albums";
+import { LiveStreamsResponse } from "../live-streams/types";
+import { LabelsResponse } from "../labels/types";
+import { GenresResponse } from "../genres/types";
+import { UsersResponse } from "../users/types";
+import { IndexEntry, NowPlayingResponse } from "./types";
 
 export class System extends Base {
   /**
@@ -590,6 +587,16 @@ export class System extends Base {
     let query = "democratic";
     query += qs.stringify(params, "&");
     return this.request(query);
+  }
+
+  /**
+   * Get what is currently being played by all users.
+   * @remarks MINIMUM_API_VERSION=6.3.1
+   * @see {@link https://ampache.org/api/api-json-methods#now_playing}
+   */
+  nowPlaying() {
+    let query = "now_playing";
+    return this.request<{ now_playing: NowPlayingResponse[] }>(query);
   }
 
   /**
