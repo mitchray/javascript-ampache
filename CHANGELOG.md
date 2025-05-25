@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.4] - 2025-05-25
+
+- Was missing some updates from API 6.3.0 - 6.6.8
+
 ## [1.1.3] - 2025-05-25
 
 - Update Ampache API version

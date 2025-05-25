@@ -1,6 +1,6 @@
 import qs from "querystringify";
-import { SongsResponse } from "../songs/types";
-import { ArtistsResponse } from "../artists/types";
+import { SongResponse, SongsResponse } from "../songs/types";
+import { ArtistResponse, ArtistsResponse } from "../artists/types";
 import {
   Base,
   BinaryBoolean,
@@ -9,17 +9,19 @@ import {
   Success,
   UID,
 } from "../base";
-import { AlbumsResponse } from "../albums/types";
-import { VideosResponse } from "../videos/types";
-import { PlaylistsResponse } from "../playlists/types";
+import { AlbumResponse, AlbumsResponse } from "../albums/types";
+import { VideoResponse, VideosResponse } from "../videos/types";
+import { PlaylistResponse, PlaylistsResponse } from "../playlists/types";
 import {
   PodcastsResponse,
   PodcastEpisodesResponse,
+  PodcastResponse,
+  PodcastEpisodeResponse,
 } from "../podcasts/types";
 import { LiveStreamsResponse } from "../live-streams/types";
-import { LabelsResponse } from "../labels/types";
-import { GenresResponse } from "../genres/types";
-import { UsersResponse } from "../users/types";
+import { LabelResponse, LabelsResponse } from "../labels/types";
+import { GenreResponse, GenresResponse } from "../genres/types";
+import { UserResponse, UsersResponse } from "../users/types";
 import { IndexEntry, NowPlayingResponse } from "./types";
 
 export class System extends Base {
@@ -730,4 +732,112 @@ export class System extends Base {
 
   // alias of advanced_search
   search = this.advancedSearch;
+
+  /**
+   * Perform a search given passed rules and return matching objects in a group.
+   * If the rules do not exist for the object type or would return the entire table they will not return objects
+   * You'll want to consult the docs for this.
+   * @remarks MINIMUM_API_VERSION=6.3.0
+   * @param params.operator and, or (whether to match one rule or all)
+   * @param params.rules An array of rules
+   * @param [params.type] Object type to return (all, music, song_artist, album_artist, podcast, video; all by default)
+   * @param [params.random] 0, 1 (random order of results; default to 0)
+   * @param [params.offset]
+   * @param [params.limit]
+   * @see {@link https://ampache.org/api/api-json-methods#search_group}
+   */
+  searchGroup(
+      params: {
+        operator: "and" | "or";
+        rules: Array<Array<string>>;
+        type?:
+            | "all"
+            | "music"
+            | "song_artist"
+            | "album_artist"
+            | "podcast"
+            | "video";
+        random?: BinaryBoolean;
+      } & Pagination,
+  ) {
+    let query = "search_group";
+
+    for (let i = 0; i < params.rules.length; i++) {
+      const thisRule = params.rules[i];
+      const ruleNumber = i + 1;
+
+      params["rule_" + ruleNumber] = thisRule[0];
+      params["rule_" + ruleNumber + "_operator"] = thisRule[1];
+      params["rule_" + ruleNumber + "_input"] = thisRule[2];
+
+      if (thisRule[0] === "metadata") {
+        params["rule_" + ruleNumber + "_subtype"] = thisRule[3];
+      }
+    }
+
+    // drop the initial 'rules' as it was split into its parts
+    delete params.rules;
+
+    query += qs.stringify(params, "&");
+
+    let data;
+
+    switch (params.type) {
+      case "music":
+        data = this.request<{ search: {
+            song: SongResponse[];
+            album: AlbumResponse[];
+            artist: ArtistResponse[];
+          }
+        }>(query);
+        break;
+      case "song_artist":
+        data = this.request<{ search: {
+            song: SongResponse[];
+            album: AlbumResponse[];
+            song_artist: ArtistResponse[];
+          }
+        }>(query);
+        break;
+      case "album_artist":
+        data = this.request<{ search: {
+            song: SongResponse[];
+            album: AlbumResponse[];
+            album_artist: ArtistResponse[];
+          }
+        }>(query);
+        break;
+      case "podcast":
+        data = this.request<{ search: {
+            podcast: PodcastResponse[];
+            podcast_episode: PodcastEpisodeResponse[];
+          }
+        }>(query);
+        break;
+      case "video":
+        data = this.request<{ search: {
+            video: VideoResponse[];
+          }
+        }>(query);
+        break;
+      case "all":
+      default:
+        data = this.request<{ search: {
+            song: SongResponse[];
+            album: AlbumResponse[];
+            artist: ArtistResponse[];
+            song_artist: ArtistResponse[];
+            album_artist: ArtistResponse[];
+            label: LabelResponse[];
+            playlist: PlaylistResponse[];
+            podcast: PodcastResponse[];
+            podcast_episode: PodcastEpisodeResponse[];
+            genre: GenreResponse[];
+            user: UserResponse[];
+          }
+        }>(query);
+    }
+
+    return data;
+  }
 }
