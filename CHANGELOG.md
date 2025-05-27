@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.6] - 2025-05-27
+
+- get_art has a `size` param
+
 ## [1.1.5] - 2025-05-26
 
 - Had not run build since v1.1.1...

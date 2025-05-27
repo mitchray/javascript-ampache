@@ -525,11 +525,13 @@ export class System extends Base {
    * @remarks MINIMUM_API_VERSION=400001
    * @param params.id UID to find
    * @param params.type Object type
+   * @param [params.size] width x height (e.g. '640x480')
    * @see {@link https://ampache.org/api/api-json-methods#get_art}
    */
   getArt(params: {
     id: UID;
     type: "song" | "artist" | "album" | "playlist" | "search" | "podcast";
+    size?: string;
   }) {
     let query = "get_art";
     query += qs.stringify(params, "&");
