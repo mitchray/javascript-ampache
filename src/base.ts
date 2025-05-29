@@ -4,6 +4,7 @@ import qs from "querystringify";
 type Config = {
   url: string;
   sessionKey?: string;
+  useBearerToken: false;
   debug?: boolean;
 };
 
@@ -39,15 +40,18 @@ export abstract class Base {
   sessionKey: string;
   url: string;
   version: string = "6.6.8";
+  useBearerToken: boolean;
   debug: boolean;
 
   constructor(config: Config) {
     this.sessionKey = config.sessionKey || null;
     this.url = config.url;
+    this.useBearerToken = config.useBearerToken || false;
     this.debug = config.debug || false;
   }
 
   protected request<T>(endpoint: string): Promise<T> {
+    let authString = "&auth=" + this.sessionKey;
     let url =
       this.url +
       "/server/json.server.php?action=" +
@@ -55,9 +59,13 @@ export abstract class Base {
       "&version=" +
       this.version;
 
+    if (!this.useBearerToken) {
+      url += authString;
+    }
+
     if (this.debug) {
       console.debug(
-        "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
+        "javascript-ampache query URL %c" + url + authString,
         "color: black; font-style: italic; background-color: orange;padding: 2px",
       );
     }
@@ -65,7 +73,7 @@ export abstract class Base {
     return fetch(url, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + this.sessionKey,
+        Authorization: this.useBearerToken ? "Bearer " + this.sessionKey : undefined,
       },
     }).then((r) => {
       if (r.ok) {
@@ -76,16 +84,19 @@ export abstract class Base {
   }
 
   protected binary<T>(endpoint: string): Promise<Blob> {
+    let authString = "&auth=" + this.sessionKey;
     let url =
       this.url +
-      "/server/json.server.php?action=" +
-      endpoint +
-      "&version=" +
-      this.version;
+      "/server/json.server.php?action=" + endpoint +
+      "&version=" + this.version;
+
+    if (!this.useBearerToken) {
+      url += authString;
+    }
 
     if (this.debug) {
       console.debug(
-        "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
+        "javascript-ampache query URL %c" + url + authString,
         "color: black; font-style: italic; background-color: orange;padding: 2px",
       );
     }
@@ -93,7 +104,7 @@ export abstract class Base {
     return fetch(url, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + this.sessionKey,
+        Authorization: this.useBearerToken ? "Bearer " + this.sessionKey : undefined,
       },
     })
       .then((response) => response.blob())
@@ -117,10 +128,8 @@ export abstract class Base {
 
     let url =
       this.url +
-      "/server/json.server.php?action=" +
-      query +
-      "&version=" +
-      this.version;
+      "/server/json.server.php?action=" + query +
+      "&version=" + this.version;
 
     if (this.debug) {
       console.debug(
