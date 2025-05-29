@@ -65,7 +65,7 @@ export abstract class Base {
 
     if (this.debug) {
       console.debug(
-        "javascript-ampache query URL %c" + url + authString,
+        "javascript-ampache query URL %c" + url,
         "color: black; font-style: italic; background-color: orange;padding: 2px",
       );
     }
@@ -96,7 +96,7 @@ export abstract class Base {
 
     if (this.debug) {
       console.debug(
-        "javascript-ampache query URL %c" + url + this.useBearerToken ? "&auth=" + this.sessionKey : "",
+        "javascript-ampache query URL %c" + url,
         "color: black; font-style: italic; background-color: orange;padding: 2px",
       );
     }
@@ -123,6 +123,7 @@ export abstract class Base {
    * @param [params]
    */
   public rawURL(endpoint: string, params?: {}) {
+    let authString = "&auth=" + this.sessionKey;
     let query = endpoint;
     query += qs.stringify(params, "&");
 
@@ -131,9 +132,13 @@ export abstract class Base {
       "/server/json.server.php?action=" + query +
       "&version=" + this.version;
 
+    if (!this.useBearerToken) {
+      url += authString;
+    }
+
     if (this.debug) {
       console.debug(
-        "javascript-ampache query URL %c" + url + this.useBearerToken ? "&auth=" + this.sessionKey : "",
+        "javascript-ampache query URL %c" + url,
         "color: black; font-style: italic; background-color: orange;padding: 2px",
       );
     }
