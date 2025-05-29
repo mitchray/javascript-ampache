@@ -96,7 +96,7 @@ export abstract class Base {
 
     if (this.debug) {
       console.debug(
-        "javascript-ampache query URL %c" + url + authString,
+        "javascript-ampache query URL %c" + url + this.useBearerToken ? "&auth=" + this.sessionKey : "",
         "color: black; font-style: italic; background-color: orange;padding: 2px",
       );
     }
@@ -133,7 +133,7 @@ export abstract class Base {
 
     if (this.debug) {
       console.debug(
-        "javascript-ampache query URL %c" + url + "&auth=" + this.sessionKey,
+        "javascript-ampache query URL %c" + url + this.useBearerToken ? "&auth=" + this.sessionKey : "",
         "color: black; font-style: italic; background-color: orange;padding: 2px",
       );
     }
