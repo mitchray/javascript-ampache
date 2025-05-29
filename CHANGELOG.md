@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.7] - 2025-05-30
+
+- Opt-in to Bearer token
+
 ## [1.1.6] - 2025-05-27
 
 - get_art has a `size` param
