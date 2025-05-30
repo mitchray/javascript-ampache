@@ -1,10 +1,11 @@
 import fetch from "isomorphic-unfetch";
 import qs from "querystringify";
+import { outputDebugURL } from "./utils";
 
 type Config = {
   url: string;
   sessionKey?: string;
-  useBearerToken: false;
+  useBearerToken?: boolean;
   debug?: boolean;
 };
 
@@ -51,7 +52,6 @@ export abstract class Base {
   }
 
   protected request<T>(endpoint: string): Promise<T> {
-    let authString = "&auth=" + this.sessionKey;
     let url =
       this.url +
       "/server/json.server.php?action=" +
@@ -60,21 +60,16 @@ export abstract class Base {
       this.version;
 
     if (!this.useBearerToken) {
-      url += authString;
+      url += "&auth=" + this.sessionKey;
     }
 
     if (this.debug) {
-      console.debug(
-        "javascript-ampache query URL %c" + url,
-        "color: black; font-style: italic; background-color: orange;padding: 2px",
-      );
+      outputDebugURL(url, this);
     }
 
     return fetch(url, {
       method: "GET",
-      headers: {
-        Authorization: this.useBearerToken ? "Bearer " + this.sessionKey : undefined,
-      },
+      headers: this.useBearerToken ? { Authorization: "Bearer " + this.sessionKey } : {},
     }).then((r) => {
       if (r.ok) {
         return r.json();
@@ -84,28 +79,22 @@ export abstract class Base {
   }
 
   protected binary<T>(endpoint: string): Promise<Blob> {
-    let authString = "&auth=" + this.sessionKey;
     let url =
       this.url +
       "/server/json.server.php?action=" + endpoint +
       "&version=" + this.version;
 
     if (!this.useBearerToken) {
-      url += authString;
+      url += "&auth=" + this.sessionKey;
     }
 
     if (this.debug) {
-      console.debug(
-        "javascript-ampache query URL %c" + url,
-        "color: black; font-style: italic; background-color: orange;padding: 2px",
-      );
+      outputDebugURL(url, this);
     }
 
     return fetch(url, {
       method: "GET",
-      headers: {
-        Authorization: this.useBearerToken ? "Bearer " + this.sessionKey : undefined,
-      },
+      headers: this.useBearerToken ? { Authorization: "Bearer " + this.sessionKey } : {},
     })
       .then((response) => response.blob())
       .then((r) => {
@@ -123,7 +112,6 @@ export abstract class Base {
    * @param [params]
    */
   public rawURL(endpoint: string, params?: {}) {
-    let authString = "&auth=" + this.sessionKey;
     let query = endpoint;
     query += qs.stringify(params, "&");
 
@@ -133,14 +121,11 @@ export abstract class Base {
       "&version=" + this.version;
 
     if (!this.useBearerToken) {
-      url += authString;
+      url += "&auth=" + this.sessionKey;
     }
 
     if (this.debug) {
-      console.debug(
-        "javascript-ampache query URL %c" + url,
-        "color: black; font-style: italic; background-color: orange;padding: 2px",
-      );
+      outputDebugURL(url, this);
     }
 
     return url;

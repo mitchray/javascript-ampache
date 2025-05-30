@@ -3,6 +3,7 @@ import qs from "querystringify";
 import fetch from "isomorphic-unfetch";
 import { Base, Success } from "../base";
 import { AuthResponse } from "./types";
+import { outputDebugURL } from "../utils";
 
 export class Auth extends Base {
   /**
@@ -20,6 +21,8 @@ export class Auth extends Base {
     timestamp?: number;
     version?: string;
   }) {
+    let token = params.auth;
+
     // generate a timestamp if one wasn't provided
     if (!params.timestamp) {
       params.timestamp = Math.floor(new Date().getTime() / 1000);
@@ -35,10 +38,22 @@ export class Auth extends Base {
       delete params.timestamp;
     }
 
+    // not needed if using Bearer token
+    if (this.useBearerToken) {
+      delete params.auth;
+    }
+
     let query = this.url + "/server/json.server.php?action=handshake";
     query += qs.stringify(params, "&");
 
-    return fetch(query)
+    if (this.debug) {
+      outputDebugURL(query, this);
+    }
+
+    return fetch(query, {
+      method: "GET",
+      headers: this.useBearerToken ? { Authorization: "Bearer " + token } : {},
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.auth) {

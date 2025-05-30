@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.10] - 2025-05-30
+
+- Use Bearer token in Authorization header for handshake() if that is enabled
+
 ## [1.1.9] - 2025-05-30
 
 - Opt-in to Bearer token (losing my mind)

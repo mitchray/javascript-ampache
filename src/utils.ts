@@ -1,4 +1,5 @@
 import JsSHA from "jssha/dist/sha256";
+import { Base } from "./base";
 
 export function applyMixins(derivedCtor: any, baseCtors: any[]) {
   baseCtors.forEach((baseCtor) => {
@@ -22,4 +23,18 @@ export function encryptPassword(password: string, time: number) {
 
     return shaObj.getHash("HEX");
   }
+}
+
+export function outputDebugURL(url: string, config: Base) {
+  let label = "javascript-ampache query URL";
+
+  if (config.useBearerToken) {
+    label = "(Using Bearer token, auth added for debugging) - " + label;
+    url += "&auth=" + config.sessionKey;
+  }
+
+  console.debug(
+      label + " %c" + url,
+      "color: black; font-style: italic; background-color: orange;padding: 2px",
+  );
 }
