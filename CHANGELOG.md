@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.0] - 2025-11-08
+
+- Add `search_rules` method
+
 ## [1.1.10] - 2025-05-30
 
 - Use Bearer token in Authorization header for handshake() if that is enabled
