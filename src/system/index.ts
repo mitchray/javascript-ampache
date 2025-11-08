@@ -209,6 +209,7 @@ export class System extends Base {
       catalog?: number;
       add?: Date;
       update?: Date;
+      cond?: string;
     } & ExtendedPagination,
   ) {
     let query = "browse";
