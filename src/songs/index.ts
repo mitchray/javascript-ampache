@@ -165,15 +165,15 @@ export class Songs extends Base {
   /**
    * Get the full song file tags using VaInfo
    * This is used to get tags for remote catalogs to allow maximum data to be returned
-   * @remarks MINIMUM_API_VERSION=7.5.0
+   * @remarks MINIMUM_API_VERSION=6.7.0
    * @param params.filter UID of song to fetch
    * @see {@link https://ampache.org/api/api-json-methods#song_tags}
    */
-  // songTags(params: { filter: UID }) {
-  //   let query = "song_tags";
-  //   query += qs.stringify(params, "&");
-  //   return this.request<SongResponse>(query); // TODO update reponse
-  // }
+  songTags(params: { filter: UID }) {
+    let query = "song_tags";
+    query += qs.stringify(params, "&");
+    return this.request(query); // TODO response type
+  }
 
   /**
    * This takes a URL and returns the song object in question
