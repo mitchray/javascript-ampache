@@ -89,6 +89,7 @@ export class Playlists extends Base {
    * This returns a user's playlists based on the specified filter
    * @remarks MINIMUM_API_VERSION=6.3.0
    * @param [params.filter] Filter results to match this string
+   * @param [params.include] 0, 1 (include playlist items)
    * @param [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
@@ -101,6 +102,7 @@ export class Playlists extends Base {
   userPlaylists(
     params?: {
       filter?: string;
+      include?: BinaryBoolean;
       exact?: BinaryBoolean;
       add?: Date;
       update?: Date;
@@ -115,6 +117,7 @@ export class Playlists extends Base {
    * This returns a user's smartlists based on the specified filter
    * @remarks MINIMUM_API_VERSION=6.3.0
    * @param [params.filter] Filter results to match this string
+   * @param [params.include] 0, 1 (include playlist items)
    * @param [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
@@ -127,6 +130,7 @@ export class Playlists extends Base {
   userSmartlists(
     params?: {
       filter?: string;
+      include?: BinaryBoolean;
       exact?: BinaryBoolean;
       add?: Date;
       update?: Date;
