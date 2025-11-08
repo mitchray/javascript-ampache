@@ -40,3 +40,11 @@ export type NowPlayingResponse = {
   expire: number;
   user: UserSummary;
 }
+
+export type RuleResponse = {
+  name: string;
+  label: string;
+  type: string;
+  title: string;
+  widget: string[];
+}

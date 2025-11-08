@@ -22,7 +22,7 @@ import { LiveStreamsResponse } from "../live-streams/types";
 import { LabelResponse, LabelsResponse } from "../labels/types";
 import { GenreResponse, GenresResponse } from "../genres/types";
 import { UserResponse, UsersResponse } from "../users/types";
-import { IndexEntry, NowPlayingResponse } from "./types";
+import { IndexEntry, NowPlayingResponse, RuleResponse } from "./types";
 
 export class System extends Base {
   /**
@@ -635,6 +635,20 @@ export class System extends Base {
     let query = "player";
     query += qs.stringify(params, "&");
     return this.request<{ now_playing: NowPlayingResponse[] }>(query);
+  }
+
+  /**
+   * Print a list of valid search rules for your search type
+   * @remarks MINIMUM_API_VERSION=6.8.0
+   * @param params.filter Object type
+   * @see {@link https://ampache.org/api/api-json-methods#search_rules}
+   */
+  searchRules(params: {
+    filter: "song" | "album" | "song_artist" | "album_artist" | "artist" | "label" | "playlist" | "podcast" | "podcast_episode" | "genre" | "user" | "video";
+  }) {
+    let query = "search_rules";
+    query += qs.stringify(params, "&");
+    return this.request<{ rule: RuleResponse[] }>(query);
   }
 
   /**
