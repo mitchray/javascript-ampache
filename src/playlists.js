@@ -52,27 +52,22 @@ export const playlistsMethods = {
   },
 
   /**
-   * This returns smartlists based on the specified filter. NOTE: Filtered from Playlists() so pagination is invalid.
+   * This returns smartlists based on the specified filter
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} [params]
    * @param {string} [params.filter] Filter results to match this string
    * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param {Date} [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param {Date} [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
-   * @param {import("./base.js").BinaryBoolean} [params.show_dupes] 0, 1 (if true ignore 'api_hide_dupe_searches' setting)
+   * @param {number} [params.offset]
+   * @param {number} [params.limit]
+   * @param {string} [params.cond]
+   * @param {string} [params.sort]
    * @returns {Promise<PlaylistsResponse>}
-   * @see {@link https://ampache.org/api/api-json-methods#playlists}
+   * @see {@link https://ampache.org/api/api-json-methods#smartlists}
    */
   smartlists(params) {
-    return this.call("playlists", params).then((response) => {
-      // filter out regular playlists
-      if (Array.isArray(response.playlist)) {
-        response.playlist = response.playlist.filter((item) =>
-          item.id.toString().startsWith("smart_"),
-        );
-      }
-      return response;
-    });
+    return this.call("smartlists", params);
   },
 
   /**
