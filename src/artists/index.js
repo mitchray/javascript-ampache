@@ -1,7 +1,44 @@
-import qs from "querystringify";
-import { Base } from "../base.js";
+/**
+ * @typedef {Object} ArtistSummary
+ * @property {string} id
+ * @property {string} name
+ * @property {string|null} prefix
+ * @property {string} basename
+ */
 
-export class Artists extends Base {
+/**
+ * @typedef {Object} ArtistResponse
+ * @property {string} id
+ * @property {string} name
+ * @property {string|null} prefix
+ * @property {string} basename
+ * @property {import("../albums/index.js").AlbumResponse[]} albums
+ * @property {number} albumcount
+ * @property {import("../songs/index.js").SongsResponse[]} songs
+ * @property {number} songcount
+ * @property {import("../genres/index.js").GenreResponse[]} genre
+ * @property {string} art
+ * @property {boolean} has_art
+ * @property {boolean} flag
+ * @property {number|null} rating
+ * @property {number|null} averagerating
+ * @property {string|null} mbid
+ * @property {string} summary
+ * @property {number} time
+ * @property {number} yearformed
+ * @property {string} placeformed
+ */
+
+/**
+ * @typedef {Object} ArtistsResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {ArtistResponse[]} artist
+ */
+
+import qs from "querystringify";
+
+export const artistsMethods = {
   /**
    * This takes a collection of inputs and returns artist objects
    * @remarks MINIMUM_API_VERSION=380001
@@ -16,14 +53,14 @@ export class Artists extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").ArtistsResponse>}
+   * @returns {Promise<ArtistsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#artists}
    */
   artists(params) {
     let query = "artists";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns a single artist based on the UID of said artist
@@ -31,14 +68,14 @@ export class Artists extends Base {
    * @param {Object} params
    * @param {import("../base.js").UID} params.filter UID to find
    * @param {"albums"|"songs"} [params.include] (albums | songs) include child objects in the response
-   * @returns {Promise<import("./types.js").ArtistResponse>}
+   * @returns {Promise<ArtistResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#artist}
    */
   artist(params) {
     let query = "artist";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns the artists associated with the genre in question as defined by the UID
@@ -49,14 +86,14 @@ export class Artists extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").ArtistsResponse>}
+   * @returns {Promise<ArtistsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#genre_artists}
    */
   genreArtists(params) {
     let query = "genre_artists";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns the artists associated with the label in question as defined by the UID
@@ -67,12 +104,12 @@ export class Artists extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").ArtistsResponse>}
+   * @returns {Promise<ArtistsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#label_artists}
    */
   labelArtists(params) {
     let query = "label_artists";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
-}
+  },
+};

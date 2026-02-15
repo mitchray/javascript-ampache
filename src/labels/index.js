@@ -1,7 +1,27 @@
-import qs from "querystringify";
-import { Base } from "../base.js";
+/**
+ * @typedef {Object} LabelResponse
+ * @property {import("../base.js").UID} id
+ * @property {string} name
+ * @property {number} artists
+ * @property {string|null} summary
+ * @property {string|null} external_link
+ * @property {string|null} address
+ * @property {string|null} category
+ * @property {string|null} email
+ * @property {string|null} website
+ * @property {import("../base.js").UID} user
+ */
 
-export class Labels extends Base {
+/**
+ * @typedef {Object} LabelsResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {LabelResponse[]} label
+ */
+
+import qs from "querystringify";
+
+export const labelsMethods = {
   /**
    * This returns labels based on the specified filter
    * @remarks MINIMUM_API_VERSION=420000
@@ -14,26 +34,26 @@ export class Labels extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").LabelsResponse>}
+   * @returns {Promise<LabelsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#labels}
    */
   labels(params) {
     let query = "labels";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns a single label
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
    * @param {import("../base.js").UID} params.filter UID to find
-   * @returns {Promise<import("./types.js").LabelResponse>}
+   * @returns {Promise<LabelResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#label}
    */
   label(params) {
     let query = "label";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
-}
+  },
+};

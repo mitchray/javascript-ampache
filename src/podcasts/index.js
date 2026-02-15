@@ -1,7 +1,96 @@
-import qs from "querystringify";
-import { Base } from "../base.js";
+/**
+ * @typedef {Object} PodcastEpisodeResponse
+ * @property {import("../base.js").UID} id
+ * @property {string} title
+ * @property {string} name
+ * @property {string} description
+ * @property {string} category
+ * @property {string} author
+ * @property {string} author_full
+ * @property {string} website
+ * @property {string} pubdate
+ * @property {"completed"|"pending"} state
+ * @property {string} filelength
+ * @property {string} filesize
+ * @property {string} filename
+ * @property {string} mime
+ * @property {number} time
+ * @property {number} size
+ * @property {number} bitrate
+ * @property {number} stream_bitrate
+ * @property {number} rate
+ * @property {number|null} mode
+ * @property {number|null} channels
+ * @property {string} public_url
+ * @property {string} url
+ * @property {import("../base.js").UID} catalog
+ * @property {string} art
+ * @property {boolean} has_art
+ * @property {boolean} flag
+ * @property {number|null} rating
+ * @property {number|null} averagerating
+ * @property {number} playcount
+ * @property {number} played
+ */
 
-export class Podcasts extends Base {
+/**
+ * @typedef {Object} PodcastResponse
+ * @property {import("../base.js").UID} id
+ * @property {string} name
+ * @property {string} description
+ * @property {string} language
+ * @property {string} copyright
+ * @property {string} feed_url
+ * @property {string} generator
+ * @property {string} website
+ * @property {string} build_date
+ * @property {string} sync_date
+ * @property {string} public_url
+ * @property {string} art
+ * @property {boolean} has_art
+ * @property {boolean} flag
+ * @property {number|null} rating
+ * @property {number|null} averaterating
+ * @property {PodcastEpisodeResponse[]} podcast_episode
+ */
+
+/**
+ * @typedef {Object} PodcastsResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {PodcastResponse[]} podcast
+ */
+
+/**
+ * @typedef {Object} PodcastEpisodesResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {PodcastEpisodeResponse[]} podcast_episode
+ */
+
+/**
+ * @typedef {Object} DeletedPodcastEpisodeResponse
+ * @property {import("../base.js").UID} id
+ * @property {number} addition_time
+ * @property {number} delete_time
+ * @property {string} title
+ * @property {string} file
+ * @property {import("../base.js").UID} catalog
+ * @property {number} total_count
+ * @property {number} total_skip
+ * @property {import("../base.js").UID} podcast
+ */
+
+/**
+ * @typedef {Object} DeletedPodcastEpisodesResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {DeletedPodcastEpisodeResponse[]} deleted_podcast_episode
+ */
+
+import qs from "querystringify";
+
+export const podcastsMethods = {
   /**
    * Get information about podcasts
    * @remarks MINIMUM_API_VERSION=420000
@@ -12,14 +101,14 @@ export class Podcasts extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").PodcastsResponse>}
+   * @returns {Promise<PodcastsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#podcasts}
    */
   podcasts(params) {
     let query = "podcasts";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Get information about podcasts
@@ -29,14 +118,14 @@ export class Podcasts extends Base {
    * @param {"episodes"} [params.include] episodes (include podcast_episodes in the response)
    * @param {number} [params.offset]
    * @param {number} [params.limit]
-   * @returns {Promise<import("./types.js").PodcastResponse>}
+   * @returns {Promise<PodcastResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#podcast}
    */
   podcast(params) {
     let query = "podcast";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Create a podcast that can be used by anyone to stream media.
@@ -44,14 +133,14 @@ export class Podcasts extends Base {
    * @param {Object} params
    * @param {string} params.url RSS url for podcast
    * @param {import("../base.js").UID} params.catalog UID of podcast catalog
-   * @returns {Promise<import("./types.js").PodcastResponse>}
+   * @returns {Promise<PodcastResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#podcast_create}
    */
   podcastCreate(params) {
     let query = "podcast_create";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Update the description and/or expiration date for an existing podcast.
@@ -71,7 +160,7 @@ export class Podcasts extends Base {
     let query = "podcast_edit";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Delete an existing podcast
@@ -85,7 +174,7 @@ export class Podcasts extends Base {
     let query = "podcast_delete";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns the episodes for a podcast
@@ -96,28 +185,28 @@ export class Podcasts extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").PodcastEpisodesResponse>}
+   * @returns {Promise<PodcastEpisodesResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#podcast_episodes}
    */
   podcastEpisodes(params) {
     let query = "podcast_episodes";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Get the podcast_episode from a UID
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
    * @param {import("../base.js").UID} params.filter UID of podcast
-   * @returns {Promise<import("./types.js").PodcastEpisodeResponse>}
+   * @returns {Promise<PodcastEpisodeResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#podcast_episode}
    */
   podcastEpisode(params) {
     let query = "podcast_episode";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Delete an existing podcast_episode
@@ -131,7 +220,7 @@ export class Podcasts extends Base {
     let query = "podcast_episode_delete";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Sync and download new podcast episodes
@@ -146,19 +235,19 @@ export class Podcasts extends Base {
     let query = "update_podcast";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns the episodes for a podcast that have been deleted
    * @param {Object} [params]
    * @param {number} [params.offset]
    * @param {number} [params.limit]
-   * @returns {Promise<import("./types.js").DeletedPodcastEpisodesResponse>}
+   * @returns {Promise<DeletedPodcastEpisodesResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#deleted_podcast_episodes}
    */
   deletedPodcastEpisodes(params) {
     let query = "deleted_podcast_episodes";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
-}
+  },
+};

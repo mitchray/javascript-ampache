@@ -1,7 +1,36 @@
-import qs from "querystringify";
-import { Base } from "../base.js";
+/**
+ * @typedef {Object} PlaylistResponse
+ * @property {import("../base.js").UID} id
+ * @property {string} name
+ * @property {string} owner
+ * @property {number} items
+ * @property {"public"|"private"} type
+ * @property {string} art
+ * @property {boolean} has_art
+ * @property {boolean} flag
+ * @property {number|null} rating
+ * @property {number|null} averagerating
+ * @property {import("../users/index.js").UserSummary} user
+ * @property {boolean} has_access
+ * @property {boolean} has_collaborate
+ * @property {number} last_update
+ */
 
-export class Playlists extends Base {
+/**
+ * @typedef {Object} PlaylistsResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {PlaylistResponse[]} playlist
+ */
+
+/**
+ * @typedef {Object} HashResponse
+ * @property {string} md5
+ */
+
+import qs from "querystringify";
+
+export const playlistsMethods = {
   /**
    * This returns playlists based on the specified filter
    * @remarks MINIMUM_API_VERSION=380001
@@ -17,14 +46,14 @@ export class Playlists extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").PlaylistsResponse>}
+   * @returns {Promise<PlaylistsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#playlists}
    */
   playlists(params) {
     let query = "playlists";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns smartlists based on the specified filter. NOTE: Filtered from Playlists() so pagination is invalid.
@@ -35,7 +64,7 @@ export class Playlists extends Base {
    * @param {Date} [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param {Date} [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
    * @param {import("../base.js").BinaryBoolean} [params.show_dupes] 0, 1 (if true ignore 'api_hide_dupe_searches' setting)
-   * @returns {Promise<import("./types.js").PlaylistsResponse>}
+   * @returns {Promise<PlaylistsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#playlists}
    */
   smartlists(params) {
@@ -50,21 +79,21 @@ export class Playlists extends Base {
       }
       return response;
     });
-  }
+  },
 
   /**
    * This returns a single playlist
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
    * @param {import("../base.js").UID} params.filter UID to find
-   * @returns {Promise<import("./types.js").PlaylistResponse>}
+   * @returns {Promise<PlaylistResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist}
    */
   playlist(params) {
     let query = "playlist";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns a user's playlists based on the specified filter
@@ -79,14 +108,14 @@ export class Playlists extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").PlaylistsResponse>}
+   * @returns {Promise<PlaylistsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#user_playlists}
    */
   userPlaylists(params) {
     let query = "user_playlists";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns a user's smartlists based on the specified filter
@@ -101,14 +130,14 @@ export class Playlists extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").PlaylistsResponse>}
+   * @returns {Promise<PlaylistsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#user_smartlists}
    */
   userSmartlists(params) {
     let query = "user_smartlists";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This creates a new playlist and returns it
@@ -116,14 +145,14 @@ export class Playlists extends Base {
    * @param {Object} params
    * @param {string} params.name Playlist name
    * @param {"public"|"private"} [params.type] public, private (Playlist type)
-   * @returns {Promise<import("./types.js").PlaylistResponse>}
+   * @returns {Promise<PlaylistResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist_create}
    */
   playlistCreate(params) {
     let query = "playlist_create";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This adds an item to a playlist
@@ -139,7 +168,7 @@ export class Playlists extends Base {
     let query = "playlist_add";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This modifies name and type of the playlist.
@@ -159,7 +188,7 @@ export class Playlists extends Base {
     let query = "playlist_edit";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This deletes a playlist
@@ -173,7 +202,7 @@ export class Playlists extends Base {
     let query = "playlist_delete";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This adds a song to a playlist
@@ -190,7 +219,7 @@ export class Playlists extends Base {
     let query = "playlist_add_song";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This remove a song from a playlist
@@ -206,7 +235,7 @@ export class Playlists extends Base {
     let query = "playlist_remove_song";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Get a list of song JSON, indexes or id's based on some simple search criteria
@@ -220,26 +249,26 @@ export class Playlists extends Base {
    * @param {"song"|"index"|"id"} [params.format] song, index, id (default = 'song')
    * @param {number} [params.offset]
    * @param {number} [params.limit]
-   * @returns {Promise<import("../songs/types.js").SongsResponse>}
+   * @returns {Promise<import("../songs/index.js").SongsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist_generate}
    */
   playlistGenerate(params) {
     let query = "playlist_generate";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns the md5 hash for the songs in a playlist
    * @remarks MINIMUM_API_VERSION=6.6.0
    * @param {Object} params
    * @param {import("../base.js").UID} params.filter string UID of Playlist
-   * @returns {Promise<import("./types.js").HashResponse>}
+   * @returns {Promise<HashResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist_hash}
    */
   playlistHash(params) {
     let query = "playlist_hash";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
-}
+  },
+};

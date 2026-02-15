@@ -1,7 +1,33 @@
-import qs from "querystringify";
-import { Base } from "../base.js";
+/**
+ * @typedef {Object} GenreSummary
+ * @property {import("../base.js").UID} id
+ * @property {string} name
+ */
 
-export class Genres extends Base {
+/**
+ * @typedef {Object} GenreResponse
+ * @property {import("../base.js").UID} id
+ * @property {string} name
+ * @property {number} albums
+ * @property {number} artists
+ * @property {number} songs
+ * @property {number} videos
+ * @property {number} playlists
+ * @property {number} live_streams
+ * @property {boolean} is_hidden
+ * @property {GenreSummary[]} merge
+ */
+
+/**
+ * @typedef {Object} GenresResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {GenreResponse[]} genre
+ */
+
+import qs from "querystringify";
+
+export const genresMethods = {
   /**
    * This returns the genres (Tags) based on the specified filter
    * @remarks MINIMUM_API_VERSION=380001
@@ -12,26 +38,26 @@ export class Genres extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").GenresResponse>}
+   * @returns {Promise<GenresResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#genres}
    */
   genres(params) {
     let query = "genres";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns a single genre based on UID
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
    * @param {import("../base.js").UID} params.filter UID to find
-   * @returns {Promise<import("./types.js").GenreResponse>}
+   * @returns {Promise<GenreResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#genre}
    */
   genre(params) {
     let query = "genre";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
-}
+  },
+};

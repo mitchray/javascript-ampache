@@ -1,7 +1,23 @@
-import qs from "querystringify";
-import { Base } from "../base.js";
+/**
+ * @typedef {Object} LiveStreamResponse
+ * @property {import("../base.js").UID} id
+ * @property {string} name
+ * @property {string} url
+ * @property {string} codec
+ * @property {import("../base.js").UID} catalog
+ * @property {string} site_url
+ */
 
-export class LiveStreams extends Base {
+/**
+ * @typedef {Object} LiveStreamsResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {LiveStreamResponse[]} live_stream
+ */
+
+import qs from "querystringify";
+
+export const liveStreamsMethods = {
   /**
    * This returns live_streams based on the specified filter
    * @remarks MINIMUM_API_VERSION=5.1.0
@@ -14,28 +30,28 @@ export class LiveStreams extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").LiveStreamsResponse>}
+   * @returns {Promise<LiveStreamsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#live_streams}
    */
   liveStreams(params) {
     let query = "live_streams";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns a single live_stream
    * @remarks MINIMUM_API_VERSION=5.1.0
    * @param {Object} params
    * @param {import("../base.js").UID} params.filter UID to find
-   * @returns {Promise<import("./types.js").LiveStreamResponse>}
+   * @returns {Promise<LiveStreamResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#live_stream}
    */
   liveStream(params) {
     let query = "live_stream";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Create a live_stream (radio station) object.
@@ -47,14 +63,14 @@ export class LiveStreams extends Base {
    * @param {"mp3"|"flac"|"ogg"|"vorbis"|"opus"|"aac"|"alac"} params.codec Stream codec
    * @param {string} params.catalog Catalog ID to associate with this stream
    * @param {string} [params.site_url] Homepage URL of the stream
-   * @returns {Promise<import("./types.js").LiveStreamResponse>}
+   * @returns {Promise<LiveStreamResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#live_stream_create}
    */
   liveStreamCreate(params) {
     let query = "live_stream_create";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Edit a live_stream (radio station) object.
@@ -67,14 +83,14 @@ export class LiveStreams extends Base {
    * @param {"mp3"|"flac"|"ogg"|"vorbis"|"opus"|"aac"|"alac"} [params.codec] Stream codec
    * @param {string} [params.catalog] Catalog ID to associate with this stream
    * @param {string} [params.site_url] Homepage URL of the stream
-   * @returns {Promise<import("./types.js").LiveStreamResponse>}
+   * @returns {Promise<LiveStreamResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#live_stream_edit}
    */
   liveStreamEdit(params) {
     let query = "live_stream_edit";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Delete a live_stream (radio station) object (if it exists)
@@ -89,5 +105,5 @@ export class LiveStreams extends Base {
     let query = "live_stream_delete";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
-}
+  },
+};

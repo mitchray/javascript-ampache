@@ -1,31 +1,71 @@
-import qs from "querystringify";
-import { Base } from "../base.js";
+/**
+ * @typedef {Object} UserSummary
+ * @property {import("../base.js").UID} id
+ * @property {string} username
+ */
 
-export class Users extends Base {
+/**
+ * @typedef {Object} UserResponse
+ * @property {import("../base.js").UID} id
+ * @property {string} username
+ * @property {string} auth
+ * @property {string} email
+ * @property {number} access
+ * @property {string|null} streamtoken
+ * @property {number} fullname_public
+ * @property {string|null} validation
+ * @property {boolean} disabled
+ * @property {number} create_date
+ * @property {number} last_seen
+ * @property {string|null} website
+ * @property {string|null} state
+ * @property {string|null} city
+ */
+
+/**
+ * @typedef {Object} UsersResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {UserResponse[]} user
+ */
+
+/**
+ * @typedef {Object} ActivityResponse
+ * @property {import("../base.js").UID} id
+ * @property {number} date
+ * @property {string} object_type
+ * @property {import("../base.js").UID} object_id
+ * @property {string} action
+ * @property {UserSummary} user
+ */
+
+import qs from "querystringify";
+
+export const usersMethods = {
   /**
    * Get ids and usernames for your site
    * @remarks MINIMUM_API_VERSION=5.0.0
-   * @returns {Promise<{ user: import("./types.js").UserSummary[] }>}
+   * @returns {Promise<{ user: UserSummary[] }>}
    * @see {@link https://ampache.org/api/api-json-methods#users}
    */
   users() {
     let query = "users";
     return this.request(query);
-  }
+  },
 
   /**
    * This get a user's public information (or current user if username is omitted)
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} [params]
    * @param {string} [params.username] UID to find
-   * @returns {Promise<import("./types.js").UserResponse>}
+   * @returns {Promise<UserResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#user}
    */
   user(params) {
     let query = "user";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Create a new user
@@ -45,7 +85,7 @@ export class Users extends Base {
     let query = "user_create";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Register as a new user if allowed.
@@ -62,7 +102,7 @@ export class Users extends Base {
     let query = "register";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Update an existing user
@@ -86,7 +126,7 @@ export class Users extends Base {
     let query = "user_update";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Update an existing user
@@ -114,7 +154,7 @@ export class Users extends Base {
     let query = "user_edit";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Delete an existing user.
@@ -129,7 +169,7 @@ export class Users extends Base {
     let query = "user_delete";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This gets the followers for the requested username
@@ -140,28 +180,28 @@ export class Users extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<{ user: import("./types.js").UserSummary[] }>}
+   * @returns {Promise<{ user: UserSummary[] }>}
    * @see {@link https://ampache.org/api/api-json-methods#followers}
    */
   followers(params) {
     let query = "followers";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Get a list of people that this user follows
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
    * @param {string} params.username
-   * @returns {Promise<{ user: import("./types.js").UserSummary[] }>}
+   * @returns {Promise<{ user: UserSummary[] }>}
    * @see {@link https://ampache.org/api/api-json-methods#following}
    */
   following(params) {
     let query = "following";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This will follow/unfollow a user
@@ -174,7 +214,7 @@ export class Users extends Base {
     let query = "toggle_follow";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This get a user timeline
@@ -183,14 +223,14 @@ export class Users extends Base {
    * @param {string} params.username Username to find
    * @param {number} [params.limit] Max results to return
    * @param {number} [params.since] UNIXTIME
-   * @returns {Promise<{ activity: import("./types.js").ActivityResponse[] }>}
+   * @returns {Promise<{ activity: ActivityResponse[] }>}
    * @see {@link https://ampache.org/api/api-json-methods#timeline}
    */
   timeline(params) {
     let query = "timeline";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This get current user friends timeline
@@ -198,12 +238,12 @@ export class Users extends Base {
    * @param {Object} [params]
    * @param {number} [params.limit] Max results to return
    * @param {number} [params.since] UNIXTIME
-   * @returns {Promise<{ activity: import("./types.js").ActivityResponse[] }>}
+   * @returns {Promise<{ activity: ActivityResponse[] }>}
    * @see {@link https://ampache.org/api/api-json-methods#friends_timeline}
    */
   friendsTimeline(params) {
     let query = "friends_timeline";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
-}
+  },
+};

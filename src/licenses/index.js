@@ -1,7 +1,21 @@
-import qs from "querystringify";
-import { Base } from "../base.js";
+/**
+ * @typedef {Object} LicenseResponse
+ * @property {import("../base.js").UID} id
+ * @property {string} name
+ * @property {string} description
+ * @property {string} external_link
+ */
 
-export class Licenses extends Base {
+/**
+ * @typedef {Object} LicensesResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {LicenseResponse[]} license
+ */
+
+import qs from "querystringify";
+
+export const licensesMethods = {
   /**
    * This returns licenses based on the specified filter
    * @remarks MINIMUM_API_VERSION=420000
@@ -14,26 +28,26 @@ export class Licenses extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").LicensesResponse>}
+   * @returns {Promise<LicensesResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#licenses}
    */
   licenses(params) {
     let query = "licenses";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns a single license
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
    * @param {import("../base.js").UID} params.filter UID to find
-   * @returns {Promise<import("./types.js").LicenseResponse>}
+   * @returns {Promise<LicenseResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#license}
    */
   license(params) {
     let query = "license";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
-}
+  },
+};

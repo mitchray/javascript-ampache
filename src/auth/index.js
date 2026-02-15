@@ -1,10 +1,43 @@
+/**
+ * @typedef {Object} AuthResponse
+ * @property {string} add
+ * @property {number} albums
+ * @property {string} api
+ * @property {number} artists
+ * @property {string} auth
+ * @property {number} catalogs
+ * @property {string} compatible
+ * @property {string} clean
+ * @property {number} genres
+ * @property {number} labels
+ * @property {number} licenses
+ * @property {number} live_streams
+ * @property {number} playlists
+ * @property {number} podcasts
+ * @property {number} podcast_episodes
+ * @property {string} server
+ * @property {string} session_expire
+ * @property {number} shares
+ * @property {number} songs
+ * @property {string} update
+ * @property {number} user
+ * @property {string} username
+ * @property {string} version
+ * @property {number} videos
+ * @property {number} max_song
+ * @property {number} max_album
+ * @property {number} max_artist
+ * @property {number} max_video
+ * @property {number} max_podcast
+ * @property {number} max_podcast_episode
+ */
+
 import JsSHA from "jssha/dist/sha256";
 import qs from "querystringify";
 import fetch from "isomorphic-unfetch";
-import { Base } from "../base.js";
 import { outputDebugURL } from "../utils.js";
 
-export class Auth extends Base {
+export const authMethods = {
   /**
    * Handles verifying a new handshake
    * @remarks MINIMUM_API_VERSION=380001
@@ -13,7 +46,7 @@ export class Auth extends Base {
    * @param {string} [params.user] username
    * @param {number} [params.timestamp] UNIXTIME()
    * @param {string} [params.version] version of Ampache API to establish connection with
-   * @returns {Promise<import("./types.js").AuthResponse>}
+   * @returns {Promise<AuthResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#handshake}
    */
   handshake(params) {
@@ -55,9 +88,9 @@ export class Auth extends Base {
         if (data.auth) {
           this.sessionKey = data.auth;
         }
-        return /** @type {import("./types.js").AuthResponse} */ (data);
+        return /** @type {AuthResponse} */ (data);
       });
-  }
+  },
 
   /**
    * This can be called without being authenticated, it is useful for determining if what the status
@@ -66,14 +99,14 @@ export class Auth extends Base {
    * @param {Object} [params]
    * @param {string} [params.auth] (Session ID) returns version information and extends the session if passed
    * @param {string} [params.version] API Version that the application understands
-   * @returns {Promise<import("./types.js").AuthResponse>}
+   * @returns {Promise<AuthResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#ping}
    */
   ping(params) {
     let query = "ping";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Destroy a session using the session auth parameter
@@ -87,7 +120,7 @@ export class Auth extends Base {
     let query = "goodbye";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Email a new password to the user (if allowed) using a reset token.
@@ -101,7 +134,7 @@ export class Auth extends Base {
     let query = "lost_password";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Encrypt your password into the accepted format.
@@ -124,5 +157,5 @@ export class Auth extends Base {
 
       return shaObj.getHash("HEX");
     }
-  }
-}
+  },
+};

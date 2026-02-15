@@ -2,22 +2,6 @@ import JsSHA from "jssha/dist/sha256";
 import { Base } from "./base.js";
 
 /**
- * @param {Function} derivedCtor
- * @param {Function[]} baseCtors
- */
-export function applyMixins(derivedCtor, baseCtors) {
-  baseCtors.forEach((baseCtor) => {
-    Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
-      Object.defineProperty(
-        derivedCtor.prototype,
-        name,
-        Object.getOwnPropertyDescriptor(baseCtor.prototype, name),
-      );
-    });
-  });
-}
-
-/**
  * @param {string} password
  * @param {number} time
  * @returns {string}

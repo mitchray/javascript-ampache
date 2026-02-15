@@ -1,7 +1,83 @@
-import qs from "querystringify";
-import { Base } from "../base.js";
+/**
+ * @typedef {Object} SongResponse
+ * @property {import("../base.js").UID} id
+ * @property {string} title
+ * @property {string} name
+ * @property {import("../artists/index.js").ArtistSummary} artist
+ * @property {import("../albums/index.js").AlbumSummary} album
+ * @property {import("../artists/index.js").ArtistSummary} albumartist
+ * @property {number} disk
+ * @property {number} track
+ * @property {string} filename
+ * @property {import("../genres/index.js").GenreSummary[]} genre
+ * @property {number} playlisttrack
+ * @property {number} time
+ * @property {number|string} year
+ * @property {string} format
+ * @property {string} stream_format
+ * @property {number} rate
+ * @property {string} mode
+ * @property {string} mime
+ * @property {string} stream_mime
+ * @property {string} url
+ * @property {number} size
+ * @property {string|null} mbid
+ * @property {string|null} album_mbid
+ * @property {string|null} artist_mbid
+ * @property {string} art
+ * @property {boolean} has_art
+ * @property {boolean} flag
+ * @property {number|null} rating
+ * @property {number|null} averagerating
+ * @property {number} playcount
+ * @property {number} catalog
+ * @property {string} composer
+ * @property {number|null} channels
+ * @property {string} comment
+ * @property {string|null} license
+ * @property {string} publisher
+ * @property {string} language
+ * @property {string} lyrics
+ * @property {number|null} replaygain_album_gain
+ * @property {number|null} replaygain_album_peak
+ * @property {number|null} replaygain_track_gain
+ * @property {number|null} replaygain_track_peak
+ * @property {number|null} r128_album_gain
+ * @property {number|null} r128_track_gain
+ */
 
-export class Songs extends Base {
+/**
+ * @typedef {Object} SongsResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {SongResponse[]} song
+ */
+
+/**
+ * @typedef {Object} DeletedSongResponse
+ * @property {import("../base.js").UID} id
+ * @property {number} addition_time
+ * @property {number} delete_time
+ * @property {number} update_time
+ * @property {string} title
+ * @property {string} file
+ * @property {import("../base.js").UID} catalog
+ * @property {number} total_count
+ * @property {number} total_skip
+ * @property {import("../base.js").UID} album
+ * @property {import("../base.js").UID} artist
+ */
+
+/**
+ * @typedef {Object} DeletedSongsResponse
+ * @property {number} total_count
+ * @property {string} md5
+ * @property {DeletedSongResponse[]} deleted_song
+ */
+
+import qs from "querystringify";
+
+export const songsMethods = {
   /**
    * Returns songs based on the specified filter
    * @remarks MINIMUM_API_VERSION=380001
@@ -14,28 +90,28 @@ export class Songs extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").SongsResponse>}
+   * @returns {Promise<SongsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#songs}
    */
   songs(params) {
     let query = "songs";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Returns a single song
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
    * @param {import("../base.js").UID} params.filter UID to find
-   * @returns {Promise<import("./types.js").SongResponse>}
+   * @returns {Promise<SongResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#song}
    */
   song(params) {
     let query = "song";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Songs of the specified artist
@@ -47,14 +123,14 @@ export class Songs extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").SongsResponse>}
+   * @returns {Promise<SongsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#artist_songs}
    */
   artistSongs(params) {
     let query = "artist_songs";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Songs of the specified album
@@ -65,14 +141,14 @@ export class Songs extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").SongsResponse>}
+   * @returns {Promise<SongsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#album_songs}
    */
   albumSongs(params) {
     let query = "album_songs";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Songs of the specified genre
@@ -83,14 +159,14 @@ export class Songs extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").SongsResponse>}
+   * @returns {Promise<SongsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#genre_songs}
    */
   genreSongs(params) {
     let query = "genre_songs";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns the songs for a playlist
@@ -100,14 +176,14 @@ export class Songs extends Base {
    * @param {import("../base.js").BinaryBoolean} [params.random] 0, 1 (if true get random songs using limit)
    * @param {number} [params.offset]
    * @param {number} [params.limit]
-   * @returns {Promise<import("./types.js").SongsResponse>}
+   * @returns {Promise<SongsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist_songs}
    */
   playlistSongs(params) {
     let query = "playlist_songs";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This returns the songs for a license
@@ -118,14 +194,14 @@ export class Songs extends Base {
    * @param {number} [params.limit]
    * @param {string} [params.cond]
    * @param {string} [params.sort]
-   * @returns {Promise<import("./types.js").SongsResponse>}
+   * @returns {Promise<SongsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#license_songs}
    */
   licenseSongs(params) {
     let query = "license_songs";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Delete an existing song. (if you are allowed to)
@@ -139,7 +215,7 @@ export class Songs extends Base {
     let query = "song_delete";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Get the full song file tags using VaInfo
@@ -154,14 +230,14 @@ export class Songs extends Base {
     let query = "song_tags";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This takes a URL and returns the song object in question
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
    * @param {string} params.url Full Ampache URL from server
-   * @returns {Promise<import("./types.js").SongResponse>}
+   * @returns {Promise<SongResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#url_to_song}
    */
   urlToSong(params) {
@@ -169,7 +245,7 @@ export class Songs extends Base {
     params.url = encodeURIComponent(params.url);
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This searches the songs and returns... songs
@@ -178,14 +254,14 @@ export class Songs extends Base {
    * @param {string} params.filter Filter results to match this string
    * @param {number} [params.offset]
    * @param {number} [params.limit]
-   * @returns {Promise<import("./types.js").SongsResponse>}
+   * @returns {Promise<SongsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#search_songs}
    */
   searchSongs(params) {
     let query = "search_songs";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Returns songs that have been deleted from the server
@@ -193,12 +269,12 @@ export class Songs extends Base {
    * @param {Object} [params]
    * @param {number} [params.offset]
    * @param {number} [params.limit]
-   * @returns {Promise<import("./types.js").DeletedSongsResponse>}
+   * @returns {Promise<DeletedSongsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#deleted_songs}
    */
   deletedSongs(params) {
     let query = "deleted_songs";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
-}
+  },
+};

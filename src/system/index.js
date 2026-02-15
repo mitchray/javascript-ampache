@@ -1,7 +1,40 @@
-import qs from "querystringify";
-import { Base } from "../base.js";
+/**
+ * @typedef {import("../songs/index.js").SongResponse|import("../albums/index.js").AlbumResponse|import("../artists/index.js").ArtistResponse|import("../playlists/index.js").PlaylistResponse|import("../podcasts/index.js").PodcastResponse|import("../podcasts/index.js").PodcastEpisodeResponse|import("../live-streams/index.js").LiveStreamResponse} IndexType
+ */
 
-export class System extends Base {
+/**
+ * @typedef {import("../songs/index.js").SongResponse|import("../albums/index.js").AlbumResponse|import("../artists/index.js").ArtistResponse|import("../videos/index.js").VideoResponse|import("../playlists/index.js").PlaylistResponse|import("../podcasts/index.js").PodcastResponse|import("../podcasts/index.js").PodcastEpisodeResponse} StatsType
+ */
+
+/**
+ * @typedef {Object} IndexEntry
+ * @property {import("../base.js").UID} id
+ * @property {string} name
+ * @property {string} prefix
+ * @property {string} basename
+ */
+
+/**
+ * @typedef {Object} NowPlayingResponse
+ * @property {import("../base.js").UID} id
+ * @property {"song"|"podcast_episode"|"video"} type
+ * @property {string} client
+ * @property {number} expire
+ * @property {import("../users/index.js").UserSummary} user
+ */
+
+/**
+ * @typedef {Object} RuleResponse
+ * @property {string} name
+ * @property {string} label
+ * @property {string} type
+ * @property {string} title
+ * @property {string[]} widget
+ */
+
+import qs from "querystringify";
+
+export const systemMethods = {
   /**
    * Check Ampache for updates and run the update if there is one.
    * @remarks MINIMUM_API_VERSION=5.0.0
@@ -10,7 +43,7 @@ export class System extends Base {
   systemUpdate() {
     let query = "system_update";
     return this.request(query);
-  }
+  },
 
   /**
    * This takes a collection of inputs and returns ID + name for the object type
@@ -61,7 +94,7 @@ export class System extends Base {
     }
 
     return data;
-  }
+  },
 
   /**
    * This takes a named array of objects and returning `id`, `name`, `prefix` and `basename`
@@ -81,7 +114,7 @@ export class System extends Base {
     let query = "list";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This takes a collection of inputs and return ID's for the object type.
@@ -103,7 +136,7 @@ export class System extends Base {
     let query = "index";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Return children of a parent object in a folder traversal/browse style
@@ -124,7 +157,7 @@ export class System extends Base {
     let query = "browse";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Return similar artist IDs or similar song IDs compared to the input filter
@@ -152,7 +185,7 @@ export class System extends Base {
     }
 
     return data;
-  }
+  },
 
   /**
    * Get some items based on some simple search types and filters. (Random by default)
@@ -197,7 +230,7 @@ export class System extends Base {
     }
 
     return data;
-  }
+  },
 
   /**
    * This rates a library item
@@ -211,7 +244,7 @@ export class System extends Base {
     let query = "rate";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * This flags a library item as a favorite
@@ -226,7 +259,7 @@ export class System extends Base {
     let query = "flag";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Take a song_id and update the object_count and user_activity table with a play. This allows other sources to record play history to Ampache.
@@ -243,7 +276,7 @@ export class System extends Base {
     let query = "record_play";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Search for a song using text info and then record a play if found. This allows other sources to record play history to ampache
@@ -265,7 +298,7 @@ export class System extends Base {
     let query = "scrobble";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Update a single album, artist, song from the tag data
@@ -278,7 +311,7 @@ export class System extends Base {
     let query = "update_from_tags";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Update artist information and fetch similar artists from last.fm
@@ -292,7 +325,7 @@ export class System extends Base {
     let query = "update_artist_info";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Updates a single album, artist, song running the gather_art process.
@@ -308,7 +341,7 @@ export class System extends Base {
     let query = "update_art";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Streams a given media file. Takes the file id in parameter with optional max bit rate, file format, time offset,
@@ -328,7 +361,7 @@ export class System extends Base {
     let query = "stream";
     query += qs.stringify(params, "&");
     return this.binary(query);
-  }
+  },
 
   /**
    * Downloads a given media file. set format=raw to download the full file
@@ -345,7 +378,7 @@ export class System extends Base {
     let query = "download";
     query += qs.stringify(params, "&");
     return this.binary(query);
-  }
+  },
 
   /**
    * Get an art image file.
@@ -359,7 +392,7 @@ export class System extends Base {
     let query = "get_art";
     query += qs.stringify(params, "&");
     return this.binary(query);
-  }
+  },
 
   /**
    * This is for controlling localplay
@@ -374,7 +407,7 @@ export class System extends Base {
     let query = "localplay";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Get the list of songs in your localplay playlist
@@ -384,7 +417,7 @@ export class System extends Base {
   localplaySongs() {
     let query = "localplay_songs";
     return this.request(query);
-  }
+  },
 
   /**
    * This is for controlling democratic play (Songs only). VOTE: +1 vote for the oid. DEVOTE: -1 vote for the oid.
@@ -399,7 +432,7 @@ export class System extends Base {
     let query = "democratic";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Get what is currently being played by all users.
@@ -409,7 +442,7 @@ export class System extends Base {
   nowPlaying() {
     let query = "now_playing";
     return this.request(query);
-  }
+  },
 
   /**
    * Inform the server about the state of your client. (Song you are playing, Play/Pause state, etc.)
@@ -425,7 +458,7 @@ export class System extends Base {
     let query = "player";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Print a list of valid search rules for your search type
@@ -437,7 +470,7 @@ export class System extends Base {
     let query = "search_rules";
     query += qs.stringify(params, "&");
     return this.request(query);
-  }
+  },
 
   /**
    * Perform an advanced search given passed rules.
@@ -512,10 +545,15 @@ export class System extends Base {
     }
 
     return data;
-  }
+  },
 
-  // alias of advanced_search
-  search = this.advancedSearch;
+  /**
+   * Alias of advancedSearch
+   * @see advancedSearch
+   */
+  search(params) {
+    return this.advancedSearch(params);
+  },
 
   /**
    * Perform a search given passed rules and return matching objects in a group.
@@ -575,5 +613,5 @@ export class System extends Base {
     }
 
     return data;
-  }
-}
+  },
+};
