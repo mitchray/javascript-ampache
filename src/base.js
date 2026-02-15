@@ -46,11 +46,23 @@ export class Base {
   }
 
   /**
+   * Build action string with optional params and call request.
    * @template T
-   * @param {string} endpoint
+   * @param {string} action API action name
+   * @param {Object} [params] Optional query params
    * @returns {Promise<T>}
    */
-  request(endpoint) {
+  call(action, params) {
+    const query = action + (params != null ? qs.stringify(params, "&") : "");
+    return this.request(query);
+  }
+
+  /**
+   * @param {string} endpoint Action and optional query string
+   * @returns {string} Full request URL
+   * @private
+   */
+  _buildURL(endpoint) {
     let url =
       this.url +
       "/server/json.server.php?action=" +
@@ -66,14 +78,36 @@ export class Base {
       outputDebugURL(url, this);
     }
 
+    return url;
+  }
+
+  /**
+   * @template T
+   * @param {string} endpoint
+   * @returns {Promise<T>}
+   */
+  request(endpoint) {
+    const url = this._buildURL(endpoint);
     return fetch(url, {
       method: "GET",
       headers: this.useBearerToken ? { Authorization: "Bearer " + this.sessionKey } : {},
-    }).then((r) => {
+    }).then(async (r) => {
       if (r.ok) {
         return r.json();
       }
-      throw new Error(r.statusText);
+      let body = r.statusText;
+      const contentType = r.headers.get("content-type");
+      try {
+        body = contentType && contentType.includes("application/json")
+          ? await r.json()
+          : await r.text();
+      } catch (_) {
+        // keep statusText if body read fails
+      }
+      const err = new Error(r.statusText);
+      err.status = r.status;
+      err.body = body;
+      throw err;
     });
   }
 
@@ -82,27 +116,11 @@ export class Base {
    * @returns {Promise<Blob>}
    */
   binary(endpoint) {
-    let url =
-      this.url +
-      "/server/json.server.php?action=" + endpoint +
-      "&version=" + this.version;
-
-    if (!this.useBearerToken) {
-      url += "&auth=" + this.sessionKey;
-    }
-
-    if (this.debug) {
-      outputDebugURL(url, this);
-    }
-
+    const url = this._buildURL(endpoint);
     return fetch(url, {
       method: "GET",
       headers: this.useBearerToken ? { Authorization: "Bearer " + this.sessionKey } : {},
-    })
-      .then((response) => response.blob())
-      .then((r) => {
-        return r;
-      });
+    }).then((response) => response.blob());
   }
 
   /**
@@ -119,23 +137,8 @@ export class Base {
    * @returns {string}
    */
   rawURL(endpoint, params) {
-    let query = endpoint;
-    query += qs.stringify(params, "&");
-
-    let url =
-      this.url +
-      "/server/json.server.php?action=" + query +
-      "&version=" + this.version;
-
-    if (!this.useBearerToken) {
-      url += "&auth=" + this.sessionKey;
-    }
-
-    if (this.debug) {
-      outputDebugURL(url, this);
-    }
-
-    return url;
+    const query = endpoint + (params != null ? qs.stringify(params, "&") : "");
+    return this._buildURL(query);
   }
 }
 

@@ -8,8 +8,6 @@
  * @property {import("../base.js").UID} object_id
  */
 
-import qs from "querystringify";
-
 export const shoutsMethods = {
   /**
    * This gets the latest posted shouts
@@ -21,8 +19,6 @@ export const shoutsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#last_shouts}
    */
   last_shouts(params) {
-    let query = "last_shouts";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("last_shouts", params);
   },
 };

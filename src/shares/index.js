@@ -24,8 +24,6 @@
  * @property {ShareResponse[]} share
  */
 
-import qs from "querystringify";
-
 export const sharesMethods = {
   /**
    * This searches the shares and returns... shares
@@ -41,9 +39,7 @@ export const sharesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#shares}
    */
   shares(params) {
-    let query = "shares";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("shares", params);
   },
 
   /**
@@ -55,9 +51,7 @@ export const sharesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#share}
    */
   share(params) {
-    let query = "share";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("share", params);
   },
 
   /**
@@ -72,9 +66,7 @@ export const sharesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#share_create}
    */
   shareCreate(params) {
-    let query = "share_create";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("share_create", params);
   },
 
   /**
@@ -90,9 +82,7 @@ export const sharesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#share_edit}
    */
   shareEdit(params) {
-    let query = "share_edit";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("share_edit", params);
   },
 
   /**
@@ -104,8 +94,6 @@ export const sharesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#share_delete}
    */
   shareDelete(params) {
-    let query = "share_delete";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("share_delete", params);
   },
 };

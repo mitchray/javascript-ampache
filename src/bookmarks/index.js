@@ -14,8 +14,6 @@
  * @property {BookmarkResponse[]} bookmark
  */
 
-import qs from "querystringify";
-
 export const bookmarksMethods = {
   /**
    * Get a single bookmark by bookmark_id
@@ -27,9 +25,7 @@ export const bookmarksMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#bookmark}
    */
   bookmark(params) {
-    let query = "bookmark";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("bookmark", params);
   },
 
   /**
@@ -42,9 +38,7 @@ export const bookmarksMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#bookmarks}
    */
   bookmarks(params) {
-    let query = "bookmarks";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("bookmarks", params);
   },
 
   /**
@@ -59,9 +53,7 @@ export const bookmarksMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#get_bookmark}
    */
   getBookmark(params) {
-    let query = "get_bookmark";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("get_bookmark", params);
   },
 
   /**
@@ -78,9 +70,7 @@ export const bookmarksMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#bookmark_create}
    */
   bookmarkCreate(params) {
-    let query = "bookmark_create";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("bookmark_create", params);
   },
 
   /**
@@ -97,9 +87,7 @@ export const bookmarksMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#bookmark_edit}
    */
   bookmarkEdit(params) {
-    let query = "bookmark_edit";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("bookmark_edit", params);
   },
 
   /**
@@ -113,8 +101,6 @@ export const bookmarksMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#bookmark_delete}
    */
   bookmarkDelete(params) {
-    let query = "bookmark_delete";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("bookmark_delete", params);
   },
 };

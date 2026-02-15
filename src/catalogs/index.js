@@ -20,8 +20,6 @@
  * @property {CatalogResponse[]} catalog
  */
 
-import qs from "querystringify";
-
 export const catalogsMethods = {
   /**
    * This searches the catalogs and returns... catalogs
@@ -36,9 +34,7 @@ export const catalogsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#catalogs}
    */
   catalogs(params) {
-    let query = "catalogs";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("catalogs", params);
   },
 
   /**
@@ -50,9 +46,7 @@ export const catalogsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#catalog}
    */
   catalog(params) {
-    let query = "catalog";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("catalog", params);
   },
 
   /**
@@ -66,9 +60,7 @@ export const catalogsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#catalog_action}
    */
   catalogAction(params) {
-    let query = "catalog_action";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("catalog_action", params);
   },
 
   /**
@@ -84,9 +76,7 @@ export const catalogsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#catalog_file}
    */
   catalogFile(params) {
-    let query = "catalog_file";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("catalog_file", params);
   },
 
   /**
@@ -106,9 +96,7 @@ export const catalogsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#catalog_add}
    */
   catalogAdd(params) {
-    let query = "catalog_add";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("catalog_add", params);
   },
 
   /**
@@ -121,8 +109,6 @@ export const catalogsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#catalog_delete}
    */
   catalogDelete(params) {
-    let query = "catalog_delete";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("catalog_delete", params);
   },
 };

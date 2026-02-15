@@ -19,8 +19,6 @@
  * @property {LabelResponse[]} label
  */
 
-import qs from "querystringify";
-
 export const labelsMethods = {
   /**
    * This returns labels based on the specified filter
@@ -38,9 +36,7 @@ export const labelsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#labels}
    */
   labels(params) {
-    let query = "labels";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("labels", params);
   },
 
   /**
@@ -52,8 +48,6 @@ export const labelsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#label}
    */
   label(params) {
-    let query = "label";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("label", params);
   },
 };

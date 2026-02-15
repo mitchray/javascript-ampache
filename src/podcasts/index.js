@@ -88,8 +88,6 @@
  * @property {DeletedPodcastEpisodeResponse[]} deleted_podcast_episode
  */
 
-import qs from "querystringify";
-
 export const podcastsMethods = {
   /**
    * Get information about podcasts
@@ -105,9 +103,7 @@ export const podcastsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#podcasts}
    */
   podcasts(params) {
-    let query = "podcasts";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("podcasts", params);
   },
 
   /**
@@ -122,9 +118,7 @@ export const podcastsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#podcast}
    */
   podcast(params) {
-    let query = "podcast";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("podcast", params);
   },
 
   /**
@@ -137,9 +131,7 @@ export const podcastsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#podcast_create}
    */
   podcastCreate(params) {
-    let query = "podcast_create";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("podcast_create", params);
   },
 
   /**
@@ -157,9 +149,7 @@ export const podcastsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#podcast_edit}
    */
   podcastEdit(params) {
-    let query = "podcast_edit";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("podcast_edit", params);
   },
 
   /**
@@ -171,9 +161,7 @@ export const podcastsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#podcast_delete}
    */
   podcastDelete(params) {
-    let query = "podcast_delete";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("podcast_delete", params);
   },
 
   /**
@@ -189,9 +177,7 @@ export const podcastsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#podcast_episodes}
    */
   podcastEpisodes(params) {
-    let query = "podcast_episodes";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("podcast_episodes", params);
   },
 
   /**
@@ -203,9 +189,7 @@ export const podcastsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#podcast_episode}
    */
   podcastEpisode(params) {
-    let query = "podcast_episode";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("podcast_episode", params);
   },
 
   /**
@@ -217,9 +201,7 @@ export const podcastsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#podcast_episode_delete}
    */
   podcastEpisodeDelete(params) {
-    let query = "podcast_episode_delete";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("podcast_episode_delete", params);
   },
 
   /**
@@ -232,9 +214,7 @@ export const podcastsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#update_podcast}
    */
   updatePodcast(params) {
-    let query = "update_podcast";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("update_podcast", params);
   },
 
   /**
@@ -246,8 +226,6 @@ export const podcastsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#deleted_podcast_episodes}
    */
   deletedPodcastEpisodes(params) {
-    let query = "deleted_podcast_episodes";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("deleted_podcast_episodes", params);
   },
 };

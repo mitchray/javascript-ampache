@@ -25,8 +25,6 @@
  * @property {GenreResponse[]} genre
  */
 
-import qs from "querystringify";
-
 export const genresMethods = {
   /**
    * This returns the genres (Tags) based on the specified filter
@@ -42,9 +40,7 @@ export const genresMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#genres}
    */
   genres(params) {
-    let query = "genres";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("genres", params);
   },
 
   /**
@@ -56,8 +52,6 @@ export const genresMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#genre}
    */
   genre(params) {
-    let query = "genre";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("genre", params);
   },
 };

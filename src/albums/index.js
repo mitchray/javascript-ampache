@@ -37,8 +37,6 @@
  * @property {AlbumResponse[]} album
  */
 
-import qs from "querystringify";
-
 export const albumsMethods = {
   /**
    * This returns albums based on the provided search filters
@@ -57,9 +55,7 @@ export const albumsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#albums}
    */
   albums(params) {
-    let query = "albums";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("albums", params);
   },
 
   /**
@@ -72,9 +68,7 @@ export const albumsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#album}
    */
   album(params) {
-    let query = "album";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("album", params);
   },
 
   /**
@@ -91,9 +85,7 @@ export const albumsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#artist_albums}
    */
   artistAlbums(params) {
-    let query = "artist_albums";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("artist_albums", params);
   },
 
   /**
@@ -109,8 +101,6 @@ export const albumsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#genre_albums}
    */
   genreAlbums(params) {
-    let query = "genre_albums";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("genre_albums", params);
   },
 };

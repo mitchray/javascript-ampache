@@ -32,10 +32,9 @@
  * @property {number} max_podcast_episode
  */
 
-import JsSHA from "jssha/dist/sha256";
 import qs from "querystringify";
 import fetch from "isomorphic-unfetch";
-import { outputDebugURL } from "../utils.js";
+import { outputDebugURL, encryptPassword as encryptPasswordUtil } from "../utils.js";
 
 export const authMethods = {
   /**
@@ -103,9 +102,7 @@ export const authMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#ping}
    */
   ping(params) {
-    let query = "ping";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("ping", params);
   },
 
   /**
@@ -117,9 +114,7 @@ export const authMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#goodbye}
    */
   goodbye(params) {
-    let query = "goodbye";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("goodbye", params);
   },
 
   /**
@@ -131,9 +126,7 @@ export const authMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#lost_password}
    */
   lostPassword(params) {
-    let query = "lost_password";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("lost_password", params);
   },
 
   /**
@@ -144,18 +137,6 @@ export const authMethods = {
    * @returns {string}
    */
   encryptPassword(params) {
-    let key = getSHA256(params.password);
-    return getSHA256(params.time + key);
-
-    /**
-     * @param {string} text
-     * @returns {string}
-     */
-    function getSHA256(text) {
-      let shaObj = new JsSHA("SHA-256", "TEXT", { encoding: "UTF8" });
-      shaObj.update(text);
-
-      return shaObj.getHash("HEX");
-    }
+    return encryptPasswordUtil(params.password, params.time);
   },
 };

@@ -34,6 +34,41 @@
 
 import qs from "querystringify";
 
+const GET_INDEXES_TYPES = new Set([
+  "song",
+  "album",
+  "artist",
+  "album_artist",
+  "playlist",
+  "podcast",
+  "podcast_episode",
+  "live_stream",
+]);
+const GET_SIMILAR_TYPES = new Set(["song", "artist"]);
+const STATS_TYPES = new Set([
+  "song",
+  "album",
+  "artist",
+  "video",
+  "playlist",
+  "podcast",
+  "podcast_episode",
+]);
+const ADVANCED_SEARCH_TYPES = new Set([
+  "song",
+  "album",
+  "artist",
+  "album_artist",
+  "song_artist",
+  "label",
+  "playlist",
+  "podcast",
+  "podcast_episode",
+  "genre",
+  "user",
+  "video",
+]);
+
 export const systemMethods = {
   /**
    * Check Ampache for updates and run the update if there is one.
@@ -41,8 +76,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#system_update}
    */
   systemUpdate() {
-    let query = "system_update";
-    return this.request(query);
+    return this.call("system_update");
   },
 
   /**
@@ -62,38 +96,11 @@ export const systemMethods = {
    * @deprecated Being removed in 7.0.0. Use `list` instead.
    */
   getIndexes(params) {
-    let query = "get_indexes";
-    query += qs.stringify(params, "&");
-    let data;
-
-    switch (params.type) {
-      case "song":
-        data = this.request(query);
-        break;
-      case "album":
-        data = this.request(query);
-        break;
-      case "artist":
-      case "album_artist":
-        data = this.request(query);
-        break;
-      case "playlist":
-        data = this.request(query);
-        break;
-      case "podcast":
-        data = this.request(query);
-        break;
-      case "podcast_episode":
-        data = this.request(query);
-        break;
-      case "live_stream":
-        data = this.request(query);
-        break;
-      default:
-        return false;
+    if (!GET_INDEXES_TYPES.has(params.type)) {
+      return false;
     }
-
-    return data;
+    const query = "get_indexes" + qs.stringify(params, "&");
+    return this.request(query);
   },
 
   /**
@@ -111,9 +118,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#list}
    */
   list(params) {
-    let query = "list";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("list", params);
   },
 
   /**
@@ -133,9 +138,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#index}
    */
   index(params) {
-    let query = "index";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("index", params);
   },
 
   /**
@@ -154,9 +157,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#browse}
    */
   browse(params) {
-    let query = "browse";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("browse", params);
   },
 
   /**
@@ -169,22 +170,11 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#get_similar}
    */
   getSimilar(params) {
-    let query = "get_similar";
-    query += qs.stringify(params, "&");
-    let data;
-
-    switch (params.type) {
-      case "song":
-        data = this.request(query);
-        break;
-      case "artist":
-        data = this.request(query);
-        break;
-      default:
-        return false;
+    if (!GET_SIMILAR_TYPES.has(params.type)) {
+      return false;
     }
-
-    return data;
+    const query = "get_similar" + qs.stringify(params, "&");
+    return this.request(query);
   },
 
   /**
@@ -199,37 +189,11 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#stats}
    */
   stats(params) {
-    let query = "stats";
-    query += qs.stringify(params, "&");
-    let data;
-
-    switch (params.type) {
-      case "song":
-        data = this.request(query);
-        break;
-      case "album":
-        data = this.request(query);
-        break;
-      case "artist":
-        data = this.request(query);
-        break;
-      case "video":
-        data = this.request(query);
-        break;
-      case "playlist":
-        data = this.request(query);
-        break;
-      case "podcast":
-        data = this.request(query);
-        break;
-      case "podcast_episode":
-        data = this.request(query);
-        break;
-      default:
-        return false;
+    if (!STATS_TYPES.has(params.type)) {
+      return false;
     }
-
-    return data;
+    const query = "stats" + qs.stringify(params, "&");
+    return this.request(query);
   },
 
   /**
@@ -241,9 +205,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#rate}
    */
   rate(params) {
-    let query = "rate";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("rate", params);
   },
 
   /**
@@ -256,9 +218,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#flag}
    */
   flag(params) {
-    let query = "flag";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("flag", params);
   },
 
   /**
@@ -273,9 +233,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#record_play}
    */
   recordPlay(params) {
-    let query = "record_play";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("record_play", params);
   },
 
   /**
@@ -295,9 +253,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#scrobble}
    */
   scrobble(params) {
-    let query = "scrobble";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("scrobble", params);
   },
 
   /**
@@ -308,9 +264,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#update_from_tags}
    */
   updateFromTags(params) {
-    let query = "update_from_tags";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("update_from_tags", params);
   },
 
   /**
@@ -322,9 +276,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#update_artist_info}
    */
   updateArtistInfo(params) {
-    let query = "update_artist_info";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("update_artist_info", params);
   },
 
   /**
@@ -338,9 +290,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#update_art}
    */
   updateArt(params) {
-    let query = "update_art";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("update_art", params);
   },
 
   /**
@@ -358,8 +308,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#stream}
    */
   stream(params) {
-    let query = "stream";
-    query += qs.stringify(params, "&");
+    const query = "stream" + (params != null ? qs.stringify(params, "&") : "");
     return this.binary(query);
   },
 
@@ -375,8 +324,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#download}
    */
   download(params) {
-    let query = "download";
-    query += qs.stringify(params, "&");
+    const query = "download" + (params != null ? qs.stringify(params, "&") : "");
     return this.binary(query);
   },
 
@@ -389,8 +337,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#get_art}
    */
   getArt(params) {
-    let query = "get_art";
-    query += qs.stringify(params, "&");
+    const query = "get_art" + (params != null ? qs.stringify(params, "&") : "");
     return this.binary(query);
   },
 
@@ -404,9 +351,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#localplay}
    */
   localplay(params) {
-    let query = "localplay";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("localplay", params);
   },
 
   /**
@@ -415,8 +360,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#localplay_songs}
    */
   localplaySongs() {
-    let query = "localplay_songs";
-    return this.request(query);
+    return this.call("localplay_songs");
   },
 
   /**
@@ -429,9 +373,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#democratic}
    */
   democratic(params) {
-    let query = "democratic";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("democratic", params);
   },
 
   /**
@@ -440,8 +382,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#now_playing}
    */
   nowPlaying() {
-    let query = "now_playing";
-    return this.request(query);
+    return this.call("now_playing");
   },
 
   /**
@@ -455,9 +396,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#player}
    */
   player(params) {
-    let query = "player";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("player", params);
   },
 
   /**
@@ -467,9 +406,7 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#search_rules}
    */
   searchRules(params) {
-    let query = "search_rules";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("search_rules", params);
   },
 
   /**
@@ -485,8 +422,6 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#advanced_search}
    */
   advancedSearch(params) {
-    let query = "advanced_search";
-
     for (let i = 0; i < params.rules.length; i++) {
       const thisRule = params.rules[i];
       const ruleNumber = i + 1;
@@ -500,51 +435,13 @@ export const systemMethods = {
       }
     }
 
-    // drop the initial 'rules' as it was split into its parts
     delete params.rules;
 
-    query += qs.stringify(params, "&");
-
-    let data;
-
-    switch (params.type) {
-      case "song":
-        data = this.request(query);
-        break;
-      case "album":
-        data = this.request(query);
-        break;
-      case "artist":
-      case "album_artist":
-      case "song_artist":
-        data = this.request(query);
-        break;
-      case "label":
-        data = this.request(query);
-        break;
-      case "playlist":
-        data = this.request(query);
-        break;
-      case "podcast":
-        data = this.request(query);
-        break;
-      case "podcast_episode":
-        data = this.request(query);
-        break;
-      case "genre":
-        data = this.request(query);
-        break;
-      case "user":
-        data = this.request(query);
-        break;
-      case "video":
-        data = this.request(query);
-        break;
-      default:
-        return false;
+    if (!ADVANCED_SEARCH_TYPES.has(params.type)) {
+      return false;
     }
-
-    return data;
+    const query = "advanced_search" + qs.stringify(params, "&");
+    return this.request(query);
   },
 
   /**
@@ -569,8 +466,6 @@ export const systemMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#search_group}
    */
   searchGroup(params) {
-    let query = "search_group";
-
     for (let i = 0; i < params.rules.length; i++) {
       const thisRule = params.rules[i];
       const ruleNumber = i + 1;
@@ -584,34 +479,9 @@ export const systemMethods = {
       }
     }
 
-    // drop the initial 'rules' as it was split into its parts
     delete params.rules;
 
-    query += qs.stringify(params, "&");
-
-    let data;
-
-    switch (params.type) {
-      case "music":
-        data = this.request(query);
-        break;
-      case "song_artist":
-        data = this.request(query);
-        break;
-      case "album_artist":
-        data = this.request(query);
-        break;
-      case "podcast":
-        data = this.request(query);
-        break;
-      case "video":
-        data = this.request(query);
-        break;
-      case "all":
-      default:
-        data = this.request(query);
-    }
-
-    return data;
+    const query = "search_group" + qs.stringify(params, "&");
+    return this.request(query);
   },
 };

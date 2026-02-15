@@ -39,8 +39,6 @@
  * @property {UserSummary} user
  */
 
-import qs from "querystringify";
-
 export const usersMethods = {
   /**
    * Get ids and usernames for your site
@@ -49,8 +47,7 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#users}
    */
   users() {
-    let query = "users";
-    return this.request(query);
+    return this.call("users");
   },
 
   /**
@@ -62,9 +59,7 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#user}
    */
   user(params) {
-    let query = "user";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("user", params);
   },
 
   /**
@@ -82,9 +77,7 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#user_create}
    */
   userCreate(params) {
-    let query = "user_create";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("user_create", params);
   },
 
   /**
@@ -99,9 +92,7 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods/#register}
    */
   register(params) {
-    let query = "register";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("register", params);
   },
 
   /**
@@ -123,9 +114,7 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#user_update}
    */
   userUpdate(params) {
-    let query = "user_update";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("user_update", params);
   },
 
   /**
@@ -151,9 +140,7 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#user_edit}
    */
   userEdit(params) {
-    let query = "user_edit";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("user_edit", params);
   },
 
   /**
@@ -166,9 +153,7 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#user_delete}
    */
   userDelete(params) {
-    let query = "user_delete";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("user_delete", params);
   },
 
   /**
@@ -184,9 +169,7 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#followers}
    */
   followers(params) {
-    let query = "followers";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("followers", params);
   },
 
   /**
@@ -198,9 +181,7 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#following}
    */
   following(params) {
-    let query = "following";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("following", params);
   },
 
   /**
@@ -211,9 +192,7 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#toggle_follow}
    */
   toggleFollow(params) {
-    let query = "toggle_follow";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("toggle_follow", params);
   },
 
   /**
@@ -227,9 +206,7 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#timeline}
    */
   timeline(params) {
-    let query = "timeline";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("timeline", params);
   },
 
   /**
@@ -242,8 +219,6 @@ export const usersMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#friends_timeline}
    */
   friendsTimeline(params) {
-    let query = "friends_timeline";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("friends_timeline", params);
   },
 };

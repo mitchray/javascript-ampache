@@ -36,8 +36,6 @@
  * @property {ArtistResponse[]} artist
  */
 
-import qs from "querystringify";
-
 export const artistsMethods = {
   /**
    * This takes a collection of inputs and returns artist objects
@@ -57,9 +55,7 @@ export const artistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#artists}
    */
   artists(params) {
-    let query = "artists";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("artists", params);
   },
 
   /**
@@ -72,9 +68,7 @@ export const artistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#artist}
    */
   artist(params) {
-    let query = "artist";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("artist", params);
   },
 
   /**
@@ -90,9 +84,7 @@ export const artistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#genre_artists}
    */
   genreArtists(params) {
-    let query = "genre_artists";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("genre_artists", params);
   },
 
   /**
@@ -108,8 +100,6 @@ export const artistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#label_artists}
    */
   labelArtists(params) {
-    let query = "label_artists";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("label_artists", params);
   },
 };

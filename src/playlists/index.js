@@ -28,8 +28,6 @@
  * @property {string} md5
  */
 
-import qs from "querystringify";
-
 export const playlistsMethods = {
   /**
    * This returns playlists based on the specified filter
@@ -50,9 +48,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlists}
    */
   playlists(params) {
-    let query = "playlists";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("playlists", params);
   },
 
   /**
@@ -68,9 +64,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlists}
    */
   smartlists(params) {
-    let query = "playlists";
-    query += qs.stringify(params, "&");
-    return this.request(query).then((response) => {
+    return this.call("playlists", params).then((response) => {
       // filter out regular playlists
       if (Array.isArray(response.playlist)) {
         response.playlist = response.playlist.filter((item) =>
@@ -90,9 +84,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlist}
    */
   playlist(params) {
-    let query = "playlist";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("playlist", params);
   },
 
   /**
@@ -112,9 +104,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#user_playlists}
    */
   userPlaylists(params) {
-    let query = "user_playlists";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("user_playlists", params);
   },
 
   /**
@@ -134,9 +124,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#user_smartlists}
    */
   userSmartlists(params) {
-    let query = "user_smartlists";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("user_smartlists", params);
   },
 
   /**
@@ -149,9 +137,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlist_create}
    */
   playlistCreate(params) {
-    let query = "playlist_create";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("playlist_create", params);
   },
 
   /**
@@ -165,9 +151,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlist_add}
    */
   playlistAdd(params) {
-    let query = "playlist_add";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("playlist_add", params);
   },
 
   /**
@@ -185,9 +169,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlist_edit}
    */
   playlistEdit(params) {
-    let query = "playlist_edit";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("playlist_edit", params);
   },
 
   /**
@@ -199,9 +181,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlist_delete}
    */
   playlistDelete(params) {
-    let query = "playlist_delete";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("playlist_delete", params);
   },
 
   /**
@@ -216,9 +196,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlist_add_song}
    */
   playlistAddSong(params) {
-    let query = "playlist_add_song";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("playlist_add_song", params);
   },
 
   /**
@@ -232,9 +210,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlist_remove_song}
    */
   playlistRemoveSong(params) {
-    let query = "playlist_remove_song";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("playlist_remove_song", params);
   },
 
   /**
@@ -253,9 +229,7 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlist_generate}
    */
   playlistGenerate(params) {
-    let query = "playlist_generate";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("playlist_generate", params);
   },
 
   /**
@@ -267,8 +241,6 @@ export const playlistsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlist_hash}
    */
   playlistHash(params) {
-    let query = "playlist_hash";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("playlist_hash", params);
   },
 };

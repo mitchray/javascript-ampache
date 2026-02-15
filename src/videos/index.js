@@ -42,8 +42,6 @@
  * @property {DeletedVideoResponse[]} deleted_video
  */
 
-import qs from "querystringify";
-
 export const videosMethods = {
   /**
    * Get videos
@@ -57,9 +55,7 @@ export const videosMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#videos}
    */
   videos(params) {
-    let query = "videos";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("videos", params);
   },
 
   /**
@@ -71,9 +67,7 @@ export const videosMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#video}
    */
   video(params) {
-    let query = "video";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("video", params);
   },
 
   /**
@@ -85,8 +79,6 @@ export const videosMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#deleted_videos}
    */
   deletedVideos(params) {
-    let query = "deleted_videos";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("deleted_videos", params);
   },
 };

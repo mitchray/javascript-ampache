@@ -94,9 +94,7 @@ export const songsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#songs}
    */
   songs(params) {
-    let query = "songs";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("songs", params);
   },
 
   /**
@@ -108,9 +106,7 @@ export const songsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#song}
    */
   song(params) {
-    let query = "song";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("song", params);
   },
 
   /**
@@ -127,9 +123,7 @@ export const songsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#artist_songs}
    */
   artistSongs(params) {
-    let query = "artist_songs";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("artist_songs", params);
   },
 
   /**
@@ -145,9 +139,7 @@ export const songsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#album_songs}
    */
   albumSongs(params) {
-    let query = "album_songs";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("album_songs", params);
   },
 
   /**
@@ -163,9 +155,7 @@ export const songsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#genre_songs}
    */
   genreSongs(params) {
-    let query = "genre_songs";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("genre_songs", params);
   },
 
   /**
@@ -180,9 +170,7 @@ export const songsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#playlist_songs}
    */
   playlistSongs(params) {
-    let query = "playlist_songs";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("playlist_songs", params);
   },
 
   /**
@@ -198,9 +186,7 @@ export const songsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#license_songs}
    */
   licenseSongs(params) {
-    let query = "license_songs";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("license_songs", params);
   },
 
   /**
@@ -212,9 +198,7 @@ export const songsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#song_delete}
    */
   songDelete(params) {
-    let query = "song_delete";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("song_delete", params);
   },
 
   /**
@@ -227,9 +211,7 @@ export const songsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#song_tags}
    */
   songTags(params) {
-    let query = "song_tags";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("song_tags", params);
   },
 
   /**
@@ -258,9 +240,7 @@ export const songsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#search_songs}
    */
   searchSongs(params) {
-    let query = "search_songs";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("search_songs", params);
   },
 
   /**
@@ -273,8 +253,6 @@ export const songsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#deleted_songs}
    */
   deletedSongs(params) {
-    let query = "deleted_songs";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("deleted_songs", params);
   },
 };

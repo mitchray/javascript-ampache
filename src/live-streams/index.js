@@ -15,8 +15,6 @@
  * @property {LiveStreamResponse[]} live_stream
  */
 
-import qs from "querystringify";
-
 export const liveStreamsMethods = {
   /**
    * This returns live_streams based on the specified filter
@@ -34,9 +32,7 @@ export const liveStreamsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#live_streams}
    */
   liveStreams(params) {
-    let query = "live_streams";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("live_streams", params);
   },
 
   /**
@@ -48,9 +44,7 @@ export const liveStreamsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#live_stream}
    */
   liveStream(params) {
-    let query = "live_stream";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("live_stream", params);
   },
 
   /**
@@ -67,9 +61,7 @@ export const liveStreamsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#live_stream_create}
    */
   liveStreamCreate(params) {
-    let query = "live_stream_create";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("live_stream_create", params);
   },
 
   /**
@@ -87,9 +79,7 @@ export const liveStreamsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#live_stream_edit}
    */
   liveStreamEdit(params) {
-    let query = "live_stream_edit";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("live_stream_edit", params);
   },
 
   /**
@@ -102,8 +92,6 @@ export const liveStreamsMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#live_stream_delete}
    */
   liveStreamDelete(params) {
-    let query = "live_stream_delete";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("live_stream_delete", params);
   },
 };

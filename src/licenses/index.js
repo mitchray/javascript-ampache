@@ -13,8 +13,6 @@
  * @property {LicenseResponse[]} license
  */
 
-import qs from "querystringify";
-
 export const licensesMethods = {
   /**
    * This returns licenses based on the specified filter
@@ -32,9 +30,7 @@ export const licensesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#licenses}
    */
   licenses(params) {
-    let query = "licenses";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("licenses", params);
   },
 
   /**
@@ -46,8 +42,6 @@ export const licensesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#license}
    */
   license(params) {
-    let query = "license";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("license", params);
   },
 };

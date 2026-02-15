@@ -19,8 +19,6 @@
  * @property {PreferenceResponse[]} preference
  */
 
-import qs from "querystringify";
-
 export const preferencesMethods = {
   /**
    * Get your server preferences
@@ -30,8 +28,7 @@ export const preferencesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#system_preferences}
    */
   systemPreferences() {
-    let query = "system_preferences";
-    return this.request(query);
+    return this.call("system_preferences");
   },
 
   /**
@@ -44,20 +41,17 @@ export const preferencesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#system_preference}
    */
   systemPreference(params) {
-    let query = "system_preference";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("system_preference", params);
   },
 
   /**
    * Get your user preferences
    * @remarks MINIMUM_API_VERSION=5.0.0
-   * @returns {Promise<import("./types.js").PreferencesResponse>}
+   * @returns {Promise<PreferencesResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#user_preferences}
    */
   userPreferences() {
-    let query = "user_preferences";
-    return this.request(query);
+    return this.call("user_preferences");
   },
 
   /**
@@ -69,9 +63,7 @@ export const preferencesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#user_preference}
    */
   userPreference(params) {
-    let query = "user_preference";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("user_preference", params);
   },
 
   /**
@@ -89,9 +81,7 @@ export const preferencesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#preference_create}
    */
   preferenceCreate(params) {
-    let query = "preference_create";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("preference_create", params);
   },
 
   /**
@@ -106,9 +96,7 @@ export const preferencesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#preference_edit}
    */
   preferenceEdit(params) {
-    let query = "preference_edit";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("preference_edit", params);
   },
 
   /**
@@ -120,8 +108,6 @@ export const preferencesMethods = {
    * @see {@link https://ampache.org/api/api-json-methods#preference_delete}
    */
   preferenceDelete(params) {
-    let query = "preference_delete";
-    query += qs.stringify(params, "&");
-    return this.request(query);
+    return this.call("preference_delete", params);
   },
 };
