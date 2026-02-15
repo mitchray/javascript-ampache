@@ -1,14 +1,14 @@
 /**
- * @typedef {import("../songs/index.js").SongResponse|import("../albums/index.js").AlbumResponse|import("../artists/index.js").ArtistResponse|import("../playlists/index.js").PlaylistResponse|import("../podcasts/index.js").PodcastResponse|import("../podcasts/index.js").PodcastEpisodeResponse|import("../live-streams/index.js").LiveStreamResponse} IndexType
+ * @typedef {import("./songs.js").SongResponse|import("./albums.js").AlbumResponse|import("./artists.js").ArtistResponse|import("./playlists.js").PlaylistResponse|import("./podcasts.js").PodcastResponse|import("./podcasts.js").PodcastEpisodeResponse|import("./live-streams.js").LiveStreamResponse} IndexType
  */
 
 /**
- * @typedef {import("../songs/index.js").SongResponse|import("../albums/index.js").AlbumResponse|import("../artists/index.js").ArtistResponse|import("../videos/index.js").VideoResponse|import("../playlists/index.js").PlaylistResponse|import("../podcasts/index.js").PodcastResponse|import("../podcasts/index.js").PodcastEpisodeResponse} StatsType
+ * @typedef {import("./songs.js").SongResponse|import("./albums.js").AlbumResponse|import("./artists.js").ArtistResponse|import("./videos.js").VideoResponse|import("./playlists.js").PlaylistResponse|import("./podcasts.js").PodcastResponse|import("./podcasts.js").PodcastEpisodeResponse} StatsType
  */
 
 /**
  * @typedef {Object} IndexEntry
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {string} name
  * @property {string} prefix
  * @property {string} basename
@@ -16,11 +16,11 @@
 
 /**
  * @typedef {Object} NowPlayingResponse
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {"song"|"podcast_episode"|"video"} type
  * @property {string} client
  * @property {number} expire
- * @property {import("../users/index.js").UserSummary} user
+ * @property {import("./users.js").UserSummary} user
  */
 
 /**

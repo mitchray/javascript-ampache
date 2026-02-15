@@ -1,12 +1,12 @@
 /**
  * @typedef {Object} UserSummary
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {string} username
  */
 
 /**
  * @typedef {Object} UserResponse
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {string} username
  * @property {string} auth
  * @property {string} email
@@ -31,10 +31,10 @@
 
 /**
  * @typedef {Object} ActivityResponse
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {number} date
  * @property {string} object_type
- * @property {import("../base.js").UID} object_id
+ * @property {import("./base.js").UID} object_id
  * @property {string} action
  * @property {UserSummary} user
  */
@@ -71,9 +71,9 @@ export const usersMethods = {
    * @param {string} params.password SHA256 hashed password
    * @param {string} params.email  Email
    * @param {string} [params.fullname] Full Name
-   * @param {import("../base.js").BinaryBoolean} [params.disable] 0, 1
+   * @param {import("./base.js").BinaryBoolean} [params.disable] 0, 1
    * @param {number} [params.catalog_filter_group] Catalog filter group, default = 0
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#user_create}
    */
   userCreate(params) {
@@ -88,7 +88,7 @@ export const usersMethods = {
    * @param {string} params.password SHA256 hashed password
    * @param {string} params.email  Email
    * @param {string} [params.fullname] Full Name
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods/#register}
    */
   register(params) {
@@ -107,9 +107,9 @@ export const usersMethods = {
    * @param {string} [params.website] Website
    * @param {string} [params.state] State
    * @param {string} [params.city] City
-   * @param {import("../base.js").BinaryBoolean} [params.disable] 0, 1
+   * @param {import("./base.js").BinaryBoolean} [params.disable] 0, 1
    * @param {string} [params.maxbitrate] Max bitrate for transcoding
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @deprecated Being removed in 7.0.0. Use `user_edit` instead.
    * @see {@link https://ampache.org/api/api-json-methods#user_update}
    */
@@ -131,12 +131,12 @@ export const usersMethods = {
    * @param {string} [params.city] City
    * @param {string} [params.maxbitrate] Max bitrate for transcoding
    * @param {number} [params.group] Catalog filter group, default = 0
-   * @param {import("../base.js").BinaryBoolean} [params.disable] 0, 1
-   * @param {import("../base.js").BinaryBoolean} [params.fullname_public] show fullname in public display
-   * @param {import("../base.js").BinaryBoolean} [params.reset_apikey] reset user Api Key
-   * @param {import("../base.js").BinaryBoolean} [params.reset_streamtoken] reset user Stream Token
-   * @param {import("../base.js").BinaryBoolean} [params.clear_stats] reset all stats for this user
-   * @returns {Promise<import("../base.js").Success>}
+   * @param {import("./base.js").BinaryBoolean} [params.disable] 0, 1
+   * @param {import("./base.js").BinaryBoolean} [params.fullname_public] show fullname in public display
+   * @param {import("./base.js").BinaryBoolean} [params.reset_apikey] reset user Api Key
+   * @param {import("./base.js").BinaryBoolean} [params.reset_streamtoken] reset user Stream Token
+   * @param {import("./base.js").BinaryBoolean} [params.clear_stats] reset all stats for this user
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#user_edit}
    */
   userEdit(params) {
@@ -149,7 +149,7 @@ export const usersMethods = {
    * @remarks MINIMUM_API_VERSION=400001
    * @param {Object} params
    * @param {string} params.filter UID of user to delete
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#user_delete}
    */
   userDelete(params) {
@@ -188,7 +188,7 @@ export const usersMethods = {
    * This will follow/unfollow a user
    * @param {Object} params
    * @param {string} params.username Username string to find
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#toggle_follow}
    */
   toggleFollow(params) {

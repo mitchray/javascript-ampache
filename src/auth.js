@@ -34,7 +34,7 @@
 
 import qs from "querystringify";
 import fetch from "isomorphic-unfetch";
-import { outputDebugURL, encryptPassword as encryptPasswordUtil } from "../utils.js";
+import { outputDebugURL, encryptPassword as encryptPasswordUtil } from "./utils.js";
 
 export const authMethods = {
   /**
@@ -110,7 +110,7 @@ export const authMethods = {
    * @remarks MINIMUM_API_VERSION=400001
    * @param {Object} params
    * @param {string} params.auth Session ID to destroy
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#goodbye}
    */
   goodbye(params) {
@@ -122,7 +122,7 @@ export const authMethods = {
    * @remarks MINIMUM_API_VERSION=6.1.0
    * @param {Object} params
    * @param {string} params.auth Password reset token
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#lost_password}
    */
   lostPassword(params) {

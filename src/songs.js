@@ -1,15 +1,15 @@
 /**
  * @typedef {Object} SongResponse
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {string} title
  * @property {string} name
- * @property {import("../artists/index.js").ArtistSummary} artist
- * @property {import("../albums/index.js").AlbumSummary} album
- * @property {import("../artists/index.js").ArtistSummary} albumartist
+ * @property {import("./artists.js").ArtistSummary} artist
+ * @property {import("./albums.js").AlbumSummary} album
+ * @property {import("./artists.js").ArtistSummary} albumartist
  * @property {number} disk
  * @property {number} track
  * @property {string} filename
- * @property {import("../genres/index.js").GenreSummary[]} genre
+ * @property {import("./genres.js").GenreSummary[]} genre
  * @property {number} playlisttrack
  * @property {number} time
  * @property {number|string} year
@@ -55,17 +55,17 @@
 
 /**
  * @typedef {Object} DeletedSongResponse
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {number} addition_time
  * @property {number} delete_time
  * @property {number} update_time
  * @property {string} title
  * @property {string} file
- * @property {import("../base.js").UID} catalog
+ * @property {import("./base.js").UID} catalog
  * @property {number} total_count
  * @property {number} total_skip
- * @property {import("../base.js").UID} album
- * @property {import("../base.js").UID} artist
+ * @property {import("./base.js").UID} album
+ * @property {import("./base.js").UID} artist
  */
 
 /**
@@ -83,7 +83,7 @@ export const songsMethods = {
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} [params]
    * @param {string} [params.filter] Filter results to match this string
-   * @param {import("../base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
+   * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param {Date} [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param {Date} [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
    * @param {number} [params.offset]
@@ -101,7 +101,7 @@ export const songsMethods = {
    * Returns a single song
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @returns {Promise<SongResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#song}
    */
@@ -113,8 +113,8 @@ export const songsMethods = {
    * Songs of the specified artist
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
-   * @param {import("../base.js").BinaryBoolean} [params.top50] 0, 1 (if true filter to the artist top 50)
+   * @param {import("./base.js").UID} params.filter UID to find
+   * @param {import("./base.js").BinaryBoolean} [params.top50] 0, 1 (if true filter to the artist top 50)
    * @param {number} [params.offset]
    * @param {number} [params.limit]
    * @param {string} [params.cond]
@@ -130,7 +130,7 @@ export const songsMethods = {
    * Songs of the specified album
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @param {number} [params.offset]
    * @param {number} [params.limit]
    * @param {string} [params.cond]
@@ -146,7 +146,7 @@ export const songsMethods = {
    * Songs of the specified genre
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @param {number} [params.offset]
    * @param {number} [params.limit]
    * @param {string} [params.cond]
@@ -162,8 +162,8 @@ export const songsMethods = {
    * This returns the songs for a playlist
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
-   * @param {import("../base.js").BinaryBoolean} [params.random] 0, 1 (if true get random songs using limit)
+   * @param {import("./base.js").UID} params.filter UID to find
+   * @param {import("./base.js").BinaryBoolean} [params.random] 0, 1 (if true get random songs using limit)
    * @param {number} [params.offset]
    * @param {number} [params.limit]
    * @returns {Promise<SongsResponse>}
@@ -177,7 +177,7 @@ export const songsMethods = {
    * This returns the songs for a license
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @param {number} [params.offset]
    * @param {number} [params.limit]
    * @param {string} [params.cond]
@@ -193,8 +193,8 @@ export const songsMethods = {
    * Delete an existing song. (if you are allowed to)
    * @remarks MINIMUM_API_VERSION=5.0.0
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID of song to delete
-   * @returns {Promise<import("../base.js").Success>}
+   * @param {import("./base.js").UID} params.filter UID of song to delete
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#song_delete}
    */
   songDelete(params) {
@@ -206,7 +206,7 @@ export const songsMethods = {
    * This is used to get tags for remote catalogs to allow maximum data to be returned
    * @remarks MINIMUM_API_VERSION=6.7.0
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID of song to fetch
+   * @param {import("./base.js").UID} params.filter UID of song to fetch
    * @returns {Promise<*>}
    * @see {@link https://ampache.org/api/api-json-methods#song_tags}
    */

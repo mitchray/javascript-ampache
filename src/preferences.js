@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} PreferenceResponse
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {string} name
  * @property {string} level
  * @property {string} description
@@ -77,7 +77,7 @@ export const preferencesMethods = {
    * @param {string} [params.description]
    * @param {string} [params.subcategory]
    * @param {number} [params.level] access level required to change the value (default 100)
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#preference_create}
    */
   preferenceCreate(params) {
@@ -91,8 +91,8 @@ export const preferencesMethods = {
    * @param {Object} params
    * @param {string} params.filter Preference name e.g ('notify_email', 'ajax_load')
    * @param {string|number} params.value (string/integer) Preference value
-   * @param {import("../base.js").BinaryBoolean} [params.all] 0, 1 apply to all users
-   * @returns {Promise<import("../base.js").Success>}
+   * @param {import("./base.js").BinaryBoolean} [params.all] 0, 1 apply to all users
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#preference_edit}
    */
   preferenceEdit(params) {
@@ -104,7 +104,7 @@ export const preferencesMethods = {
    * ACCESS REQUIRED: 100 (Admin)
    * @param {Object} params
    * @param {string} params.filter Preference name e.g ('notify_email', 'ajax_load')
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#preference_delete}
    */
   preferenceDelete(params) {

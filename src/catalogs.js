@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} CatalogResponse
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {string} name
  * @property {"local"|"remote"} type
  * @property {"podcast"|"clip"|"tvshow"|"movie"|"personal_video"|"music"} gather_types
@@ -41,7 +41,7 @@ export const catalogsMethods = {
    * Return catalog by UID
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @returns {Promise<CatalogResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#catalog}
    */
@@ -55,8 +55,8 @@ export const catalogsMethods = {
    * @remarks MINIMUM_API_VERSION=400001
    * @param {Object} params
    * @param {"add_to_catalog"|"clean_catalog"} params.task add_to_catalog, clean_catalog
-   * @param {import("../base.js").UID} params.catalog UID of catalog
-   * @returns {Promise<import("../base.js").Success>}
+   * @param {import("./base.js").UID} params.catalog UID of catalog
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#catalog_action}
    */
   catalogAction(params) {
@@ -71,8 +71,8 @@ export const catalogsMethods = {
    * @param {Object} params
    * @param {string} params.file FULL path to local file
    * @param {string} params.task add, clean, verify, remove, (can include comma-separated values)
-   * @param {import("../base.js").UID} params.catalog UID of catalog
-   * @returns {Promise<import("../base.js").Success>}
+   * @param {import("./base.js").UID} params.catalog UID of catalog
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#catalog_file}
    */
   catalogFile(params) {
@@ -104,8 +104,8 @@ export const catalogsMethods = {
    * ACCESS REQUIRED: 75 (Catalog Manager)
    * @remarks MINIMUM_API_VERSION=6.0.0
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter ID of the catalog
-   * @returns {Promise<import("../base.js").Success>}
+   * @param {import("./base.js").UID} params.filter ID of the catalog
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#catalog_delete}
    */
   catalogDelete(params) {

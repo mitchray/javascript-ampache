@@ -1,12 +1,12 @@
 /**
  * @typedef {Object} GenreSummary
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {string} name
  */
 
 /**
  * @typedef {Object} GenreResponse
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {string} name
  * @property {number} albums
  * @property {number} artists
@@ -31,7 +31,7 @@ export const genresMethods = {
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} [params]
    * @param {string} [params.filter] UID to find
-   * @param {import("../base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
+   * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param {number} [params.offset]
    * @param {number} [params.limit]
    * @param {string} [params.cond]
@@ -47,7 +47,7 @@ export const genresMethods = {
    * This returns a single genre based on UID
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @returns {Promise<GenreResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#genre}
    */

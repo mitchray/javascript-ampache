@@ -12,11 +12,11 @@
  * @property {string} name
  * @property {string|null} prefix
  * @property {string} basename
- * @property {import("../albums/index.js").AlbumResponse[]} albums
+ * @property {import("./albums.js").AlbumResponse[]} albums
  * @property {number} albumcount
- * @property {import("../songs/index.js").SongsResponse[]} songs
+ * @property {import("./songs.js").SongsResponse[]} songs
  * @property {number} songcount
- * @property {import("../genres/index.js").GenreResponse[]} genre
+ * @property {import("./genres.js").GenreResponse[]} genre
  * @property {string} art
  * @property {boolean} has_art
  * @property {boolean} flag
@@ -42,11 +42,11 @@ export const artistsMethods = {
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} [params]
    * @param {string} [params.filter] Filter results to match this string
-   * @param {import("../base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
+   * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param {Date} [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param {Date} [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
    * @param {"albums"|"songs"} [params.include] (albums | songs) include child objects in the response
-   * @param {import("../base.js").BinaryBoolean} [params.album_artist] 0, 1 (if true filter for album artists only)
+   * @param {import("./base.js").BinaryBoolean} [params.album_artist] 0, 1 (if true filter for album artists only)
    * @param {number} [params.offset]
    * @param {number} [params.limit]
    * @param {string} [params.cond]
@@ -62,7 +62,7 @@ export const artistsMethods = {
    * This returns a single artist based on the UID of said artist
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @param {"albums"|"songs"} [params.include] (albums | songs) include child objects in the response
    * @returns {Promise<ArtistResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#artist}
@@ -75,7 +75,7 @@ export const artistsMethods = {
    * This returns the artists associated with the genre in question as defined by the UID
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @param {number} [params.offset]
    * @param {number} [params.limit]
    * @param {string} [params.cond]
@@ -91,7 +91,7 @@ export const artistsMethods = {
    * This returns the artists associated with the label in question as defined by the UID
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID of find
+   * @param {import("./base.js").UID} params.filter UID of find
    * @param {number} [params.offset]
    * @param {number} [params.limit]
    * @param {string} [params.cond]

@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} PlaylistResponse
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {string} name
  * @property {string} owner
  * @property {number} items
@@ -10,7 +10,7 @@
  * @property {boolean} flag
  * @property {number|null} rating
  * @property {number|null} averagerating
- * @property {import("../users/index.js").UserSummary} user
+ * @property {import("./users.js").UserSummary} user
  * @property {boolean} has_access
  * @property {boolean} has_collaborate
  * @property {number} last_update
@@ -34,12 +34,12 @@ export const playlistsMethods = {
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} [params]
    * @param {string} [params.filter] Filter results to match this string
-   * @param {import("../base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
+   * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param {Date} [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param {Date} [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
-   * @param {import("../base.js").BinaryBoolean} [params.hide_search] 0, 1 (if true do not include searches/smartlists in the result)
-   * @param {import("../base.js").BinaryBoolean} [params.show_dupes] 0, 1 (if true ignore 'api_hide_dupe_searches' setting)
-   * @param {import("../base.js").BinaryBoolean} [params.include] 0, 1 (if true include the objects in the playlist)
+   * @param {import("./base.js").BinaryBoolean} [params.hide_search] 0, 1 (if true do not include searches/smartlists in the result)
+   * @param {import("./base.js").BinaryBoolean} [params.show_dupes] 0, 1 (if true ignore 'api_hide_dupe_searches' setting)
+   * @param {import("./base.js").BinaryBoolean} [params.include] 0, 1 (if true include the objects in the playlist)
    * @param {number} [params.offset]
    * @param {number} [params.limit]
    * @param {string} [params.cond]
@@ -56,10 +56,10 @@ export const playlistsMethods = {
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} [params]
    * @param {string} [params.filter] Filter results to match this string
-   * @param {import("../base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
+   * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param {Date} [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param {Date} [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
-   * @param {import("../base.js").BinaryBoolean} [params.show_dupes] 0, 1 (if true ignore 'api_hide_dupe_searches' setting)
+   * @param {import("./base.js").BinaryBoolean} [params.show_dupes] 0, 1 (if true ignore 'api_hide_dupe_searches' setting)
    * @returns {Promise<PlaylistsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#playlists}
    */
@@ -79,7 +79,7 @@ export const playlistsMethods = {
    * This returns a single playlist
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @returns {Promise<PlaylistResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist}
    */
@@ -92,8 +92,8 @@ export const playlistsMethods = {
    * @remarks MINIMUM_API_VERSION=6.3.0
    * @param {Object} [params]
    * @param {string} [params.filter] Filter results to match this string
-   * @param {import("../base.js").BinaryBoolean} [params.include] 0, 1 (include playlist items)
-   * @param {import("../base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
+   * @param {import("./base.js").BinaryBoolean} [params.include] 0, 1 (include playlist items)
+   * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param {Date} [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param {Date} [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
    * @param {number} [params.offset]
@@ -112,8 +112,8 @@ export const playlistsMethods = {
    * @remarks MINIMUM_API_VERSION=6.3.0
    * @param {Object} [params]
    * @param {string} [params.filter] Filter results to match this string
-   * @param {import("../base.js").BinaryBoolean} [params.include] 0, 1 (include playlist items)
-   * @param {import("../base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
+   * @param {import("./base.js").BinaryBoolean} [params.include] 0, 1 (include playlist items)
+   * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param {Date} [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param {Date} [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
    * @param {number} [params.offset]
@@ -144,10 +144,10 @@ export const playlistsMethods = {
    * This adds an item to a playlist
    * @remarks MINIMUM_API_VERSION=6.3.0
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID of Playlist
-   * @param {import("../base.js").UID} params.id UID of the object to add to playlist
+   * @param {import("./base.js").UID} params.filter UID of Playlist
+   * @param {import("./base.js").UID} params.id UID of the object to add to playlist
    * @param {"song"|"album"|"artist"|"playlist"} params.type 'song', 'album', 'artist', 'playlist'
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist_add}
    */
   playlistAdd(params) {
@@ -159,13 +159,13 @@ export const playlistsMethods = {
    * NOTE items and tracks must be sent together and be of equal length.
    * @remarks MINIMUM_API_VERSION=400001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @param {string} [params.name] Playlist name
    * @param {"public"|"private"} [params.type] public, private (Playlist type)
    * @param {string} [params.owner] Change playlist owner to the user id (-1 = System playlist)
    * @param {string} [params.items] comma-separated song_id's (replaces existing items with a new id)
    * @param {string} [params.tracks] comma-separated playlisttrack numbers matched to 'items' in order
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist_edit}
    */
   playlistEdit(params) {
@@ -176,8 +176,8 @@ export const playlistsMethods = {
    * This deletes a playlist
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID of playlist to delete
-   * @returns {Promise<import("../base.js").Success>}
+   * @param {import("./base.js").UID} params.filter UID of playlist to delete
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist_delete}
    */
   playlistDelete(params) {
@@ -188,10 +188,10 @@ export const playlistsMethods = {
    * This adds a song to a playlist
    * @remarks MINIMUM_API_VERSION=380001; CHANGED_IN_API_VERSION=400003
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID of Playlist
-   * @param {import("../base.js").UID} params.song UID of song to add to playlist
-   * @param {import("../base.js").BinaryBoolean} [params.check] 0, 1 Whether to check and ignore duplicates (default = 0)
-   * @returns {Promise<import("../base.js").Success>}
+   * @param {import("./base.js").UID} params.filter UID of Playlist
+   * @param {import("./base.js").UID} params.song UID of song to add to playlist
+   * @param {import("./base.js").BinaryBoolean} [params.check] 0, 1 Whether to check and ignore duplicates (default = 0)
+   * @returns {Promise<import("./base.js").Success>}
    * @deprecated Being removed in 7.0.0. Use `playlist_add` instead.
    * @see {@link https://ampache.org/api/api-json-methods#playlist_add_song}
    */
@@ -203,10 +203,10 @@ export const playlistsMethods = {
    * This remove a song from a playlist
    * @remarks MINIMUM_API_VERSION=380001; CHANGED_IN_API_VERSION=400001
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID of Playlist
-   * @param {import("../base.js").UID} [params.song] UID of song to remove from playlist
+   * @param {import("./base.js").UID} params.filter UID of Playlist
+   * @param {import("./base.js").UID} [params.song] UID of song to remove from playlist
    * @param {number} [params.track] Track number to remove from playlist
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist_remove_song}
    */
   playlistRemoveSong(params) {
@@ -221,11 +221,11 @@ export const playlistsMethods = {
    * @param {string} [params.filter] string LIKE matched to song title
    * @param {number} [params.album] UID of album
    * @param {number} [params.artist] UID of artist
-   * @param {import("../base.js").BinaryBoolean} [params.flag] 0, 1 (get flagged songs only. default = 0)
+   * @param {import("./base.js").BinaryBoolean} [params.flag] 0, 1 (get flagged songs only. default = 0)
    * @param {"song"|"index"|"id"} [params.format] song, index, id (default = 'song')
    * @param {number} [params.offset]
    * @param {number} [params.limit]
-   * @returns {Promise<import("../songs/index.js").SongsResponse>}
+   * @returns {Promise<import("./songs.js").SongsResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist_generate}
    */
   playlistGenerate(params) {
@@ -236,7 +236,7 @@ export const playlistsMethods = {
    * This returns the md5 hash for the songs in a playlist
    * @remarks MINIMUM_API_VERSION=6.6.0
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter string UID of Playlist
+   * @param {import("./base.js").UID} params.filter string UID of Playlist
    * @returns {Promise<HashResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist_hash}
    */

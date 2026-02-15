@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} LabelResponse
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {string} name
  * @property {number} artists
  * @property {string|null} summary
@@ -9,7 +9,7 @@
  * @property {string|null} category
  * @property {string|null} email
  * @property {string|null} website
- * @property {import("../base.js").UID} user
+ * @property {import("./base.js").UID} user
  */
 
 /**
@@ -25,7 +25,7 @@ export const labelsMethods = {
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} [params]
    * @param {string} [params.filter] Filter results to match this string
-   * @param {import("../base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
+   * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param {Date} [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param {Date} [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date
    * @param {number} [params.offset]
@@ -43,7 +43,7 @@ export const labelsMethods = {
    * This returns a single label
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @returns {Promise<LabelResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#label}
    */

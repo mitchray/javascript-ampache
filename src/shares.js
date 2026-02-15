@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} ShareResponse
- * @property {import("../base.js").UID} id
+ * @property {import("./base.js").UID} id
  * @property {string} name
  * @property {string} owner
  * @property {boolean} allow_stream
@@ -8,7 +8,7 @@
  * @property {number} creation_date
  * @property {number} lastvisit_date
  * @property {string} object_type
- * @property {import("../base.js").UID} object_id
+ * @property {import("./base.js").UID} object_id
  * @property {number} expire_days
  * @property {number} max_counter
  * @property {number} counter
@@ -30,7 +30,7 @@ export const sharesMethods = {
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} [params]
    * @param {string} [params.filter] UID to find
-   * @param {import("../base.js").BinaryBoolean} [params.exact] 0, 1 boolean to match the exact filter string
+   * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 boolean to match the exact filter string
    * @param {number} [params.offset]
    * @param {number} [params.limit]
    * @param {string} [params.cond]
@@ -46,7 +46,7 @@ export const sharesMethods = {
    * Return a share from UID
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
+   * @param {import("./base.js").UID} params.filter UID to find
    * @returns {Promise<ShareResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#share}
    */
@@ -58,7 +58,7 @@ export const sharesMethods = {
    * Create a public url that can be used by anyone to stream media.
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID of object you are sharing
+   * @param {import("./base.js").UID} params.filter UID of object you are sharing
    * @param {"song"|"album"|"artist"|"playlist"|"podcast"|"podcast_episode"|"video"} params.type
    * @param {string} [params.description] description (will be filled for you if empty)
    * @param {number} [params.expires] days to keep active
@@ -73,12 +73,12 @@ export const sharesMethods = {
    * Update the description and/or expiration date for an existing share
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID to find
-   * @param {import("../base.js").BinaryBoolean} [params.stream] 0, 1
-   * @param {import("../base.js").BinaryBoolean} [params.download] 0, 1
+   * @param {import("./base.js").UID} params.filter UID to find
+   * @param {import("./base.js").BinaryBoolean} [params.stream] 0, 1
+   * @param {import("./base.js").BinaryBoolean} [params.download] 0, 1
    * @param {number} [params.expires] days to keep active
    * @param {string} [params.description] description
-   * @returns {Promise<import("../base.js").Success>}
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#share_edit}
    */
   shareEdit(params) {
@@ -89,8 +89,8 @@ export const sharesMethods = {
    * Delete an existing share.
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
-   * @param {import("../base.js").UID} params.filter UID of share to delete
-   * @returns {Promise<import("../base.js").Success>}
+   * @param {import("./base.js").UID} params.filter UID of share to delete
+   * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#share_delete}
    */
   shareDelete(params) {
