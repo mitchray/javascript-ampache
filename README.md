@@ -1,6 +1,6 @@
 # javascript-ampache
 
-A JS client for the Ampache API written in Typescript.
+A JS client for the Ampache API.
 
 ## Installation
 
@@ -39,12 +39,22 @@ let results = API.advancedSearch({
 });
 ```
 
+### Bearer token
+
+You can send the session key in the `Authorization: Bearer` header instead of the `auth` query parameter by passing `useBearerToken: true` when creating the client:
+
+```js
+const API = new AmpacheAPI({
+  url: "http://pathToYourAmpacheServer",
+  sessionKey: yourSessionAuthKey,
+  useBearerToken: true,
+});
+```
+
+When using this from a browser, the Ampache server must allow the `Authorization` header (e.g. via `Access-Control-Allow-Headers`).
+
 ## Build
 
 ```bash
 npm run build
 ```
-
-### Special thanks
-
-https://lyamkin.com/blog/how-to-build-api-client-library-in-js/ & https://github.com/ilyamkin/dev-to-js

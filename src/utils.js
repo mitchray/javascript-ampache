@@ -1,5 +1,4 @@
 import JsSHA from "jssha/dist/sha256";
-import { Base } from "./base.js";
 
 /**
  * @param {string} password
@@ -24,7 +23,7 @@ export function encryptPassword(password, time) {
 
 /**
  * @param {string} url
- * @param {import("./base.js").Base} config
+ * @param {{ useBearerToken?: boolean, sessionKey?: string|null }} config
  */
 export function outputDebugURL(url, config) {
   let label = "javascript-ampache query URL";
