@@ -54,7 +54,7 @@ export const usersMethods = {
    * This get a user's public information (or current user if username is omitted)
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} [params]
-   * @param {string} [params.username] UID to find
+   * @param {string} [params.username] Username of the user to get details for
    * @returns {Promise<UserResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#user}
    */
@@ -72,7 +72,7 @@ export const usersMethods = {
    * @param {string} params.email  Email
    * @param {string} [params.fullname] Full Name
    * @param {import("./base.js").BinaryBoolean} [params.disable] 0, 1
-   * @param {number} [params.catalog_filter_group] Catalog filter group, default = 0
+   * @param {number} [params.group] Catalog filter group (API param: group), default = 0
    * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#user_create}
    */
@@ -148,7 +148,7 @@ export const usersMethods = {
    * ACCESS REQUIRED: 100 (Admin)
    * @remarks MINIMUM_API_VERSION=400001
    * @param {Object} params
-   * @param {string} params.filter UID of user to delete
+   * @param {string} params.username Username of user to delete (required by API)
    * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#user_delete}
    */

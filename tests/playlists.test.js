@@ -12,12 +12,9 @@ describe("Playlists", () => {
 
   it("smartlists()", async () => {
     const res = {
-      playlist: [
-        { id: "smart_1", name: "Smart" },
-        { id: "2", name: "Normal" },
-      ],
+      playlist: [{ id: "smart_1", name: "Smart" }],
     };
-    mockJsonRequest("playlists", res);
+    mockJsonRequest("smartlists", res);
     const result = await api.smartlists();
     expect(result.playlist).toHaveLength(1);
     expect(result.playlist[0].id).toBe("smart_1");

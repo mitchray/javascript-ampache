@@ -42,7 +42,7 @@ export const albumsMethods = {
    * This returns albums based on the provided search filters
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} [params]
-   * @param {number} [params.filter] UID to find
+   * @param {string} [params.filter] Filter results to match this string
    * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
    * @param {Date} [params.add] ISO 8601 Date Format (2020-09-16) Find objects with an 'add' date newer than the specified date
    * @param {Date} [params.update] ISO 8601 Date Format (2020-09-16) Find objects with an 'update' time newer than the specified date

@@ -39,10 +39,12 @@ const GET_INDEXES_TYPES = new Set([
   "album",
   "artist",
   "album_artist",
+  "song_artist",
   "playlist",
   "podcast",
   "podcast_episode",
   "live_stream",
+  "catalog",
 ]);
 const GET_SIMILAR_TYPES = new Set(["song", "artist"]);
 const STATS_TYPES = new Set([
@@ -213,8 +215,8 @@ export const systemMethods = {
    * @remarks MINIMUM_API_VERSION=400001
    * @param params.type Object type
    * @param params.id UID to find
+   * @param {import("./base.js").UID} [params.filter] Alias of id (Ampache 7.9.0+)
    * @param params.flag 0, 1
-   * @param [params.date] UNIXTIME
    * @see {@link https://ampache.org/api/api-json-methods#flag}
    */
   flag(params) {
@@ -227,6 +229,7 @@ export const systemMethods = {
    * ACCESS REQUIRED: 100 (Admin) permission to change another user's play history
    * @remarks MINIMUM_API_VERSION=400001
    * @param params.id UID of song
+   * @param {import("./base.js").UID} [params.filter] Alias of id (Ampache 7.9.0+)
    * @param [params.user] UID of user
    * @param [params.client] Client string
    * @param [params.date] UNIXTIME
@@ -261,6 +264,7 @@ export const systemMethods = {
    * @remarks MINIMUM_API_VERSION=400001
    * @param params.type Object type
    * @param params.id UID to find
+   * @param {import("./base.js").UID} [params.filter] Alias of id (Ampache 7.9.0+)
    * @see {@link https://ampache.org/api/api-json-methods#update_from_tags}
    */
   updateFromTags(params) {
@@ -273,6 +277,7 @@ export const systemMethods = {
    * ACCESS REQUIRED: 75 (Catalog Manager)
    * @remarks MINIMUM_API_VERSION=400001
    * @param params.id UID to find
+   * @param {import("./base.js").UID} [params.filter] Alias of id (Ampache 7.9.0+)
    * @see {@link https://ampache.org/api/api-json-methods#update_artist_info}
    */
   updateArtistInfo(params) {
@@ -285,6 +290,7 @@ export const systemMethods = {
    * ACCESS REQUIRED: 75 (Catalog Manager)
    * @remarks MINIMUM_API_VERSION=400001
    * @param params.id UID to update
+   * @param {import("./base.js").UID} [params.filter] Alias of id (Ampache 7.9.0+)
    * @param params.type Object type
    * @param [params.overwrite]
    * @see {@link https://ampache.org/api/api-json-methods#update_art}
@@ -299,6 +305,7 @@ export const systemMethods = {
    * NOTE search and playlist will only stream a random object from the list.
    * @remarks MINIMUM_API_VERSION=400001
    * @param params.id UID to find
+   * @param {import("./base.js").UID} [params.filter] Alias of id (Ampache 7.9.0+)
    * @param params.type Object type
    * @param [params.bitrate] Max bitrate for transcoding
    * @param [params.format] mp3, ogg, raw, etc. (raw returns the original format)
@@ -317,6 +324,7 @@ export const systemMethods = {
    * NOTE search and playlist will only download a random object from the list
    * @remarks MINIMUM_API_VERSION=400001
    * @param params.id UID to find
+   * @param {import("./base.js").UID} [params.filter] Alias of id (Ampache 7.9.0+)
    * @param params.type Object type
    * @param [params.format] mp3, ogg, raw, etc. (raw returns the original format)
    * @param [params.bitrate] max bitrate for transcoding in bytes (e.g 192000=192Kb)
@@ -332,6 +340,7 @@ export const systemMethods = {
    * Get an art image file.
    * @remarks MINIMUM_API_VERSION=400001
    * @param params.id UID to find
+   * @param {import("./base.js").UID} [params.filter] Alias of id (Ampache 7.9.0+)
    * @param params.type Object type
    * @param [params.size] width x height (e.g. '640x480')
    * @see {@link https://ampache.org/api/api-json-methods#get_art}
@@ -345,6 +354,7 @@ export const systemMethods = {
    * This is for controlling localplay
    * @param params.command The command to send to the localplay controller
    * @param [params.oid] Object UID
+   * @param {import("./base.js").UID} [params.filter] Alias of oid (Ampache 7.9.0+)
    * @param [params.type] Object type
    * @param [params.clear] 0, 1 (Clear the current playlist before adding)
    * @remarks MINIMUM_API_VERSION=380001; CHANGED_IN_API_VERSION=5.0.0
@@ -397,6 +407,19 @@ export const systemMethods = {
    */
   player(params) {
     return this.call("player", params);
+  },
+
+  /**
+   * Return external plugin metadata searching by object id and type
+   * @remarks MINIMUM_API_VERSION=6.0.0
+   * @param {Object} params
+   * @param {import("./base.js").UID} params.filter Object id to find
+   * @param {"song"|"album"|"artist"|"label"} params.type Object type
+   * @returns {Promise<*>}
+   * @see {@link https://ampache.org/api/api-json-methods#get_external_metadata}
+   */
+  getExternalMetadata(params) {
+    return this.call("get_external_metadata", params);
   },
 
   /**

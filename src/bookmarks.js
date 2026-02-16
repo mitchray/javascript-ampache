@@ -78,7 +78,7 @@ export const bookmarksMethods = {
    * @remarks MINIMUM_API_VERSION=5.0.0
    * @param {Object} params
    * @param {import("./base.js").UID} params.filter UID to find
-   * @param {"song"|"video"|"podcast_episode"} params.type Object type
+   * @param {"bookmark"|"song"|"video"|"podcast_episode"} params.type Object type
    * @param {number} params.position current track time in seconds
    * @param {string} [params.client] Agent string. (Default: 'AmpacheAPI')
    * @param {number} [params.date] update time (Default: UNIXTIME())

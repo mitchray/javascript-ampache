@@ -56,6 +56,7 @@ export const catalogsMethods = {
    * @param {Object} params
    * @param {"add_to_catalog"|"clean_catalog"} params.task add_to_catalog, clean_catalog
    * @param {import("./base.js").UID} params.catalog UID of catalog
+   * @param {import("./base.js").UID} [params.filter] Alias of catalog (Ampache 7.9.0+)
    * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#catalog_action}
    */
@@ -72,11 +73,29 @@ export const catalogsMethods = {
    * @param {string} params.file FULL path to local file
    * @param {string} params.task add, clean, verify, remove, (can include comma-separated values)
    * @param {import("./base.js").UID} params.catalog UID of catalog
+   * @param {import("./base.js").UID} [params.filter] Alias of catalog (Ampache 7.9.0+)
    * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#catalog_file}
    */
   catalogFile(params) {
     return this.call("catalog_file", params);
+  },
+
+  /**
+   * Perform actions on local catalog folders. Single folder versions of catalog add, clean, verify and remove (delete).
+   * Make sure you remember to urlencode those folder names!
+   * ACCESS REQUIRED: 50 (Content Manager)
+   * @remarks MINIMUM_API_VERSION=420000
+   * @param {Object} params
+   * @param {string} params.folder FULL path to local folder
+   * @param {string} params.task add, clean, verify, remove, (can include comma-separated values)
+   * @param {import("./base.js").UID} params.catalog UID of catalog
+   * @param {import("./base.js").UID} [params.filter] Alias of catalog (Ampache 7.9.0+)
+   * @returns {Promise<import("./base.js").Success>}
+   * @see {@link https://ampache.org/api/api-json-methods#catalog_folder}
+   */
+  catalogFolder(params) {
+    return this.call("catalog_folder", params);
   },
 
   /**

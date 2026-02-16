@@ -52,7 +52,7 @@ describe("Users", () => {
   it("userDelete()", async () => {
     const res = { success: "ok" };
     mockJsonRequest("user_delete", res);
-    const result = await api.userDelete({ filter: "1" });
+    const result = await api.userDelete({ username: "olduser" });
     expect(result).toEqual(res);
   });
 

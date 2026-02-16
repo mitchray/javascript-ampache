@@ -215,17 +215,32 @@ export const songsMethods = {
   },
 
   /**
+   * Return database lyrics or search with plugins by song id
+   * @remarks MINIMUM_API_VERSION=6.7.0
+   * @param {Object} params
+   * @param {import("./base.js").UID} params.filter Song id to find
+   * @param {import("./base.js").BinaryBoolean} [params.plugins] 0, 1, if false disable plugin lookup (default: 1)
+   * @returns {Promise<*>}
+   * @see {@link https://ampache.org/api/api-json-methods#get_lyrics}
+   */
+  getLyrics(params) {
+    return this.call("get_lyrics", params);
+  },
+
+  /**
    * This takes a URL and returns the song object in question
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
-   * @param {string} params.url Full Ampache URL from server
+   * @param {string} [params.url] Full Ampache URL from server (deprecated in 7.9.0+, use filter)
+   * @param {string} [params.filter] Alias of url (Ampache 7.9.0+)
    * @returns {Promise<SongResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#url_to_song}
    */
   urlToSong(params) {
     let query = "url_to_song";
-    params.url = encodeURIComponent(params.url);
-    query += qs.stringify(params, "&");
+    const out = { ...params };
+    if (out.url != null) out.url = encodeURIComponent(out.url);
+    query += qs.stringify(out, "&");
     return this.request(query);
   },
 

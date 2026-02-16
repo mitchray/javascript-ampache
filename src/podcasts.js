@@ -107,13 +107,11 @@ export const podcastsMethods = {
   },
 
   /**
-   * Get information about podcasts
+   * Get the podcast from its id
    * @remarks MINIMUM_API_VERSION=420000
-   * @param {Object} [params]
-   * @param {import("./base.js").UID} params.filter UID to find
+   * @param {Object} params
+   * @param {import("./base.js").UID} params.filter UID of podcast, returns podcast JSON
    * @param {"episodes"} [params.include] episodes (include podcast_episodes in the response)
-   * @param {number} [params.offset]
-   * @param {number} [params.limit]
    * @returns {Promise<PodcastResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#podcast}
    */
@@ -209,7 +207,8 @@ export const podcastsMethods = {
    * ACCESS REQUIRED: 50 (Content Manager)
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params
-   * @param {import("./base.js").UID} params.id UID of podcast
+   * @param {import("./base.js").UID} params.filter UID of podcast (required)
+   * @param {import("./base.js").UID} [params.id] Alias of filter (Ampache 7.9.0+)
    * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#update_podcast}
    */

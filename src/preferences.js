@@ -92,6 +92,7 @@ export const preferencesMethods = {
    * @param {string} params.filter Preference name e.g ('notify_email', 'ajax_load')
    * @param {string|number} params.value (string/integer) Preference value
    * @param {import("./base.js").BinaryBoolean} [params.all] 0, 1 apply to all users
+   * @param {import("./base.js").BinaryBoolean} [params.default] 0, 1 set as system default (New and public users). ACCESS: 100 (Admin)
    * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#preference_edit}
    */
