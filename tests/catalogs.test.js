@@ -38,6 +38,17 @@ describe("Catalogs", () => {
     expect(result).toEqual(res);
   });
 
+  it("catalogFolder()", async () => {
+    const res = { success: "ok" };
+    mockJsonRequest("catalog_folder", res);
+    const result = await api.catalogFolder({
+      folder: "/path/to/folder",
+      task: "add",
+      catalog: 1,
+    });
+    expect(result).toEqual(res);
+  });
+
   it("catalogAdd()", async () => {
     const res = { id: "1" };
     mockJsonRequest("catalog_add", res);

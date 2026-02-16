@@ -95,7 +95,7 @@ describe("Playlists", () => {
   });
 
   it("playlistHash()", async () => {
-    const res = { hash: "abc123" };
+    const res = { md5: "abc123" };
     mockJsonRequest("playlist_hash", res);
     const result = await api.playlistHash({ filter: 1 });
     expect(result).toEqual(res);

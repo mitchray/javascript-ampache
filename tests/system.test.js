@@ -17,6 +17,11 @@ describe("System", () => {
     expect(result).toEqual(res);
   });
 
+  it("getIndexes() with invalid type returns false", () => {
+    const result = api.getIndexes({ type: "invalid" });
+    expect(result).toBe(false);
+  });
+
   it("list()", async () => {
     const res = { list: [] };
     mockJsonRequest("list", res);
@@ -50,6 +55,11 @@ describe("System", () => {
     mockJsonRequest("stats", res);
     const result = await api.stats({ type: "song" });
     expect(result).toEqual(res);
+  });
+
+  it("stats() with invalid type returns false", () => {
+    const result = api.stats({ type: "invalid" });
+    expect(result).toBe(false);
   });
 
   it("rate()", async () => {
@@ -161,6 +171,13 @@ describe("System", () => {
     expect(result).toEqual(res);
   });
 
+  it("getExternalMetadata()", async () => {
+    const res = { object_id: "1", object_type: "song", plugin: [] };
+    mockJsonRequest("get_external_metadata", res);
+    const result = await api.getExternalMetadata({ filter: 1, type: "song" });
+    expect(result).toEqual(res);
+  });
+
   it("searchRules()", async () => {
     const res = { rule: [] };
     mockJsonRequest("search_rules", res);
@@ -179,6 +196,15 @@ describe("System", () => {
     expect(result).toEqual(res);
   });
 
+  it("advancedSearch() with invalid type returns false", () => {
+    const result = api.advancedSearch({
+      type: "invalid",
+      operator: "and",
+      rules: [["title", "0", "test"]],
+    });
+    expect(result).toBe(false);
+  });
+
   it("searchGroup()", async () => {
     const res = { search: { song: [], album: [], artist: [] } };
     mockJsonRequest("search_group", res);
@@ -191,5 +217,16 @@ describe("System", () => {
 
   it("advancedSearch is callable", () => {
     expect(typeof api.advancedSearch).toBe("function");
+  });
+
+  it("search() alias returns same result as advancedSearch()", async () => {
+    const res = { song: [] };
+    mockJsonRequest("advanced_search", res);
+    const result = await api.search({
+      type: "song",
+      operator: "and",
+      rules: [["title", "0", "test"]],
+    });
+    expect(result).toEqual(res);
   });
 });

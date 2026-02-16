@@ -66,11 +66,27 @@ describe("Songs", () => {
     expect(result).toEqual(res);
   });
 
+  it("getLyrics()", async () => {
+    const res = { object_id: "1", object_type: "song", plugin: [] };
+    mockJsonRequest("get_lyrics", res);
+    const result = await api.getLyrics({ filter: 1 });
+    expect(result).toEqual(res);
+  });
+
   it("urlToSong()", async () => {
     const res = { id: "1" };
     mockJsonRequest("url_to_song", res);
     const result = await api.urlToSong({
       url: "https://ampache.test/server/play/index.php?song=1",
+    });
+    expect(result).toEqual(res);
+  });
+
+  it("urlToSong() with filter param (7.9.0+)", async () => {
+    const res = { id: "1" };
+    mockJsonRequest("url_to_song", res);
+    const result = await api.urlToSong({
+      filter: "https://ampache.test/server/play/index.php?song=1",
     });
     expect(result).toEqual(res);
   });

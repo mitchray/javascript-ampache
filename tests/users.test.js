@@ -49,6 +49,16 @@ describe("Users", () => {
     expect(result).toEqual(res);
   });
 
+  it("userEdit()", async () => {
+    const res = { success: "ok" };
+    mockJsonRequest("user_edit", res);
+    const result = await api.userEdit({
+      username: "user",
+      email: "new@example.com",
+    });
+    expect(result).toEqual(res);
+  });
+
   it("userDelete()", async () => {
     const res = { success: "ok" };
     mockJsonRequest("user_delete", res);
