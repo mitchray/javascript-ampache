@@ -1,6 +1,6 @@
 {
   "name": "javascript-ampache",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0",
   "description": "A JS library for the Ampache API",
   "main": "dist/index.js",
   "module": "dist/index.m.js",
