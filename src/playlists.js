@@ -83,6 +83,18 @@ export const playlistsMethods = {
   },
 
   /**
+   * This returns a single smartlist
+   * @remarks MINIMUM_API_VERSION=6.9.1
+   * @param {Object} params
+   * @param {import("./base.js").UID} params.filter UID to find
+   * @returns {Promise<PlaylistResponse>}
+   * @see {@link https://ampache.org/api/api-json-methods#smartlist}
+   */
+  smartlist(params) {
+    return this.call("smartlist", params);
+  },
+
+  /**
    * This returns a user's playlists based on the specified filter
    * @remarks MINIMUM_API_VERSION=6.3.0
    * @param {Object} [params]
@@ -177,6 +189,18 @@ export const playlistsMethods = {
    */
   playlistDelete(params) {
     return this.call("playlist_delete", params);
+  },
+
+  /**
+   * This deletes a smartlist
+   * @remarks MINIMUM_API_VERSION=6.9.1
+   * @param {Object} params
+   * @param {import("./base.js").UID} params.filter UID of smartlist to delete
+   * @returns {Promise<import("./base.js").Success>}
+   * @see {@link https://ampache.org/api/api-json-methods#smartlist_delete}
+   */
+  smartlistDelete(params) {
+    return this.call("smartlist_delete", params);
   },
 
   /**

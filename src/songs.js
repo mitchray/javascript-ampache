@@ -174,6 +174,21 @@ export const songsMethods = {
   },
 
   /**
+   * This returns the songs for a smartlist
+   * @remarks MINIMUM_API_VERSION=6.9.1
+   * @param {Object} params
+   * @param {import("./base.js").UID} params.filter UID to find
+   * @param {import("./base.js").BinaryBoolean} [params.random] 0, 1 (if true get random songs using limit)
+   * @param {number} [params.offset]
+   * @param {number} [params.limit]
+   * @returns {Promise<SongsResponse>}
+   * @see {@link https://ampache.org/api/api-json-methods#smartlist_songs}
+   */
+  smartlistSongs(params) {
+    return this.call("smartlist_songs", params);
+  },
+
+  /**
    * This returns the songs for a license
    * @remarks MINIMUM_API_VERSION=420000
    * @param {Object} params

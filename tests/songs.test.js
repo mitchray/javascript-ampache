@@ -45,6 +45,13 @@ describe("Songs", () => {
     expect(result).toEqual(res);
   });
 
+  it("smartlistSongs()", async () => {
+    const res = { song: [] };
+    mockJsonRequest("smartlist_songs", res);
+    const result = await api.smartlistSongs({ filter: 1 });
+    expect(result).toEqual(res);
+  });
+
   it("licenseSongs()", async () => {
     const res = { song: [] };
     mockJsonRequest("license_songs", res);

@@ -27,6 +27,13 @@ describe("Playlists", () => {
     expect(result).toEqual(res);
   });
 
+  it("smartlist()", async () => {
+    const res = { id: "smart_1", name: "My Smart" };
+    mockJsonRequest("smartlist", res);
+    const result = await api.smartlist({ filter: 1 });
+    expect(result).toEqual(res);
+  });
+
   it("userPlaylists()", async () => {
     const res = { playlist: [] };
     mockJsonRequest("user_playlists", res);
@@ -70,6 +77,13 @@ describe("Playlists", () => {
     const res = { success: "ok" };
     mockJsonRequest("playlist_delete", res);
     const result = await api.playlistDelete({ filter: 1 });
+    expect(result).toEqual(res);
+  });
+
+  it("smartlistDelete()", async () => {
+    const res = { success: "ok" };
+    mockJsonRequest("smartlist_delete", res);
+    const result = await api.smartlistDelete({ filter: 1 });
     expect(result).toEqual(res);
   });
 
