@@ -17,6 +17,7 @@
  * @property {number} podcast_episodes
  * @property {string} server
  * @property {string} session_expire
+ * @property {string|null} [streamtoken]
  * @property {number} shares
  * @property {number} songs
  * @property {string} update

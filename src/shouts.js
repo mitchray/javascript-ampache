@@ -14,6 +14,7 @@ export const shoutsMethods = {
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} [params]
    * @param {string} [params.username] Username to find
+   * @param {string} [params.filter] Alias of username (Ampache 7.9.0+)
    * @param {number} [params.limit] Maximum number of results to return
    * @returns {Promise<{ shout: ShoutResponse[] }>}
    * @see {@link https://ampache.org/api/api-json-methods#last_shouts}

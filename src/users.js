@@ -55,6 +55,7 @@ export const usersMethods = {
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} [params]
    * @param {string} [params.username] Username of the user to get details for
+   * @param {string} [params.filter] Alias of username (Ampache 7.9.0+)
    * @returns {Promise<UserResponse>}
    * @see {@link https://ampache.org/api/api-json-methods#user}
    */
@@ -136,6 +137,7 @@ export const usersMethods = {
    * @param {import("./base.js").BinaryBoolean} [params.reset_apikey] reset user Api Key
    * @param {import("./base.js").BinaryBoolean} [params.reset_streamtoken] reset user Stream Token
    * @param {import("./base.js").BinaryBoolean} [params.clear_stats] reset all stats for this user
+   * @param {string} [params.filter] Alias of username (Ampache 7.9.0+)
    * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#user_edit}
    */
@@ -149,6 +151,7 @@ export const usersMethods = {
    * @remarks MINIMUM_API_VERSION=400001
    * @param {Object} params
    * @param {string} params.username Username of user to delete (required by API)
+   * @param {string} [params.filter] Alias of username (Ampache 7.9.0+)
    * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#user_delete}
    */
@@ -188,6 +191,7 @@ export const usersMethods = {
    * This will follow/unfollow a user
    * @param {Object} params
    * @param {string} params.username Username string to find
+   * @param {string} [params.filter] Alias of username (Ampache 7.9.0+)
    * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#toggle_follow}
    */
@@ -200,6 +204,7 @@ export const usersMethods = {
    * @remarks MINIMUM_API_VERSION=380001
    * @param {Object} params
    * @param {string} params.username Username to find
+   * @param {string} [params.filter] Alias of username (Ampache 7.9.0+)
    * @param {number} [params.limit] Max results to return
    * @param {number} [params.since] UNIXTIME
    * @returns {Promise<{ activity: ActivityResponse[] }>}

@@ -203,6 +203,7 @@ export const systemMethods = {
    * @remarks MINIMUM_API_VERSION=380001
    * @param params.type Object type
    * @param params.id UID to find
+   * @param {import("./base.js").UID} [params.filter] Alias of id (Ampache 7.9.0+)
    * @param params.rating Rating to apply
    * @see {@link https://ampache.org/api/api-json-methods#rate}
    */
