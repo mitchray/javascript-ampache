@@ -6,7 +6,10 @@
   "module": "dist/index.m.js",
   "umd:main": "dist/index.umd.js",
   "source": "src/index.js",
-  "repository": "github:mitchray/javascript-ampache",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitchray/javascript-ampache.git"
+  },
   "scripts": {
     "build": "rimraf dist && microbundle",
     "dev": "microbundle watch",
