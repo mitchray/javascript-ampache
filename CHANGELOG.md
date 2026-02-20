@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.1] - 2026-02-20
+
+## Requires Ampache 7.9.1 Build 11+
+
+- Refactored project to simplify structure
+- ```smartlist``` method
+- ```smartlists``` method - Native support now, so longer a filtered list from ```playlists```
+- ```smartlist_songs``` method
+- ```smartlist_delete``` method
+- ```get_kyrics``` method
+
 ## [1.2.0] - 2025-11-08
 
 - Add `search_rules` method

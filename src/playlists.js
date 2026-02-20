@@ -53,7 +53,7 @@ export const playlistsMethods = {
 
   /**
    * This returns smartlists based on the specified filter
-   * @remarks MINIMUM_API_VERSION=380001
+   * @remarks MINIMUM_API_VERSION=6.9.1
    * @param {Object} [params]
    * @param {string} [params.filter] Filter results to match this string
    * @param {import("./base.js").BinaryBoolean} [params.exact] 0, 1 (if true filter is exact = rather than fuzzy LIKE)
