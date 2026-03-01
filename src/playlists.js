@@ -154,6 +154,7 @@ export const playlistsMethods = {
    * @param {import("./base.js").UID} params.filter UID of Playlist
    * @param {import("./base.js").UID} params.id UID of the object to add to playlist
    * @param {"song"|"album"|"artist"|"playlist"} params.type 'song', 'album', 'artist', 'playlist'
+   * @param {import("./base.js").BinaryBoolean} [params.check] 0, 1 Whether to check and ignore duplicates (default = 0)
    * @returns {Promise<import("./base.js").Success>}
    * @see {@link https://ampache.org/api/api-json-methods#playlist_add}
    */

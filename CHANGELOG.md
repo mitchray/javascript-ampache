@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.0.2] - 2026-03-01
+
+## Requires Ampache 7.9.1 Build 11+
+
+- ```playlistAdd``` has ```check``` param same as ```playlistSongAdd```
 ## [2.0.1] - 2026-02-20
 
 ## Requires Ampache 7.9.1 Build 11+
